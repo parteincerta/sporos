@@ -291,16 +291,6 @@ clipit () {
 	fi
 }
 
-# Decrypt password-encrypted file.
-dec_file () {
-	local src="$1"
-	local dst="$2"
-	if [ -s "$src" ]; then
-		[ -z "$dst" ] && gpg --decrypt "$src" 2>/dev/null | pager
-		[ -n "$dst" ] && gpg --symmetric "$src" > "$dst"
-	fi
-}
-
 # Start lf in the current directory or in the given one.
 e () {
 	BASH_ENV="$HOME/.bash_profile" lf "$1"
@@ -311,8 +301,18 @@ e () {
 	fi
 }
 
-# Encrypt file with password
-enc_file () {
+# Decrypt password-encrypted file.
+gpg_dec_file () {
+	local src="$1"
+	local dst="$2"
+	if [ -s "$src" ]; then
+		[ -z "$dst" ] && gpg --decrypt "$src" 2>/dev/null | pager
+		[ -n "$dst" ] && gpg --symmetric "$src" > "$dst"
+	fi
+}
+
+# Encrypt a file with a password.
+gpg_enc_file () {
 	local src="$1"
 	local dst="$2"
 	if [ -s "$src" ]; then

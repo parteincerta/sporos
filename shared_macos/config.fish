@@ -175,10 +175,6 @@ function clipit --description "Copy a file or directory into the clipboard."
 	bash -l -c "clipit $argv"
 end
 
-function dec_file --description "Decrypt GPG-encrypted file to pager or to file."
-	bash -l -c "dec_file $argv"
-end
-
 function e --description "Start lf in the current directory or in the given one."
 	BASH_ENV="$HOME/.bash_profile" lf "$argv[1]"
 	if [ -f "$TMPDIR"/lfcd ]
@@ -188,7 +184,11 @@ function e --description "Start lf in the current directory or in the given one.
 	end
 end
 
-function enc_file --description "Password-ecrypt file"
+function gpg_dec_file --description "Decrypt password-encrypted file."
+	bash -l -c "dec_file $argv"
+end
+
+function gpg_enc_file --description "Encrypt a file with a password."
 	bash -l -c "enc_file $argv"
 end
 
