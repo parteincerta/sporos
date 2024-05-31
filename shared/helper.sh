@@ -6,6 +6,10 @@ fg_green="\033[0;32m"
 fg_orange="\033[0;33m"
 fg_red="\033[0;31m"
 
+# NOTE: To understand Bash's parameter expansion:
+# https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html
+system_hostname="${HOSTNAME/%.local/}"
+
 enter_password () {
 	local pwd1="pwd1"
 	local pwd2="pwd2"
