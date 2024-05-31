@@ -4,7 +4,7 @@ development environment across all the computers I use.
 
 ## macOS
 - To performe the whole setup: `bash macos/<hostname>/bootstrap.sh`
-- To install/update only the dotfiles: `bash macos/<hostname>/bootstrap.sh`
+- To install/update only the dotfiles: `bash macos/<hostname>/configure.sh`
 
 ### Maintenance
 - Manual operations:
