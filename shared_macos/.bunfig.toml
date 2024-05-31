@@ -1,0 +1,8 @@
+telemetry = false
+
+[install]
+globalDir = "#bun_install_globalDir"
+globalBinDir = "#bun_install_globalBinDir"
+
+[install.cache]
+dir = "#bun_install_cache_dir"
