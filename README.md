@@ -11,6 +11,11 @@ development environment across all the computers I use.
   - Check for [hosts files][macos-maintenance-01] updates.
   - Check for [MongoDB Shell][macos-maintenance-02] updates.
   - Check for [MongoDB Tools][macos-maintenance-03] updates.
+  - Check for Neovim updates.
+    * Update Lazy's plugins: `:Lazy sync`.
+    * Update Mason's registry: `:MasonUpdate`.
+    * Update Mason's LSPs: `:Mason` -> Press the `U` key.
+    * Update TreeSitter's parsers: `TSUpdateSync`.
   - Check for VSCode plugins updates.
 
 [macos-maintenance-01]: https://github.com/StevenBlack/hosts/releases
