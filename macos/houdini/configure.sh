@@ -6,7 +6,7 @@ this_script_abs_path="$(cd $this_script_rel_path >/dev/null && pwd)"
 shared_dir="$(cd $this_script_abs_path/../../shared >/dev/null && pwd)"
 shared_dir_macos="$(cd $this_script_abs_path/../../shared_macos >/dev/null && pwd)"
 
-source "$shared_dir"/helper.sh
+source "$shared_dir"/scripts/helper.sh
 
 trap_error () {
 	local exit_code=$?

@@ -6,7 +6,7 @@ this_script_abs_path="$(cd $this_script_rel_path >/dev/null && pwd)"
 shared_dir="$(cd $this_script_abs_path/../../shared >/dev/null && pwd)"
 shared_dir_macos="$(cd $this_script_abs_path/../../shared_macos >/dev/null && pwd)"
 
-source "$shared_dir"/helper.sh
+source "$shared_dir"/scripts/helper.sh
 
 trap_error () {
 	local exit_code=$?
@@ -91,7 +91,7 @@ source .env.sh
 bat cache --build
 
 log_info "\t >>> Installing fonts /etc/hosts"
-source "$shared_dir"/install-hosts.sh deimos
+source "$shared_dir"/scripts/install-hosts.sh deimos
 
 
 log_info "\t >>> Installing PIP packages"
@@ -125,8 +125,8 @@ done
 
 
 log_info "\t >>> Installing MongoDB Shell and Tools"
-source "$shared_dir"/install-mongo.sh shell
-source "$shared_dir"/install-mongo.sh tools
+source "$shared_dir"/scripts/install-mongo.sh shell
+source "$shared_dir"/scripts/install-mongo.sh tools
 
 
 log_info "\t >>> Installing Neovim plugins"
@@ -134,7 +134,7 @@ nvim --headless -c "Lazy! install" -c qall
 
 
 log_info "\t >>> Installing VSCode plugins"
-source "$shared_dir"/install-plugins-vscode.sh
+source "$shared_dir"/scripts/install-plugins-vscode.sh
 
 
 log_info "\t >>> Ignoring Focusrite Scarlett Solo automount"

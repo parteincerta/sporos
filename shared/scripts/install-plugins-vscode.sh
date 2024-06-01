@@ -22,9 +22,11 @@ trap trap_exit EXIT
 
 vsc_data_dir="$XDG_CACHE_HOME/code/data/"
 vsc_extensions_dir="$XDG_CACHE_HOME/code/extensions/"
-[ "$1" = "--extensions-list" ] &&
-	vsc_extensions_list=$(cat "${this_script_abs_path}/${2}") ||
-	vsc_extensions_list=$(cat "$this_script_abs_path"/extensions.vscode.txt)
+if [ "$1" = "--extensions-list" ] && [ -s "$2" ]; then
+	vsc_extensions_list=$(cat "$2")
+else
+	vsc_extensions_list=$(cat "$this_script_abs_path"/../extensions.vscode.txt)
+fi
 
 for extension in $vsc_extensions_list
 do
