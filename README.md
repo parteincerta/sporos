@@ -9,7 +9,7 @@ development environment across all the computers I use.
 ### Maintenance
 - Manual operations:
   - Check for [hosts files][macos-maintenance-01] updates.
-  - Check for [MongoDB Shell][macos-maintenance-01] updates.
+  - Check for [MongoDB Shell][macos-maintenance-02] updates.
   - Check for [MongoDB Tools][macos-maintenance-03] updates.
   - Check for VSCode plugins updates.
 
