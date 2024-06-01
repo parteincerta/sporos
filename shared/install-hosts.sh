@@ -20,7 +20,7 @@ trap trap_error ERR
 trap trap_exit EXIT
 
 hostname="${1:-${HOSTNAME%.*}}"
-ver="3.14.73"
+ver="3.14.74"
 url="https://raw.githubusercontent.com/StevenBlack/hosts/${ver}/hosts"
 system="$(uname -s)"
 
