@@ -20,13 +20,13 @@ trap trap_error ERR
 trap trap_exit EXIT
 
 hostname="${1:-${HOSTNAME%.*}}"
-ver="3.14.74"
-url="https://raw.githubusercontent.com/StevenBlack/hosts/${ver}/hosts"
+version="3.14.74"
+url="https://raw.githubusercontent.com/StevenBlack/hosts/${version}/hosts"
 system="$(uname -s)"
 
 if [ "$system" = "Darwin" ]; then
 
-	echo "-> Downloading StevenBlack's hosts v$ver ..."
+	echo "-> Downloading StevenBlack's hosts v$version ..."
 	curl --fail --connect-timeout 13 --retry 5 --retry-delay 2 \
 		-L -sS -H "Accept:application/vnd.github.v3.raw" "$url" \
 		-o "$TMPDIR"/hosts

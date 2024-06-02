@@ -25,11 +25,11 @@ system="$(uname -s)"
 if [ "$1" == "shell" ]; then
 	rm -rf "$TMPDIR"/mongosh*
 
-	ver="2.2.6"
+	version="2.2.6"
 
 	if [ "$system" = "Darwin" ]; then
 		[ "$arch" = "x86_64" ] && arch="x64" || true
-		url="https://downloads.mongodb.com/compass/mongosh-${ver}-darwin-${arch}.zip"
+		url="https://downloads.mongodb.com/compass/mongosh-${version}-darwin-${arch}.zip"
 
 		echo "-> Downloading $url ..."
 		curl --fail --connect-timeout 13 --retry 5 --retry-delay 2 \
@@ -40,7 +40,7 @@ if [ "$1" == "shell" ]; then
 
 		echo "-> Installing in "$HOME"/.local/bin/ ..."
 		rm -rf "$HOME"/.local/bin/mongosh
-		mv "$TMPDIR"/"mongosh-${ver}-darwin-${arch}"/bin/mongosh \
+		mv "$TMPDIR"/"mongosh-${version}-darwin-${arch}"/bin/mongosh \
 			"$HOME"/.local/bin/
 
 		echo "Finished."
@@ -53,10 +53,10 @@ if [ "$1" == "shell" ]; then
 elif [ "$1" == "tools" ]; then
 	rm -rf "$TMPDIR"/mongodb*
 
-	ver="100.9.4"
+	version="100.9.4"
 
 	if [ "$system" = "Darwin" ]; then
-		url="https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-${arch}-${ver}.zip"
+		url="https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-${arch}-${version}.zip"
 		echo "-> Downloading $url ..."
 		curl --fail --connect-timeout 13 --retry 5 --retry-delay 2 \
 			--progress-bar -L -S "$url" -o "$TMPDIR"mongodb-tools.zip
@@ -66,7 +66,7 @@ elif [ "$1" == "tools" ]; then
 
 		echo "-> Installing in "$HOME"/.local/bin/ ..."
 		rm -rf "$HOME"/.local/bin/mongo{dump,export,import,restore,stat,top}
-		mv "$TMPDIR"/"mongodb-database-tools-macos-${arch}-${ver}"/bin/mongo* \
+		mv "$TMPDIR"/"mongodb-database-tools-macos-${arch}-${version}"/bin/mongo* \
 			"$HOME"/.local/bin/
 
 		echo "Finished."
