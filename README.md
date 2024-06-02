@@ -8,11 +8,11 @@ development environment across all the computers I use.
 
 ### Maintenance
 - ASDF maintenance commands:
-  * Check latest available version: `asdf latest <pkg> [major]`.
-  * Install latest available version: `asdf install <pkg> latest:<major>`.
-  * Update specific plugin: `asdf plugin-update <pkg>`.
-  * Update all plugins: `asdf plugin-update --all`.
-  * Use the latest version globally: `asdf global <pkg> latest:<major>`.
+  * Add new plugin: `asdf plugin-add <plugin>`.
+  * Check latest available version: `asdf latest <plugin> [major]`.
+  * Install latest available version: `asdf install <plugin> latest:<major>`.
+  * Update plugins: `asdf plugin-update <plugin|--all>`.
+  * Use the latest version globally: `asdf global <plugin> latest:<major>`.
 - Homebrew maintenance commands:
   - Update Homebrew and the list of formulae: `brew update`.
   - List outdated formulae: `brew outdated --greedy`.
