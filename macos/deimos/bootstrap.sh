@@ -125,8 +125,8 @@ done
 
 
 log_info "\t >>> Installing MongoDB Shell and Tools"
-source "$shared_dir"/scripts/install-mongo.sh shell
-source "$shared_dir"/scripts/install-mongo.sh tools
+source "$shared_dir"/scripts/install-mongo-utils.sh shell
+source "$shared_dir"/scripts/install-mongo-utils.sh tools
 
 
 log_info "\t >>> Installing Neovim plugins"
