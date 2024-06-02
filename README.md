@@ -31,8 +31,8 @@ development environment across all the computers I use.
     [MongoDB Tools][macos-maintenance-03] updates.
   - Update the version references in
     [install-mongo-utils.sh](shared/scripts/install-mongo-utils.sh).
-  - Update MongoDB Shell: `bash shared/scripts/install-mongo-utils.sh shell`.
-  - Update MongoDB Tools: `bash shared/scripts/install-mongo-utils.sh tools`.
+  - Update Shell: `bash shared/scripts/install-mongo-utils.sh shell`.
+  - Update Tools: `bash shared/scripts/install-mongo-utils.sh tools`.
 - Neovim maintenance commands:
   * Update Lazy's plugins: `:Lazy sync`.
   * Update Mason's registry: `:MasonUpdate`.
