@@ -67,8 +67,8 @@ log_info "\t >>> Installing Homebrew apps"
 homebrew_cli=(
 	7zip aria2 asdf bat bash bash-completion@2 bear bzip2 chatgpt coreutils eza
 	fd findutils fish font-jetbrains-mono-nerd-font fzf gh git-delta gnupg gsed
-	jq lf libpq miniserve mkcert moreutils neovim oha openfortivpn pbzip2 pigz
-	rclone ripgrep tokei xz zstd
+	jq lf libpq miniserve mkcert moreutils neovim oha pbzip2 pigz rclone ripgrep
+	tokei xz zstd
 )
 brew install ${homebrew_cli[*]}
 
