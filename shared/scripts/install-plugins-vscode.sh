@@ -4,21 +4,9 @@ this_script="$(basename ${BASH_SOURCE[0]})"
 this_script_rel_path="$(dirname ${BASH_SOURCE[0]})"
 this_script_abs_path="$(cd $this_script_rel_path >/dev/null && pwd)"
 
-trap_error () {
-	local exit_code=$?
-	local failed_cmd="$BASH_COMMAND"
-	local failed_line_nr="$BASH_LINENO"
-	echo ">>> Failed the execution of $this_script on line $failed_line_nr."
-	echo ">>> Command '$failed_cmd' failed with exit code $exit_code."
-}
-
-trap_exit () {
-	rm -rf "$TMPDIR"/hosts
-}
-
 set -e
+source "$this_script_rel_path/helper.sh"
 trap trap_error ERR
-trap trap_exit EXIT
 
 vsc_data_dir="$XDG_CACHE_HOME/code/data/"
 vsc_extensions_dir="$XDG_CACHE_HOME/code/extensions/"

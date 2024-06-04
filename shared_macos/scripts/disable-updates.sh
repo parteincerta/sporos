@@ -5,17 +5,8 @@ this_script_rel_path="$(dirname ${BASH_SOURCE[0]})"
 this_script_abs_path="$(cd $this_script_rel_path >/dev/null && pwd)"
 shared_dir="$(cd $this_script_abs_path/../../shared >/dev/null && pwd)"
 
-source "$shared_dir"/scripts/helper.sh
-
-trap_error () {
-	local exit_code=$?
-	local failed_cmd="$BASH_COMMAND"
-	local failed_line_nr="$BASH_LINENO"
-	echo ">>> Failed the execution of $this_script on line $failed_line_nr."
-	echo ">>> Command '$failed_cmd' failed with exit code $exit_code."
-}
-
 set -e
+source "$shared_dir/scripts/helper.sh"
 trap trap_error ERR
 
 force_disable_brave () {
@@ -23,16 +14,14 @@ force_disable_brave () {
 
 	echo ">>> Disabling Brave's automatic updates ..."
 
-	local updater_path=$(join_strings \
+	local aupath=$(join_strings \
 		"/Applications/Brave Browser.app/Contents/Frameworks/"\
 		"Brave Browser Framework.framework/Versions/Current/"\
 		"/Frameworks/Sparkle.framework/Versions/A/Resources"
 	)
 	$(
-		cd "$updater_path" &&
-		[ -d "Autoupdate.app" ] &&
-		mv Autoupdate.app DisableAutoupdate.app ||
-		true
+		[ -d "$aupath/Autoupdate.app" ] &&
+			mv "$aupath/Autoupdate.app" "$aupath/DisableAutoupdate.app" || true
 	)
 }
 

@@ -6,26 +6,12 @@ this_script_abs_path="$(cd $this_script_rel_path >/dev/null && pwd)"
 shared_dir="$(cd $this_script_abs_path/../../shared >/dev/null && pwd)"
 shared_dir_macos="$(cd $this_script_abs_path/../../shared_macos >/dev/null && pwd)"
 
-source "$shared_dir"/scripts/helper.sh
-
-trap_error () {
-	local exit_code=$?
-	local failed_cmd="$BASH_COMMAND"
-	local failed_line_nr="$BASH_LINENO"
-	log_error ">>> Failed the execution of $this_script on line $failed_line_nr."
-	log_error ">>> Command '$failed_cmd' failed with exit code $exit_code."
-}
-
-trap_exit () {
-	popd >/dev/null
-}
-
 set -e
+source "$shared_dir/scripts/helper.sh"
 trap trap_error ERR
-trap trap_exit EXIT
-
-
 pushd "$this_script_abs_path" >/dev/null
+trap "popd >/dev/null" EXIT
+
 
 if [ "deimos" != "$system_hostname" ]; then
 	log_warning ">>> This configuration script belongs to a another host: deimos".

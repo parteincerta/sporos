@@ -3,21 +3,10 @@
 this_script="$(basename ${BASH_SOURCE[0]})"
 this_script_rel_path="$(dirname ${BASH_SOURCE[0]})"
 
-trap_error () {
-	local exit_code=$?
-	local failed_cmd="$BASH_COMMAND"
-	local failed_line_nr="$BASH_LINENO"
-	echo ">>> Failed the execution of $this_script on line $failed_line_nr."
-	echo ">>> Command '$failed_cmd' failed with exit code $exit_code."
-}
-
-trap_exit () {
-	rm -rf "$TMPDIR"/hosts
-}
-
 set -e
+source "$this_script_rel_path/helper.sh"
 trap trap_error ERR
-trap trap_exit EXIT
+trap "rm -rf $TMPDIR/hosts" EXIT
 
 hostname="${1:-${HOSTNAME%.*}}"
 version="3.14.75"

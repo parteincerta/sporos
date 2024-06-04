@@ -6,26 +6,12 @@ this_script_abs_path="$(cd $this_script_rel_path >/dev/null && pwd)"
 shared_dir="$(cd $this_script_abs_path/../../shared >/dev/null && pwd)"
 shared_dir_macos="$(cd $this_script_abs_path/../../shared_macos >/dev/null && pwd)"
 
-source "$shared_dir"/scripts/helper.sh
-
-trap_error () {
-	local exit_code=$?
-	local failed_cmd="$BASH_COMMAND"
-	local failed_line_nr="$BASH_LINENO"
-	log_error ">>> Failed at ${this_script}:${failed_line_nr}."
-	log_error ">>> '$failed_cmd' exited with code $exit_code."
-}
-
-trap_exit () {
-	popd >/dev/null
-}
-
 set -e
+source "$shared_dir/scripts/helper.sh"
 trap trap_error ERR
-trap trap_exit EXIT
-
-
 pushd "$this_script_abs_path" >/dev/null
+trap "popd >/dev/null" EXIT
+
 
 source .env.sh || true
 bootstrap_mark_file="$XDG_CACHE_HOME/.bootstrapped"

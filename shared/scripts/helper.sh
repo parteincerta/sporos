@@ -47,3 +47,11 @@ log_success () {
 log_warning () {
 	>&2 echo -e "${fg_orange}$1${color_reset}"
 }
+
+trap_error () {
+	local exit_code=$?
+	local failed_cmd="$BASH_COMMAND"
+	local failed_line_nr="$BASH_LINENO"
+	log_error ">>> Failed the execution of $this_script on line $failed_line_nr."
+	log_error ">>> Command '$failed_cmd' failed with exit code $exit_code."
+}
