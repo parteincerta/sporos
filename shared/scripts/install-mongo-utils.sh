@@ -21,15 +21,16 @@ trap trap_exit EXIT
 
 arch="$(uname -m)"
 system="$(uname -s)"
+mongo_sh_version="2.2.6"
+mongo_tools_version="100.9.4"
 
 if [ "$1" == "shell" ]; then
 	rm -rf "$TMPDIR"/mongosh*
 
-	version="2.2.6"
 
 	if [ "$system" = "Darwin" ]; then
 		[ "$arch" = "x86_64" ] && arch="x64" || true
-		url="https://downloads.mongodb.com/compass/mongosh-${version}-darwin-${arch}.zip"
+		url="https://downloads.mongodb.com/compass/mongosh-${mongo_sh_version}-darwin-${arch}.zip"
 
 		echo "-> Downloading $url ..."
 		curl --fail --connect-timeout 13 --retry 5 --retry-delay 2 \
@@ -40,7 +41,7 @@ if [ "$1" == "shell" ]; then
 
 		echo "-> Installing in "$HOME"/.local/bin/ ..."
 		rm -rf "$HOME"/.local/bin/mongosh
-		mv "$TMPDIR"/"mongosh-${version}-darwin-${arch}"/bin/mongosh \
+		mv "$TMPDIR"/"mongosh-${mongo_sh_version}-darwin-${arch}"/bin/mongosh \
 			"$HOME"/.local/bin/
 
 		echo "Finished."
@@ -53,10 +54,9 @@ if [ "$1" == "shell" ]; then
 elif [ "$1" == "tools" ]; then
 	rm -rf "$TMPDIR"/mongodb*
 
-	version="100.9.4"
 
 	if [ "$system" = "Darwin" ]; then
-		url="https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-${arch}-${version}.zip"
+		url="https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-${arch}-${mongo_tools_version}.zip"
 		echo "-> Downloading $url ..."
 		curl --fail --connect-timeout 13 --retry 5 --retry-delay 2 \
 			--progress-bar -L -S "$url" -o "$TMPDIR"mongodb-tools.zip
@@ -66,7 +66,7 @@ elif [ "$1" == "tools" ]; then
 
 		echo "-> Installing in "$HOME"/.local/bin/ ..."
 		rm -rf "$HOME"/.local/bin/mongo{dump,export,import,restore,stat,top}
-		mv "$TMPDIR"/"mongodb-database-tools-macos-${arch}-${version}"/bin/mongo* \
+		mv "$TMPDIR"/"mongodb-database-tools-macos-${arch}-${mongo_tools_version}"/bin/mongo* \
 			"$HOME"/.local/bin/
 
 		echo "Finished."
