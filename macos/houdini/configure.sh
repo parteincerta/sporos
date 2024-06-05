@@ -55,6 +55,9 @@ cp -a "$shared_dir/neovim"/* "$XDG_CONFIG_HOME/nvim/"
 cp "$shared_dir_macos/plist/com.lwouis.alt-tab-macos.plist" \
 	"$HOME/Library/Preferences/"
 
+cp "pro.betterdisplay.BetterDisplay.plist" \
+	"$HOME/Library/Preferences/"
+
 cp "$shared_dir_macos/plist/com.nuebling.mac-mouse-fix.plist" \
 	"$HOME/Library/Application Support/com.nuebling.mac-mouse-fix/config.plist"
 
