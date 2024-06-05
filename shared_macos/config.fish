@@ -77,6 +77,8 @@ bind --mode default \cf accept-autosuggestion
 bind --mode insert \cf accept-autosuggestion
 bind --mode default \cy accept-autosuggestion execute
 bind --mode insert \cy accept-autosuggestion execute
+bind --mode default \ck 'printf "\033c"; commandline -f repaint'
+bind --mode insert \ck 'printf "\033c"; commandline -f repaint'
 
 if test -f "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.fish"
 	fzf --fish | source
