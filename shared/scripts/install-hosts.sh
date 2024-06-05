@@ -28,7 +28,7 @@ if [ "$system" = "Darwin" ]; then
 	for addr in ${shared_address_list[*]}; do
 		shared_names_list=$(jq -r ".shared[\"$addr\"][]" "$this_script_rel_path/../install-hosts-additions.json")
 		for name in ${shared_names_list[*]}; do
-			entry=$(eval echo "$name $addr")
+			entry=$(eval echo "$addr $name")
 			echo -e "$entry" >>"$TMPDIR/hosts"
 		done
 	done
@@ -40,7 +40,7 @@ if [ "$system" = "Darwin" ]; then
 		for addr in ${specific_address_list[*]}; do
 			specific_names_list=$(jq -r ".specific.$1[\"$addr\"][]" "$this_script_rel_path/../install-hosts-additions.json")
 			for name in ${specific_names_list[*]}; do
-				entry=$(eval echo "$name $addr")
+				entry=$(eval echo "$addr $name")
 				echo -e "$entry" >>"$TMPDIR/hosts"
 			done
 		done
