@@ -25,8 +25,8 @@ mkdir -p \
 "$HOME"/{.gnupg,.ssh/sockets} \
 "$HOME"/.local/{bin,share/lf} \
 "$HOME"/Library/{KeyBindings,LaunchAgents} \
-"$HOME/Library/Application Support"/Code/User/ \
-"$HOME/Library/Application Support"/com.nuebling.mac-mouse-fix/ \
+"$HOME/Library/Application Support/Code/User/" \
+"$HOME/Library/Application Support/com.nuebling.mac-mouse-fix/" \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
 "$XDG_CACHE_HOME"/bun/{bin,cache/{install,transpiler},pkg} \
 "$XDG_CONFIG_HOME"/{bat/themes,fd,fish,git,kitty,lf,nvim} \
@@ -42,29 +42,19 @@ cp "$shared_dir_macos/.bash_profile" "$HOME"
 cp "$shared_dir_macos/config.fish" "$XDG_CONFIG_HOME/fish/"
 cp "$shared_dir_macos/lfrc" "$XDG_CONFIG_HOME/lf/"
 
+vscode_cache_dir="$XDG_CACHE_HOME/code/data/User"
+vscode_settings_dir="$HOME/Library/Application Support/Code/User"
+
 cp "$shared_dir/git.conf" "$XDG_CONFIG_HOME/git/config"
 cp "$shared_dir/gpg.conf" "$HOME/.gnupg/"
 cp "$shared_dir/fdignore" "$XDG_CONFIG_HOME/fd/ignore"
+cp "$shared_dir/keybindings.vscode.json" "$vscode_cache_dir/keybindings.json"
+cp "$shared_dir/keybindings.vscode.json" "$vscode_settings_dir/keybindings.json"
 cp "$shared_dir/lficons" "$XDG_CONFIG_HOME/lf/icons"
 cp "$shared_dir/lfpreview" "$HOME/.local/bin/"
+cp -R "$shared_dir/neovim/"* "$XDG_CONFIG_HOME/nvim/"
 cp "$shared_dir/ssh.conf" "$HOME/.ssh/config"
 cp "$shared_dir/tokyonight-moon.tmTheme" "$XDG_CONFIG_HOME/bat/themes"
-
-cp -a "$shared_dir/neovim"/* "$XDG_CONFIG_HOME/nvim/"
-
-cp "$shared_dir_macos/plist/com.lwouis.alt-tab-macos.plist" \
-	"$HOME/Library/Preferences/"
-
-cp "$shared_dir_macos/plist/com.nuebling.mac-mouse-fix.plist" \
-	"$HOME/Library/Application Support/com.nuebling.mac-mouse-fix/config.plist"
-
-cp "$shared_dir_macos"/plist/com.knollsoft.* \
-	"$HOME/Library/Preferences/"
-
-cp "$shared_dir/keybindings.vscode.json" \
-	"$HOME/Library/Application Support/Code/User/keybindings.json"
-cp "$shared_dir/keybindings.vscode.json" \
-	"$XDG_CACHE_HOME/code/data/User/keybindings.json"
 
 ln -sf "$HOME"/.bash_profile "$HOME"/.bashrc
 chmod u=rwx,g=,o= "$HOME"/.gnupg
@@ -76,6 +66,11 @@ chmod u+x "$HOME/.local/bin/lfpreview"
 touch "$HOME/.hushlogin"
 touch "$XDG_CONFIG_HOME/lf/bookmarks"
 
+source "$shared_dir_macos/scripts/export-defaults.sh" --source-keys-only
+defaults import "$alttab_key" "$alttab_file"
+defaults import "$macmousefix_key" "$macmousefix_file"
+defaults import "$rectangle_key" "$rectangle_file"
+defaults import "$rectangle_chords_key" "$rectangle_chords_file"
 
 # NOTE: The following are configuration files that
 # bust be patched before being put in their place.
@@ -90,10 +85,8 @@ font_size="10.5"
 
 cp "$shared_dir/settings.vscode.json" "$TMPDIR/"
 sed -i '' "s|%font_size|$font_size|g" "$TMPDIR"/settings.vscode.json
-cp "$TMPDIR/settings.vscode.json" \
-	"$HOME/Library/Application Support/Code/User/settings.json"
-cp "$TMPDIR/settings.vscode.json" \
-	"$XDG_CACHE_HOME/code/data/User/settings.json"
+cp "$TMPDIR/settings.vscode.json" "$vscode_cache_dir/settings.json"
+cp "$TMPDIR/settings.vscode.json" "$vscode_settings_dir/settings.json"
 
 (echo "cat <<EOF"; cat "$shared_dir_macos/lfmarks"; echo EOF) |
 	sh >"$HOME/.local/share/lf/marks"

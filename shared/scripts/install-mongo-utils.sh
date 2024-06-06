@@ -37,7 +37,7 @@ if [ "$1" == "shell" ]; then
 		mv "$TMPDIR"/"mongosh-${mongo_sh_version}-darwin-${arch}"/bin/mongosh \
 			"$HOME"/.local/bin/
 
-		echo "Finished."
+		echo "-> Finished."
 
 	elif [ "$system" = "Linux" ]; then
 		# TODO
@@ -62,7 +62,7 @@ elif [ "$1" == "tools" ]; then
 		mv "$TMPDIR"/"mongodb-database-tools-macos-${arch}-${mongo_tools_version}"/bin/mongo* \
 			"$HOME"/.local/bin/
 
-		echo "Finished."
+		echo "-> Finished."
 
 	elif [ "$system" = "Linux" ]; then
 		# TODO

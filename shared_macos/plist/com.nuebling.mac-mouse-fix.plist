@@ -523,9 +523,9 @@
 		<key>lastLaunchedBundleVersion</key>
 		<integer>22635</integer>
 		<key>launchesOfCurrentBundleVersion</key>
-		<integer>2</integer>
-		<key>launchesOverall</key>
 		<integer>3</integer>
+		<key>launchesOverall</key>
+		<integer>4</integer>
 		<key>remapsAreInitialized</key>
 		<true/>
 	</dict>
