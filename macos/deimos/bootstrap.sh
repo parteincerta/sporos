@@ -38,7 +38,7 @@ defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
-# Doesn't work os macOS Sonoma
+# Doesn't work on macOS Sonoma
 # defaults write com.apple.Safari DebugDisableTabHoverPreview 1
 
 defaults write -g ApplePressAndHoldEnabled -bool false
