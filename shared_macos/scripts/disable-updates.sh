@@ -20,8 +20,9 @@ force_disable_brave () {
 		"/Frameworks/Sparkle.framework/Versions/A/Resources"
 	)
 	$(
-		[ -d "$aupath/Autoupdate.app" ] &&
-			mv "$aupath/Autoupdate.app" "$aupath/DisableAutoupdate.app" || true
+		if [ -d "$aupath/Autoupdate.app" ]; then
+			mv "$aupath/Autoupdate.app" "$aupath/DisableAutoupdate.app"
+		fi
 	)
 }
 
