@@ -52,8 +52,9 @@ cp "$shared_dir_macos/.bash_profile" "$HOME"
 cp "$shared_dir_macos/config.fish" "$XDG_CONFIG_HOME/fish/"
 cp "$shared_dir_macos/lfrc" "$XDG_CONFIG_HOME/lf/"
 
+app_support_folder="$HOME/Library/Application Support"
 vscode_cache_dir="$XDG_CACHE_HOME/code/data/User"
-vscode_settings_dir="$HOME/Library/Application Support/Code/User"
+vscode_settings_dir="$app_support_folder/Code/User"
 
 cp "$shared_dir/git.conf" "$XDG_CONFIG_HOME/git/config"
 cp "$shared_dir/gpg.conf" "$HOME/.gnupg/"
@@ -79,9 +80,9 @@ touch "$XDG_CONFIG_HOME/lf/bookmarks"
 source "$shared_dir_macos/scripts/export-defaults.sh" --source-keys-only
 defaults import "$alttab_key" "$alttab_file"
 defaults import "$betterdisplay_key" "$betterdisplay_file"
-defaults import "$macmousefix_key" "$macmousefix_file"
 defaults import "$rectangle_key" "$rectangle_file"
 defaults import "$rectangle_chords_key" "$rectangle_chords_file"
+cp "$macmousefix_file" "$app_support_folder/com.nuebling.mac-mouse-fix/config.plist"
 
 # NOTE: The following are configuration files that
 # bust be patched before being put in their place.
