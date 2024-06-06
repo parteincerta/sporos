@@ -4,7 +4,6 @@ bmalehorn.vscode-fish
 christian-kohler.path-intellisense
 dbaeumer.vscode-eslint
 dnicolson.binary-plist
-donjayamanne.githistory
 ecmel.vscode-html-css
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
@@ -16,7 +15,6 @@ James-Yu.latex-workshop
 meganrogge.template-string-converter
 metaseed.MetaJump
 mgmcdermott.vscode-language-babel
-mhutchie.git-graph
 mrmlnc.vscode-json5
 ms-azuretools.vscode-docker
 ms-vscode-remote.remote-containers
