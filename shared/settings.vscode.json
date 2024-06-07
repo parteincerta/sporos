@@ -1,7 +1,7 @@
 {
 	"editor.cursorBlinking": "phase",
 	"editor.cursorSmoothCaretAnimation": "off",
-	"editor.fontSize": %font_size,
+	"editor.fontSize": "%font_size",
 	"editor.guides.bracketPairs": "active",
 	"editor.guides.bracketPairsHorizontal": false,
 	"editor.guides.indentation": false,

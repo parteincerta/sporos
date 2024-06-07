@@ -102,7 +102,7 @@ fi
 font_size="10.5"
 
 cp "$shared_dir/settings.vscode.json" "$TMPDIR/"
-sed -i '' "s|%font_size|$font_size|g" "$TMPDIR"/settings.vscode.json
+sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR"/settings.vscode.json
 cp "$TMPDIR/settings.vscode.json" "$vscode_cache_dir/settings.json"
 cp "$TMPDIR/settings.vscode.json" "$vscode_settings_dir/settings.json"
 
