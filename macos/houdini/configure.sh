@@ -34,9 +34,9 @@ mkdir -p \
 "$DOCUMENTS"/{Misc,Recordings,Remote,Screenshots} \
 "$DOWNLOADS"/{Brave,Safari,Torrents}
 
-rm -rf "$XDG_CONFIG_HOME"/nvim/{init.lua,lua/}
+rm -rf "$XDG_CONFIG_HOME/nvim/"{init.lua,lua/}
 
-cp .env.fish "$XDG_CONFIG_HOME"/fish
+cp .env.fish "$XDG_CONFIG_HOME/fish"
 cp .env.sh "$HOME"
 cp "$shared_dir_macos/.bash_profile" "$HOME"
 cp "$shared_dir_macos/config.fish" "$XDG_CONFIG_HOME/fish/"
@@ -57,11 +57,11 @@ cp -R "$shared_dir/neovim/"* "$XDG_CONFIG_HOME/nvim/"
 cp "$shared_dir/ssh.conf" "$HOME/.ssh/config"
 cp "$shared_dir/tokyonight-moon.tmTheme" "$XDG_CONFIG_HOME/bat/themes"
 
-ln -sf "$HOME"/.bash_profile "$HOME"/.bashrc
-chmod u=rwx,g=,o= "$HOME"/.gnupg
-chmod u=rw,g=,o= "$HOME"/.gnupg/*
-chmod u=rwx,g=,o= "$HOME"/.ssh
-chmod u=rwx,g=,o= "$HOME"/.ssh/sockets
+ln -sf "$HOME/.bash_profile" "$HOME/.bashrc"
+chmod u=rwx,g=,o= "$HOME/.gnupg"
+chmod u=rw,g=,o= "$HOME/.gnupg/"*
+chmod u=rwx,g=,o= "$HOME/.ssh"
+chmod u=rwx,g=,o= "$HOME/.ssh/sockets"
 chmod u+x "$HOME/.local/bin/lfpreview"
 
 touch "$HOME/.hushlogin"
@@ -72,12 +72,12 @@ defaults import "$alttab_key" "$alttab_file"
 defaults import "$betterdisplay_key" "$betterdisplay_file"
 defaults import "$rectangle_key" "$rectangle_file"
 defaults import "$rectangle_chords_key" "$rectangle_chords_file"
-defaults import "$macmousefix_key" "$macmousefix_file"
+cp "$macmousefix_file" "$app_support_folder/com.nuebling.mac-mouse-fix/config.plist"
 
 # NOTE: The following are configuration files that
 # bust be patched before being put in their place.
 
-cp "$shared_dir_macos/.bunfig.toml" "$TMPDIR"/
+cp "$shared_dir_macos/.bunfig.toml" "$TMPDIR/"
 sed -i '' "s|#bun_install_globalDir|$XDG_CACHE_HOME/bun/pkgs|" "$TMPDIR/.bunfig.toml"
 sed -i '' "s|#bun_install_globalBinDir|$XDG_CACHE_HOME/bun/bin|" "$TMPDIR/.bunfig.toml"
 sed -i '' "s|#bun_install_cache_dir|$XDG_CACHE_HOME/bun/cache/install|" "$TMPDIR/.bunfig.toml"
@@ -86,7 +86,7 @@ mv "$TMPDIR/.bunfig.toml" "$XDG_CONFIG_HOME/"
 font_size="10.5"
 
 cp "$shared_dir/settings.vscode.json" "$TMPDIR/"
-sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR"/settings.vscode.json
+sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR/settings.vscode.json"
 cp "$TMPDIR/settings.vscode.json" "$vscode_cache_dir/settings.json"
 cp "$TMPDIR/settings.vscode.json" "$vscode_settings_dir/settings.json"
 
@@ -96,7 +96,7 @@ cp "$TMPDIR/settings.vscode.json" "$vscode_settings_dir/settings.json"
 # NOTE: The following can only be patched once Homebrew is installed.
 if [ -n "$HOMEBREW_PREFIX" ]; then
 	cp "$shared_dir_macos/kitty.conf" "$TMPDIR/"
-	sed -i '' "s|%font_size|$font_size|g" "$TMPDIR"/kitty.conf
+	sed -i '' "s|%font_size|$font_size|g" "$TMPDIR/kitty.conf"
 	sed -i '' "s|%homebrew_path|$HOMEBREW_PREFIX|g" "$TMPDIR/kitty.conf"
 	mv "$TMPDIR/kitty.conf" "$XDG_CONFIG_HOME/kitty/kitty.conf"
 	cp "$shared_dir/kitty_theme.conf" "$XDG_CONFIG_HOME/kitty/"

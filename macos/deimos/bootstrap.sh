@@ -80,7 +80,7 @@ source .env.sh
 bat cache --build
 
 log_info "\t >>> Installing fonts /etc/hosts"
-source "$shared_dir"/scripts/install-hosts.sh deimos
+source "$shared_dir/scripts/install-hosts.sh" deimos
 
 
 log_info "\t >>> Installing PIP packages"
@@ -114,8 +114,8 @@ done
 
 
 log_info "\t >>> Installing MongoDB Shell and Tools"
-source "$shared_dir"/scripts/install-mongo-utils.sh shell
-source "$shared_dir"/scripts/install-mongo-utils.sh tools
+source "$shared_dir/scripts/install-mongo-utils.sh" shell
+source "$shared_dir/scripts/install-mongo-utils.sh" tools
 
 
 log_info "\t >>> Installing Neovim plugins"
@@ -123,7 +123,7 @@ nvim --headless -c "Lazy! install" -c qall
 
 
 log_info "\t >>> Installing VSCode plugins"
-source "$shared_dir"/scripts/install-plugins-vscode.sh
+source "$shared_dir/scripts/install-plugins-vscode.sh"
 
 
 log_info "\t >>> Ignoring Focusrite Scarlett Solo automount"
@@ -131,10 +131,10 @@ echo "UUID=DC798778-543D-396B-A11F-2EC42F3500F9 none msdos ro,noauto" |
 	sudo tee -a /etc/fstab >/dev/null
 
 
-if [ -z "$(grep "$HOMEBREW_PREFIX"/bin/bash /etc/shells)" ]; then
+if [ -z "$(grep "$HOMEBREW_PREFIX/bin/bash" /etc/shells)" ]; then
 	log_info "\t >>> Setting Homebrew's bash as the default shell"
-	echo "$HOMEBREW_PREFIX"/bin/bash | sudo tee -a /etc/shells
-	chsh -s "$HOMEBREW_PREFIX"/bin/bash "$(whoami)"
+	echo "$HOMEBREW_PREFIX/bin/bash" | sudo tee -a /etc/shells
+	chsh -s "$HOMEBREW_PREFIX/bin/bash" "$(whoami)"
 fi
 
 

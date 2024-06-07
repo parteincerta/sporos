@@ -44,9 +44,9 @@ ln -fs /Volumes/D1/Remote "$DOCUMENTS"
 ln -fs /Volumes/D1/Screenshots "$DOCUMENTS"
 ln -fs /Volumes/D1/Torrents "$DOWNLOADS"
 
-rm -rf "$XDG_CONFIG_HOME"/nvim/{init.lua,lua/}
+rm -rf "$XDG_CONFIG_HOME/nvim/"{init.lua,lua/}
 
-cp .env.fish "$XDG_CONFIG_HOME"/fish
+cp .env.fish "$XDG_CONFIG_HOME/fish"
 cp .env.sh "$HOME"
 cp "$shared_dir_macos/.bash_profile" "$HOME"
 cp "$shared_dir_macos/config.fish" "$XDG_CONFIG_HOME/fish/"
@@ -67,11 +67,11 @@ cp -R "$shared_dir/neovim/"* "$XDG_CONFIG_HOME/nvim/"
 cp "$shared_dir/ssh.conf" "$HOME/.ssh/config"
 cp "$shared_dir/tokyonight-moon.tmTheme" "$XDG_CONFIG_HOME/bat/themes"
 
-ln -sf "$HOME"/.bash_profile "$HOME"/.bashrc
-chmod u=rwx,g=,o= "$HOME"/.gnupg
-chmod u=rw,g=,o= "$HOME"/.gnupg/*
-chmod u=rwx,g=,o= "$HOME"/.ssh
-chmod u=rwx,g=,o= "$HOME"/.ssh/sockets
+ln -sf "$HOME/.bash_profile" "$HOME/.bashrc"
+chmod u=rwx,g=,o= "$HOME/.gnupg"
+chmod u=rw,g=,o= "$HOME/.gnupg/"*
+chmod u=rwx,g=,o= "$HOME/.ssh"
+chmod u=rwx,g=,o= "$HOME/.ssh/sockets"
 chmod u+x "$HOME/.local/bin/lfpreview"
 
 touch "$HOME/.hushlogin"
@@ -112,7 +112,7 @@ cp "$TMPDIR/settings.vscode.json" "$vscode_settings_dir/settings.json"
 # NOTE: The following can only be patched once Homebrew is installed.
 if [ -n "$HOMEBREW_PREFIX" ]; then
 	cp "$shared_dir_macos/kitty.conf" "$TMPDIR/"
-	sed -i '' "s|%font_size|$font_size|g" "$TMPDIR"/kitty.conf
+	sed -i '' "s|%font_size|$font_size|g" "$TMPDIR/kitty.conf"
 	sed -i '' "s|%homebrew_path|$HOMEBREW_PREFIX|g" "$TMPDIR/kitty.conf"
 	mv "$TMPDIR/kitty.conf" "$XDG_CONFIG_HOME/kitty/kitty.conf"
 	cp "$shared_dir/kitty_theme.conf" "$XDG_CONFIG_HOME/kitty/"
