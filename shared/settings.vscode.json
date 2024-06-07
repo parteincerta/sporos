@@ -1,5 +1,5 @@
 {
-	"editor.cursorBlinking": "phase",
+	"editor.cursorBlinking": "blink",
 	"editor.cursorSmoothCaretAnimation": "off",
 	"editor.fontSize": "%font_size",
 	"editor.guides.bracketPairs": "active",
