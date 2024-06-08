@@ -9,7 +9,7 @@ trap trap_error ERR
 trap "rm -rf $TMPDIR/hosts" EXIT
 
 hostname="${1:-${HOSTNAME%.*}}"
-version="3.14.75"
+version="3.14.76"
 url="https://raw.githubusercontent.com/StevenBlack/hosts/${version}/hosts"
 system="$(uname -s)"
 
