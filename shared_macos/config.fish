@@ -168,6 +168,7 @@ alias npmrs="npm run start"
 alias npms="npm search"
 alias q="exit"
 alias tar="env COPYFILE_DISABLE=1 tar"
+alias whicha="which -a"
 
 function ambient --description "(re)Apply specific environment settings on demand."
 	bash -l -c "ambient $argv"

@@ -137,6 +137,7 @@ alias npmrs="npm run start"
 alias npms="npm search"
 alias q="exit"
 alias tar="COPYFILE_DISABLE=1 tar"
+alias whicha="which -a"
 
 [ -r "$HOMEBREW_PREFIX"/etc/profile.d/bash_completion.sh ] &&
 	source "$HOMEBREW_PREFIX"/etc/profile.d/bash_completion.sh
