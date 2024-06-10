@@ -42,6 +42,7 @@ development environment across all the computers I use.
   * `pip3 list --user --outdated`.
   * `pip3 install --user --upgrade <package>`.
 - Check for VSCode plugins updates.
+- Check for App Store updates.
 
 [macos-maintenance-01]: https://github.com/StevenBlack/hosts/releases
 [macos-maintenance-02]: https://github.com/mongodb-js/mongosh/releases
