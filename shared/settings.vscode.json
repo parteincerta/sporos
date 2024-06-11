@@ -33,9 +33,9 @@
 	],
 	"codesnap.showWindowControls": false,
 	"codesnap.shutterAction": "copy",
-	"cSpell.enabled": false,
-	"cSpell.includeRegExpList": [ "CStyleComment", "string" ],
-	"cSpell.ignoreWords": [ "codesnap", "marreta" ],
+	// "cSpell.enabled": false,
+	// "cSpell.includeRegExpList": [ "CStyleComment", "string" ],
+	// "cSpell.ignoreWords": [ "codesnap", "marreta" ],
 	"editor.lineNumbers": "on",
 	"extensions.experimental.affinity": {
 		"vscodevim.vim": 1

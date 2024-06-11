@@ -12,6 +12,7 @@ formulahendry.auto-rename-tag
 Gruntfuggly.todo-tree
 humao.rest-client
 James-Yu.latex-workshop
+llvm-vs-code-extensions.vscode-clangd
 meganrogge.template-string-converter
 metaseed.MetaJump
 mgmcdermott.vscode-language-babel
@@ -21,6 +22,7 @@ ms-vscode-remote.remote-containers
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 ms-vscode.cpptools
+ms-vscode.cmake-tools
 ms-vscode.hexeditor
 ms-vscode.makefile-tools
 ms-vscode.remote-explorer
@@ -30,7 +32,6 @@ PKief.material-icon-theme
 redhat.vscode-xml
 redhat.vscode-yaml
 rebornix.toggle
-streetsidesoftware.code-spell-checker
 sumneko.lua
 svelte.svelte-vscode
 usernamehw.errorlens
