@@ -68,7 +68,7 @@ microsoft=(microsoft-{excel,powerpoint,remote-desktop,word})
 homebrew_casks=(
 	alt-tab araxis-merge basictex betterdisplay brave-browser bruno chatgpt
 	$compass docker fork iina kitty mac-mouse-fix ${microsoft[*]} numi obs
-	rectangle signal tableplus transmission visual-studio-code whatsapp zoom
+	signal tableplus transmission visual-studio-code whatsapp zoom
 )
 brew install --cask ${homebrew_casks[*]}
 

@@ -24,10 +24,10 @@ macmousefix_key="com.nuebling.mac-mouse-fix"
 macmousefix_file="$shared_dir_macos/plist/${macmousefix_key}.plist"
 
 # Rectangle
-rectangle_key="com.knollsoft.Rectangle"
-rectangle_file="$shared_dir_macos/plist/${rectangle_key}.plist"
-rectangle_chords_key="com.knollsoft.Hookshot"
-rectangle_chords_file="$shared_dir_macos/plist/${rectangle_chords_key}.plist"
+# rectangle_key="com.knollsoft.Rectangle"
+# rectangle_file="$shared_dir_macos/plist/${rectangle_key}.plist"
+# rectangle_chords_key="com.knollsoft.Hookshot"
+# rectangle_chords_file="$shared_dir_macos/plist/${rectangle_chords_key}.plist"
 
 [ "$1" = "--source-keys-only" ] && return 0 || true
 
@@ -40,8 +40,8 @@ defaults export "$betterdisplay_key" "$betterdisplay_file"
 log_info ">>> Exporting Mac Mouse Fix settings..."
 cp "$HOME/Library/Application Support/${macmousefix_key}/config.plist" "$macmousefix_file"
 
-log_info ">>> Exporting Rectangle settings..."
-defaults export "$rectangle_key" "$rectangle_file"
+# log_info ">>> Exporting Rectangle settings..."
+# defaults export "$rectangle_key" "$rectangle_file"
 
-log_info ">>> Exporting Rectangle chord settings..."
-defaults export "$rectangle_chords_key" "$rectangle_chords_file"
+# log_info ">>> Exporting Rectangle chord settings..."
+# defaults export "$rectangle_chords_key" "$rectangle_chords_file"
