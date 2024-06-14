@@ -32,12 +32,12 @@ mkdir -p \
 "$XDG_CONFIG_HOME"/{bat/themes,fd,fish,git,kitty,lf,nvim} \
 "$CODE" \
 "$DOWNLOADS"/{Brave,Safari} \
-/Volumes/D1/Developer/{gh,gh-misc,icnew/{git-icone,misc}} \
+/Volumes/D1/Developer/{github,icnew/{git-icone,misc},parteincerta} \
 /Volumes/D1/{.docker,Misc,Recordings,Remote,Screenshots,Torrents}
 
-ln -fs /Volumes/D1/Developer/gh "$CODE"
-ln -fs /Volumes/D1/Developer/gh-misc "$CODE"
+ln -fs /Volumes/D1/Developer/github "$CODE"
 ln -fs /Volumes/D1/Developer/icnew "$CODE"
+ln -fs /Volumes/D1/Developer/parteincerta "$CODE"
 ln -fs /Volumes/D1/Misc "$DOCUMENTS"
 ln -fs /Volumes/D1/Recordings "$DOCUMENTS"
 ln -fs /Volumes/D1/Remote "$DOCUMENTS"

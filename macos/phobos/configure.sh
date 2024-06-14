@@ -30,7 +30,7 @@ mkdir -p \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
 "$XDG_CACHE_HOME"/bun/{bin,cache/{install,transpiler},pkg} \
 "$XDG_CONFIG_HOME"/{bat/themes,fd,fish,git,kitty,lf,nvim} \
-"$CODE"/{gh,gh-misc,icnew/{git-icone,misc}} \
+"$CODE"/{github,icnew/{git-icone,misc},parteincerta} \
 "$DOCUMENTS"/{Misc,Recordings,Remote,Screenshots} \
 "$DOWNLOADS"/{Brave,Safari,Torrents}
 
