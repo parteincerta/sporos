@@ -268,7 +268,7 @@ cmd secure_rm ${{
 	if [ -n "$fx" ]; then
 		IFS="$(printf '\n\t')"; for item in $fx
 		do
-			bash -c "secrm $item"
+			bash -c "secrm \"$item\""
 		done
 	else
 		IFS="$(printf '\n\t')" bash -c "secrm $f"
