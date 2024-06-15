@@ -8,5 +8,11 @@
 	"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
 },{
 	"key": "cmd+0",
-	"command": "workbench.action.zoomReset"
+	"command": "workbench.action.resetZoom"
+},{
+	"key": "cmd+q",
+	"command": "-workbench.action.closeWindow"
+},{
+	"key": "cmd+q",
+	"command": "workbench.action.closeWindow"
 }]
