@@ -69,7 +69,7 @@ touch "$XDG_CONFIG_HOME/lf/bookmarks"
 
 source "$shared_dir_macos/scripts/export-defaults.sh" --source-keys-only
 defaults import "$alttab_key" "$alttab_file"
-defaults import "$betterdisplay_key" "$betterdisplay_file"
+# defaults import "$betterdisplay_key" "$betterdisplay_file"
 cp "$macmousefix_file" "$app_support_folder/com.nuebling.mac-mouse-fix/config.plist"
 
 # NOTE: The following are configuration files that
