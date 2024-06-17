@@ -13,7 +13,7 @@ pushd "$this_script_abs_path" >/dev/null
 trap "popd >/dev/null" EXIT
 
 
-if [ "dremion" != "$system_hostname" ]; then
+if [ "dremio" != "$system_hostname" ]; then
 	log_warning ">>> This configuration script belongs to another host: dremio".
 	log_warning ">>> The current host is: $system_hostname"
 	exit 1
