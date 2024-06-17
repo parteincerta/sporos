@@ -14,7 +14,7 @@ trap "popd >/dev/null" EXIT
 
 
 if [ "deimos" != "$system_hostname" ]; then
-	log_warning ">>> This configuration script belongs to a another host: deimos".
+	log_warning ">>> This configuration script belongs to another host: deimos".
 	log_warning ">>> The current host is: $system_hostname"
 	exit 1
 fi

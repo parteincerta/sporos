@@ -22,7 +22,7 @@ if [ -s "$bootstrap_mark_file" ]; then
 fi
 
 if [ "houdini" != "$system_hostname" ]; then
-	log_warning ">>> This bootstrap script belongs to a another host: houdini".
+	log_warning ">>> This bootstrap script belongs to another host: houdini".
 	log_warning ">>> The current host is: $system_hostname"
 	exit 1
 fi

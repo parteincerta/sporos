@@ -22,7 +22,7 @@ if [ -s "$bootstrap_mark_file" ]; then
 fi
 
 if [ "deimos" != "$system_hostname" ]; then
-	log_warning ">>> This bootstrap script belongs to a another host: deimos".
+	log_warning ">>> This bootstrap script belongs to another host: deimos".
 	log_warning ">>> The current host is: $system_hostname"
 	exit 1
 fi
