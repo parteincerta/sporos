@@ -137,6 +137,13 @@ if [ -z "$(grep "$HOMEBREW_PREFIX/bin/bash" /etc/shells)" ]; then
 	chsh -s "$HOMEBREW_PREFIX/bin/bash" "$(whoami)"
 fi
 
+log_info "\t >>> Increasing file descriptors and processes limits"
+sudo cp limit.maxfiles.plist /Library/LaunchDaemons/
+sudo cp limit.maxproc.plist /Library/LaunchDaemons/
+sudo chown root:wheel /Library/LaunchDaemons/limit.maxfiles.plist
+sudo chown root:wheel /Library/LaunchDaemons/limit.maxproc.plist
+sudo launchctl load -w /Library/LaunchDaemons/limit.maxfiles.plist
+sudo launchctl load -w /Library/LaunchDaemons/limit.maxproc.plist
 
 echo "ok" > "$bootstrap_mark_file"
 log_success "\t >>> Finished!"

@@ -66,3 +66,10 @@ homebrew_pg_bin=/opt/homebrew/opt/libpq/bin
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -s "$HOMEBREW_PREFIX"/bin/bash ] &&
 	alias bash="$HOMEBREW_PREFIX"/bin/bash || true
+
+if [ $(shopt -q login_shell) ]; then
+	NOFILE=$(sysctl -n kern.maxfilesperproc)
+	NOPROC=$(sysctl -n kern.maxproc)
+	ulimit -n "$NOFILE"
+	ulimit -u "$NOPROC"
+fi

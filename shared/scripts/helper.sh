@@ -9,6 +9,9 @@ fg_red="\033[0;31m"
 # NOTE: To understand Bash's parameter expansion:
 # https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html
 system_hostname="${HOSTNAME/%.local/}"
+if [ "$system_hostname" = "Fernando-Moreira-MacBook-Pro-16-inch-Nov-2023-" ]; then
+	system_hostname="dremio"
+fi
 
 enter_password () {
 	local pwd1="pwd1"

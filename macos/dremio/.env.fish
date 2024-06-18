@@ -58,3 +58,11 @@ test -s "$HOMEBREW_PREFIX"/opt/asdf/libexec/asdf.sh &&
 test -n "$HOMEBREW_PREFIX" &&
 test -s "$HOMEBREW_PREFIX"/bin/bash &&
 	alias bash="$HOMEBREW_PREFIX"/bin/bash || true
+
+if status --is-login
+	echo "Limits set"
+	set NOFILE (sysctl -n kern.maxfilesperproc)
+	set NOPROC (sysctl -n kern.maxproc)
+	ulimit -n "$NOFILE"
+	ulimit -u "$NOPROC"
+end
