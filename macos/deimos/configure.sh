@@ -27,7 +27,7 @@ mkdir -p \
 "$HOME"/Library/{KeyBindings,LaunchAgents} \
 "$HOME/Library/Application Support/Code/User/" \
 "$HOME/Library/Application Support/com.nuebling.mac-mouse-fix/" \
-"$HOME/Library/Application Support/obs-studio/basic" \
+"$HOME/Library/Application Support/obs-studio/basic/" \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
 "$XDG_CACHE_HOME"/bun/{bin,cache/{install,transpiler},pkg} \
 "$XDG_CONFIG_HOME"/{bat/themes,fd,fish,git,kitty,lf,nvim} \

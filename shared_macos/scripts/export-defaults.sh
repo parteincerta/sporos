@@ -45,6 +45,7 @@ cp "$HOME/Library/Application Support/${macmousefix_key}/config.plist" "$macmous
 
 if [ -d  "$obs_dir" ]; then
 	log_info ">>> Exporting OBS settings..."
+	rm -rf "$host_dir/obs"
 	cp -R "$obs_dir" "$host_dir/obs"
 	find "$host_dir/obs" -name "*.bak" -type f -delete
 fi
