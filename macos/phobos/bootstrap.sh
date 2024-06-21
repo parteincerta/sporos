@@ -27,7 +27,7 @@ if [ "phobos" != "$system_hostname" ]; then
 	exit 1
 fi
 
-log_info "\t >>> Installing dotfiles"
+log_info "\t >>> Setting up the host file"
 /bin/bash configure.sh
 
 

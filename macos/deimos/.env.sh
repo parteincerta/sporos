@@ -40,7 +40,7 @@ homebrew_pg_bin=/opt/homebrew/opt/libpq/bin
 	export PATH="$PATH:$homebrew_bin" || true
 
 [[ ! "$PATH" =~ $homebrew_sbin ]] &&
-	export PATH="$PATH:homebrew_sbin" || true
+	export PATH="$PATH:$homebrew_sbin" || true
 
 [[ ! "$PATH" =~ $homebrew_pg_bin ]] &&
 	export PATH="$PATH:$homebrew_pg_bin" || true

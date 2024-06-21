@@ -56,20 +56,18 @@ log_info "\t >>> Installing Homebrew apps"
 homebrew_cli=(
 	7zip aria2 asdf bat bash bash-completion@2 bear bzip2 coreutils eza fd
 	findutils fish font-jetbrains-mono-nerd-font fzf gettext gh git-delta gnupg
-	gsed jq lf libpq miniserve mkcert moreutils neovim oha pbzip2 pigz rclone
+	gsed jq lf libpq maven miniserve mkcert moreutils neovim oha pbzip2 pigz
 	ripgrep tokei xz zstd
 )
 brew install ${homebrew_cli[*]}
 
 
 log_info "\t >>> Installing Homebrew casks"
-compass="mongodb-compass-isolated-edition"
 microsoft=(microsoft-{excel,powerpoint,remote-desktop,word})
 homebrew_casks=(
-	alt-tab araxis-merge basictex betterdisplay brave-browser bruno chatgpt
-	$compass docker fork google-chrome iina kitty mac-mouse-fix ${microsoft[*]}
-	numi obs signal slack tableplus tailscale transmission visual-studio-code
-	whatsapp zoom
+	alt-tab betterdisplay bruno docker fork google-chrome iina intellij-idea-ce
+	kitty mac-mouse-fix ${microsoft[*]} numi obs slack tableplus tailscale
+	temurin@8 temurin@11 visual-studio-code zoom
 )
 brew install --cask ${homebrew_casks[*]}
 
@@ -79,7 +77,7 @@ source .env.sh
 /bin/bash configure.sh
 bat cache --build
 
-log_info "\t >>> Installing fonts /etc/hosts"
+log_info "\t >>> Setting up the host file"
 source "$shared_dir/scripts/install-hosts.sh" dremio
 
 
@@ -88,47 +86,12 @@ pip3 install --user wheel
 pip3 install --user pynvim
 
 
-log_info "\t >>> Installing ASDF packages"
-asdf_plugins=("bun:1*" "golang:" "nodejs:18*" "zig:")
-
-for item in ${asdf_plugins[*]}
-do
-	plugin_name="${item%%:*}"
-	plugin_target="${item##*:}"
-	plugin_version="${plugin_target%%\**}"
-	plugin_is_global="${plugin_target: -1}"
-
-	if [ -z "$(asdf list | grep $plugin_name)" ]; then
-		asdf plugin-add "$plugin_name"
-	fi
-
-	[ -n "$plugin_name" ] &&
-	[ -n "$plugin_version" ] &&
-		asdf install "$plugin_name" "latest:$plugin_version" || true
-
-	[ -n "$plugin_name" ] &&
-	[ -n "$plugin_version" ] &&
-	[ -n "$plugin_is_global" ] &&
-		asdf global "$plugin_name" "latest:$plugin_version" || true
-done
-
-
-log_info "\t >>> Installing MongoDB Shell and Tools"
-source "$shared_dir/scripts/install-mongo-utils.sh" shell
-source "$shared_dir/scripts/install-mongo-utils.sh" tools
-
-
 log_info "\t >>> Installing Neovim plugins"
 nvim --headless -c "Lazy! install" -c qall
 
 
 log_info "\t >>> Installing VSCode plugins"
 source "$shared_dir/scripts/install-plugins-vscode.sh"
-
-
-log_info "\t >>> Ignoring Focusrite Scarlett Solo automount"
-echo "UUID=DC798778-543D-396B-A11F-2EC42F3500F9 none msdos ro,noauto" |
-	sudo tee -a /etc/fstab >/dev/null
 
 
 if [ -z "$(grep "$HOMEBREW_PREFIX/bin/bash" /etc/shells)" ]; then
@@ -142,8 +105,11 @@ sudo cp limit.maxfiles.plist /Library/LaunchDaemons/
 sudo cp limit.maxproc.plist /Library/LaunchDaemons/
 sudo chown root:wheel /Library/LaunchDaemons/limit.maxfiles.plist
 sudo chown root:wheel /Library/LaunchDaemons/limit.maxproc.plist
-sudo launchctl load -w /Library/LaunchDaemons/limit.maxfiles.plist
-sudo launchctl load -w /Library/LaunchDaemons/limit.maxproc.plist
+
+# The following statements are not working.
+# For now you've to restart macOS to pick up these tasks.
+# sudo launchctl load -w /Library/LaunchDaemons/limit.maxfiles.plist
+# sudo launchctl load -w /Library/LaunchDaemons/limit.maxproc.plist
 
 echo "ok" > "$bootstrap_mark_file"
 log_success "\t >>> Finished!"

@@ -22,7 +22,7 @@ fi
 source .env.sh || true
 
 mkdir -p \
-"$HOME"/{.gnupg,.ssh/sockets} \
+"$HOME"/{.gnupg,.m2,.ssh/sockets} \
 "$HOME"/.local/{bin,share/lf} \
 "$HOME"/Library/{KeyBindings,LaunchAgents} \
 "$HOME/Library/Application Support/Code/User/" \
@@ -41,6 +41,10 @@ cp .env.sh "$HOME"
 cp "$shared_dir_macos/.bash_profile" "$HOME"
 cp "$shared_dir_macos/config.fish" "$XDG_CONFIG_HOME/fish/"
 cp "$shared_dir_macos/lfrc" "$XDG_CONFIG_HOME/lf/"
+
+cp .mavenrc "$HOME/"
+cp maven.settings.xml "$HOME/.m2/settings.xml"
+cp maven.toolchains.xml "$HOME/.m2/toolchains.xml"
 
 app_support_folder="$HOME/Library/Application Support"
 vscode_cache_dir="$XDG_CACHE_HOME/code/data/User"

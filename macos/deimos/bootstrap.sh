@@ -79,7 +79,7 @@ source .env.sh
 /bin/bash configure.sh
 bat cache --build
 
-log_info "\t >>> Installing fonts /etc/hosts"
+log_info "\t >>> Setting up the host file"
 source "$shared_dir/scripts/install-hosts.sh" deimos
 
 

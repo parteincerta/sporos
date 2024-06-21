@@ -30,21 +30,15 @@ set --export MANPAGER "env IS_PAGER=yes nvim -n -i NONE +Man!"
 set --export NVIM_PAGER "env IS_PAGER=yes nvim -n -i NONE -R"
 
 # Homebrew on Apple Silicon uses a new location /opt/homebrew/{bin,sbin}
-# which by default are not in the $PATH so they must be manually inserted.
-set homebrew_bin /opt/homebrew/bin
-set homebrew_sbin /opt/homebrew/sbin
-set homebrew_pg_bin /opt/homebrew/opt/libpq/bin
-contains $homebrew_bin $PATH || set --append PATH $homebrew_bin
-contains $homebrew_sbin $PATH || set --append PATH $homebrew_sbin
-contains $homebrew_pg_bin $PATH || set --append PATH $homebrew_pg_bin
-
-contains "$HOME"/.docker/bin $PATH || set --append PATH "$HOME"/.docker/bin
-contains "$HOME"/.local/bin $PATH || set --append PATH "$HOME"/.local/bin
-
-string match -e 'Python*bin' "$PATH" >/dev/null ||
-begin
-	type -q python3 &&
-	set --append PATH (python3 -c "import site; print(site.USER_BASE + '/bin')")
+# which by default is not in the $PATH so it must be manually inserted.
+fish_add_path --path /opt/homebrew/bin
+fish_add_path --path /opt/homebrew/sbin
+fish_add_path --path /opt/homebrew/opt/libpq/bin
+fish_add_path --path --append "$HOME"/.docker/bin
+fish_add_path --path --append "$HOME"/.local/bin
+if [ (type -q python3) ]
+	set python3_bin (python3 -c "import site; print(site.USER_BASE + '/bin')")
+	fish_add_path --path --append $python3_bin
 end
 
 test -z "$HOMEBREW_PREFIX" &&
@@ -59,8 +53,12 @@ test -n "$HOMEBREW_PREFIX" &&
 test -s "$HOMEBREW_PREFIX"/bin/bash &&
 	alias bash="$HOMEBREW_PREFIX"/bin/bash || true
 
+set java_home (/usr/libexec/java_home)
+if [ -d "$java_home" ]
+	set --export JAVA_HOME "$java_home"
+end
+
 if status --is-login
-	echo "Limits set"
 	set NOFILE (sysctl -n kern.maxfilesperproc)
 	set NOPROC (sysctl -n kern.maxproc)
 	ulimit -n "$NOFILE"

@@ -1,0 +1,10 @@
+<settings>
+	<mirrors>
+		<mirror>
+			<id>dremio-public-mirror</id>
+			<mirrorOf>dremio-public</mirrorOf>
+			<name>Dremio Public Mirror</name>
+			<url>https://repo.drem.io/content/groups/java-mirror/</url>
+		</mirror>
+	</mirrors>
+</settings>

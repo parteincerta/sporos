@@ -37,10 +37,10 @@ homebrew_bin=/opt/homebrew/bin
 homebrew_sbin=/opt/homebrew/sbin
 homebrew_pg_bin=/opt/homebrew/opt/libpq/bin
 [[ ! "$PATH" =~ $homebrew_bin ]] &&
-	export PATH="$PATH:$homebrew_bin" || true
+	export PATH="$homebrew_bin:$PATH" || true
 
 [[ ! "$PATH" =~ $homebrew_sbin ]] &&
-	export PATH="$PATH:homebrew_sbin" || true
+	export PATH="$homebrew_sbin:$PATH" || true
 
 [[ ! "$PATH" =~ $homebrew_pg_bin ]] &&
 	export PATH="$PATH:$homebrew_pg_bin" || true
@@ -50,6 +50,9 @@ homebrew_pg_bin=/opt/homebrew/opt/libpq/bin
 
 [[ ! "$PATH" =~ $HOME/.local/bin ]] &&
 	export PATH="$PATH:$HOME/.local/bin" || true
+
+[[ ! "$PATH" =~ $PYENV_ROOT/bin ]] && [ -d $PYENV_ROOT/bin ] &&
+	export PATH="$PATH:$PYENV_ROOT/bin" || true
 
 [[ ! "$PATH" =~ Python ]] &&
 	command -v python3 &>/dev/null &&
@@ -66,6 +69,11 @@ homebrew_pg_bin=/opt/homebrew/opt/libpq/bin
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -s "$HOMEBREW_PREFIX"/bin/bash ] &&
 	alias bash="$HOMEBREW_PREFIX"/bin/bash || true
+
+java_home="$(/usr/libexec/java_home)"
+if [ -d "$java_home" ]; then
+	export JAVA_HOME="$java_home"
+fi
 
 if [ $(shopt -q login_shell) ]; then
 	NOFILE=$(sysctl -n kern.maxfilesperproc)
