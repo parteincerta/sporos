@@ -91,9 +91,7 @@ asdf install "bun" "latest:1"
 asdf global "bun" "latest:1"
 
 asdf plugin-add "nodejs"
-# Workaround to build Node.js v14 on Apple Silicon.
-# https://github.com/nodejs/node/issues/52230#issuecomment-2148778308
-CPPFLAGS='-Wno-enum-constexpr-conversion' asdf install "nodejs" "latest:14"
+asdf install "nodejs" "latest:14"
 asdf install "nodejs" "latest:18"
 
 
