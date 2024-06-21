@@ -19,6 +19,9 @@ alttab_file="$shared_dir_macos/plist/${alttab_key}.plist"
 betterdisplay_key="pro.betterdisplay.BetterDisplay"
 betterdisplay_file="$host_dir/${betterdisplay_key}.plist"
 
+# OBS
+obs_dir="$HOME/Library/Application Support/obs-studio/basic"
+
 # Mac Mouse Fix
 macmousefix_key="com.nuebling.mac-mouse-fix"
 macmousefix_file="$shared_dir_macos/plist/${macmousefix_key}.plist"
@@ -39,6 +42,12 @@ defaults export "$betterdisplay_key" "$betterdisplay_file"
 
 log_info ">>> Exporting Mac Mouse Fix settings..."
 cp "$HOME/Library/Application Support/${macmousefix_key}/config.plist" "$macmousefix_file"
+
+if [ -d  "$obs_dir" ]; then
+	log_info ">>> Exporting OBS settings..."
+	cp -R "$obs_dir" "$host_dir/obs"
+	find "$host_dir/obs" -name "*.bak" -type f -delete
+fi
 
 # log_info ">>> Exporting Rectangle settings..."
 # defaults export "$rectangle_key" "$rectangle_file"
