@@ -29,25 +29,24 @@ set --export LESSCHARSET UTF-8
 set --export MANPAGER "env IS_PAGER=yes nvim -n -i NONE +Man!"
 set --export NVIM_PAGER "env IS_PAGER=yes nvim -n -i NONE -R"
 
-set homebrew_bin /usr/local/bin
-set homebrew_sbin /usr/local/sbin
-set homebrew_pg_bin /usr/local/opt/libpq/bin
-contains $homebrew_bin $PATH || set --append PATH $homebrew_bin
-contains $homebrew_sbin $PATH || set --append PATH $homebrew_sbin
-contains $homebrew_pg_bin $PATH || set --append PATH $homebrew_pg_bin
-
-contains "$HOME"/.docker/bin $PATH || set --append PATH "$HOME"/.docker/bin
-contains "$HOME"/.local/bin $PATH || set --append PATH "$HOME"/.local/bin
-
-string match -e 'Python*bin' "$PATH" >/dev/null ||
-begin
-	type -q python3 &&
-	set --append PATH (python3 -c "import site; print(site.USER_BASE + '/bin')")
-end
-
 test -z "$HOMEBREW_PREFIX" &&
-	type -q brew &&
-	set --export HOMEBREW_PREFIX (brew --prefix)
+	type -q /usr/local/bin/brew &&
+	set --export HOMEBREW_PREFIX "/usr/local"
 
-test -s "$HOMEBREW_PREFIX"/opt/asdf/libexec/asdf.sh &&
-	source "$HOMEBREW_PREFIX"/opt/asdf/libexec/asdf.fish
+test -n "$HOMEBREW_PREFIX" &&
+test -s "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" &&
+	source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.fish"
+
+# Homebrew on Apple Silicon uses a new location /opt/homebrew/{bin,sbin}
+# which by default is not in the $PATH so they must be manually added.
+fish_add_path --path "$HOMEBREW_PREFIX/opt/libpq/bin"
+fish_add_path --path "$HOMEBREW_PREFIX/sbin"
+fish_add_path --path "$HOMEBREW_PREFIX/bin"
+
+fish_add_path --path --append "$HOME"/.docker/bin
+fish_add_path --path --append "$HOME"/.local/bin
+
+if [ (type -q python3) ]
+	set python3_bin (python3 -c "import site; print(site.USER_BASE + '/bin')")
+	fish_add_path --path --append $python3_bin
+end

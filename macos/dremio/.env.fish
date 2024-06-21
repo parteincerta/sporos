@@ -5,7 +5,6 @@ set --export XDG_STATE_HOME "$HOME/.local/state"
 
 set --export ASDF_CONCURRENCY 12
 set --export ASDF_DATA_DIR "$XDG_CACHE_HOME/asdf"
-set --export BUN_RUNTIME_TRANSPILER_CACHE_PATH "$XDG_CACHE_HOME/bun/cache/transpiler"
 set --export CODE "$HOME/Developer"
 set --export DOCUMENTS "$HOME/Documents"
 set --export DOWNLOADS "$HOME/Downloads"
@@ -29,34 +28,30 @@ set --export LESSCHARSET UTF-8
 set --export MANPAGER "env IS_PAGER=yes nvim -n -i NONE +Man!"
 set --export NVIM_PAGER "env IS_PAGER=yes nvim -n -i NONE -R"
 
+test -z "$HOMEBREW_PREFIX" &&
+	type -q /opt/homebrew/bin/brew &&
+	set --export HOMEBREW_PREFIX "/opt/homebrew"
+
+test -n "$HOMEBREW_PREFIX" &&
+test -s "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" &&
+	source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.fish"
+
 # Homebrew on Apple Silicon uses a new location /opt/homebrew/{bin,sbin}
-# which by default is not in the $PATH so it must be manually inserted.
-fish_add_path --path /opt/homebrew/bin
-fish_add_path --path /opt/homebrew/sbin
-fish_add_path --path /opt/homebrew/opt/libpq/bin
+# which by default is not in the $PATH so they must be manually added.
+fish_add_path --path "$HOMEBREW_PREFIX/opt/libpq/bin"
+fish_add_path --path "$HOMEBREW_PREFIX/sbin"
+fish_add_path --path "$HOMEBREW_PREFIX/bin"
+
 fish_add_path --path --append "$HOME"/.docker/bin
 fish_add_path --path --append "$HOME"/.local/bin
+
 if [ (type -q python3) ]
 	set python3_bin (python3 -c "import site; print(site.USER_BASE + '/bin')")
 	fish_add_path --path --append $python3_bin
 end
 
-test -z "$HOMEBREW_PREFIX" &&
-	type -q brew &&
-	set --export HOMEBREW_PREFIX (brew --prefix)
-
-test -n "$HOMEBREW_PREFIX" &&
-test -s "$HOMEBREW_PREFIX"/opt/asdf/libexec/asdf.sh &&
-	source "$HOMEBREW_PREFIX"/opt/asdf/libexec/asdf.fish
-
-test -n "$HOMEBREW_PREFIX" &&
-test -s "$HOMEBREW_PREFIX"/bin/bash &&
-	alias bash="$HOMEBREW_PREFIX"/bin/bash || true
-
-set java_home (/usr/libexec/java_home)
-if [ -d "$java_home" ]
-	set --export JAVA_HOME "$java_home"
-end
+test -d /usr/libexec/java_home &&
+	set --export JAVA_HOME "/usr/libexec/java_home"
 
 if status --is-login
 	set NOFILE (sysctl -n kern.maxfilesperproc)

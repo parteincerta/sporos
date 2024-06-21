@@ -1,11 +1,9 @@
-# vim:ft=bash
-
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-export ASDF_CONCURRENCY=12
+export ASDF_CONCURRENCY=16
 export ASDF_DATA_DIR="$XDG_CACHE_HOME/asdf"
 export BUN_RUNTIME_TRANSPILER_CACHE_PATH="$XDG_CACHE_HOME/bun/cache/transpiler"
 export CODE="$HOME/Developer"
@@ -31,38 +29,42 @@ export LESSCHARSET="UTF-8"
 export MANPAGER="env IS_PAGER=yes nvim -n -i NONE +Man!"
 export NVIM_PAGER="env IS_PAGER=yes nvim -n -i NONE -R"
 
+[ -z "$HOMEBREW_PREFIX" ] &&
+	command -v /opt/homebrew/bin/brew &>/dev/null &&
+	export HOMEBREW_PREFIX="/opt/homebrew" || true
+
+[ -n "$HOMEBREW_PREFIX" ] &&
+[ -s "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ] &&
+	source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" || true
+
 # Homebrew on Apple Silicon uses a new location /opt/homebrew/{bin,sbin}
-# which by default are not in the $PATH so they must be manually inserted.
-homebrew_bin=/opt/homebrew/bin
-homebrew_sbin=/opt/homebrew/sbin
-homebrew_pg_bin=/opt/homebrew/opt/libpq/bin
-[[ ! "$PATH" =~ $homebrew_bin ]] &&
-	export PATH="$PATH:$homebrew_bin" || true
+# which by default is not in the $PATH so they must be manually added.
+homebrew_bin="$HOMEBREW_PREFIX/bin"
+homebrew_sbin="$HOMEBREW_PREFIX/sbin"
+homebrew_pg_bin="$HOMEBREW_PREFIX/opt/libpq/bin"
 
-[[ ! "$PATH" =~ $homebrew_sbin ]] &&
-	export PATH="$PATH:$homebrew_sbin" || true
-
+[ -d $homebrew_pg_bin ] &&
 [[ ! "$PATH" =~ $homebrew_pg_bin ]] &&
-	export PATH="$PATH:$homebrew_pg_bin" || true
+	export PATH="$homebrew_pg_bin:$PATH" || true
 
+[ -d $homebrew_sbin ] &&
+[[ ! "$PATH" =~ $homebrew_sbin ]] &&
+	export PATH="$homebrew_sbin:$PATH" || true
+
+[ -d $homebrew_bin ] &&
+[[ ! "$PATH" =~ $homebrew_bin ]] &&
+	export PATH="$homebrew_bin:$PATH" || true
+
+[ -d "$PATH:$HOME/.docker/bin" ] &&
 [[ ! "$PATH" =~ $HOME/.docker/bin ]] &&
 	export PATH="$PATH:$HOME/.docker/bin" || true
 
+[ -d "$PATH:$HOME/.local/bin" ] &&
 [[ ! "$PATH" =~ $HOME/.local/bin ]] &&
 	export PATH="$PATH:$HOME/.local/bin" || true
 
 [[ ! "$PATH" =~ Python ]] &&
-	command -v python3 &>/dev/null &&
-	export PATH="$PATH:$(python3 -c "import site; print(site.USER_BASE + '/bin')")" || true
-
-[ -z "$HOMEBREW_PREFIX" ] &&
-	command -v brew &>/dev/null &&
-	export HOMEBREW_PREFIX="$(brew --prefix)" || true
-
-[ -n "$HOMEBREW_PREFIX" ] &&
-[ -s "$HOMEBREW_PREFIX"/opt/asdf/libexec/asdf.sh ] &&
-	source "$HOMEBREW_PREFIX"/opt/asdf/libexec/asdf.sh || true
-
-[ -n "$HOMEBREW_PREFIX" ] &&
-[ -s "$HOMEBREW_PREFIX"/bin/bash ] &&
-	alias bash="$HOMEBREW_PREFIX"/bin/bash || true
+command -v python3 &>/dev/null &&
+	python3_bin="$(python3 -c "import site; print(site.USER_BASE + '/bin')")" &&
+	[ -d "$python3_bin" ] &&
+	export PATH="$PATH:$python3_bin" || true
