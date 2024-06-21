@@ -56,7 +56,7 @@ fi
 log_info "\t >>> Installing Homebrew apps"
 homebrew_cli=(
 	7zip aria2 asdf bat bash bash-completion@2 bear bzip2 coreutils eza fd
-	findutils fish font-jetbrains-mono-nerd-font fzf gettext gh git-delta gnupg
+	findutils fish font-jetbrains-mono-nerd-font fzf gettext git-delta gnupg
 	gsed jq lf libpq miniserve mkcert moreutils neovim oha pbzip2 pigz rclone
 	ripgrep tokei xz zstd
 )
@@ -79,7 +79,7 @@ source .env.sh
 /bin/bash configure.sh
 bat cache --build
 
-log_info "\t >>> Setting up the host file"
+log_info "\t >>> Setting up the hosts file"
 source "$shared_dir/scripts/install-hosts.sh" deimos
 
 
@@ -89,28 +89,15 @@ pip3 install --user pynvim
 
 
 log_info "\t >>> Installing ASDF packages"
-asdf_plugins=("bun:1*" "golang:" "nodejs:18*" "zig:")
+asdf plugin-add "bun"
+asdf install "bun" "latest:1"
+asdf global "bun" "latest:1"
 
-for item in ${asdf_plugins[*]}
-do
-	plugin_name="${item%%:*}"
-	plugin_target="${item##*:}"
-	plugin_version="${plugin_target%%\**}"
-	plugin_is_global="${plugin_target: -1}"
-
-	if [ -z "$(asdf list | grep $plugin_name)" ]; then
-		asdf plugin-add "$plugin_name"
-	fi
-
-	[ -n "$plugin_name" ] &&
-	[ -n "$plugin_version" ] &&
-		asdf install "$plugin_name" "latest:$plugin_version" || true
-
-	[ -n "$plugin_name" ] &&
-	[ -n "$plugin_version" ] &&
-	[ -n "$plugin_is_global" ] &&
-		asdf global "$plugin_name" "latest:$plugin_version" || true
-done
+asdf plugin-add "nodejs"
+# Workaround to build Node.js v14 on Apple Silicon.
+# https://github.com/nodejs/node/issues/52230#issuecomment-2148778308
+CPPFLAGS='-Wno-enum-constexpr-conversion' asdf install "nodejs" "latest:14"
+asdf install "nodejs" "latest:18"
 
 
 log_info "\t >>> Installing MongoDB Shell and Tools"

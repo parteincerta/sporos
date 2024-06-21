@@ -55,7 +55,7 @@ fi
 log_info "\t >>> Installing Homebrew apps"
 homebrew_cli=(
 	7zip aria2 asdf bat bash bash-completion@2 bear bzip2 coreutils eza fd
-	findutils fish font-jetbrains-mono-nerd-font fzf gettext gh git-delta gnupg
+	findutils fish font-jetbrains-mono-nerd-font fzf gettext git-delta gnupg
 	gsed jq lf libpq maven miniserve mkcert moreutils neovim oha pbzip2 pigz
 	ripgrep tokei xz zstd
 )
@@ -77,7 +77,7 @@ source .env.sh
 /bin/bash configure.sh
 bat cache --build
 
-log_info "\t >>> Setting up the host file"
+log_info "\t >>> Setting up the hosts file"
 source "$shared_dir/scripts/install-hosts.sh" dremio
 
 
@@ -105,11 +105,6 @@ sudo cp limit.maxfiles.plist /Library/LaunchDaemons/
 sudo cp limit.maxproc.plist /Library/LaunchDaemons/
 sudo chown root:wheel /Library/LaunchDaemons/limit.maxfiles.plist
 sudo chown root:wheel /Library/LaunchDaemons/limit.maxproc.plist
-
-# The following statements are not working.
-# For now you've to restart macOS to pick up these tasks.
-# sudo launchctl load -w /Library/LaunchDaemons/limit.maxfiles.plist
-# sudo launchctl load -w /Library/LaunchDaemons/limit.maxproc.plist
 
 echo "ok" > "$bootstrap_mark_file"
 log_success "\t >>> Finished!"
