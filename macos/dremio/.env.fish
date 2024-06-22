@@ -38,6 +38,7 @@ test -s "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" &&
 
 # Homebrew on Apple Silicon uses a new location /opt/homebrew/{bin,sbin}
 # which by default is not in the $PATH so they must be manually added.
+fish_add_path --path "$HOMEBREW_PREFIX/opt/python@3.11/libexec/bin"
 fish_add_path --path "$HOMEBREW_PREFIX/opt/libpq/bin"
 fish_add_path --path "$HOMEBREW_PREFIX/sbin"
 fish_add_path --path "$HOMEBREW_PREFIX/bin"

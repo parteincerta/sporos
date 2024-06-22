@@ -41,6 +41,11 @@ export NVIM_PAGER="env IS_PAGER=yes nvim -n -i NONE -R"
 homebrew_bin="$HOMEBREW_PREFIX/bin"
 homebrew_sbin="$HOMEBREW_PREFIX/sbin"
 homebrew_pg_bin="$HOMEBREW_PREFIX/opt/libpq/bin"
+homebrew_python_bin="$HOMEBREW_PREFIX/opt/python@3.11/libexec/bin"
+
+[ -d $homebrew_python_bin ] &&
+[[ ! "$PATH" =~ $homebrew_python_bin ]] &&
+	export PATH="$homebrew_python_bin:$PATH" || true
 
 [ -d $homebrew_pg_bin ] &&
 [[ ! "$PATH" =~ $homebrew_pg_bin ]] &&
