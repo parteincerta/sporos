@@ -27,6 +27,7 @@ mkdir -p \
 "$HOME"/Library/{KeyBindings,LaunchAgents} \
 "$HOME/Library/Application Support/Code/User/" \
 "$HOME/Library/Application Support/com.nuebling.mac-mouse-fix/" \
+"$HOME/Library/Application Support/obs-studio/basic/" \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
 "$XDG_CACHE_HOME"/bun/{bin,cache/{install,transpiler},pkg} \
 "$XDG_CONFIG_HOME"/{bat/themes,fd,fish,git,kitty,lf,nvim} \
@@ -54,6 +55,7 @@ cp "$shared_dir/keybindings.vscode.json" "$vscode_settings_dir/keybindings.json"
 cp "$shared_dir/lficons" "$XDG_CONFIG_HOME/lf/icons"
 cp "$shared_dir/lfpreview" "$HOME/.local/bin/"
 cp -R "$shared_dir/neovim/"* "$XDG_CONFIG_HOME/nvim/"
+cp -R obs/* "$app_support_folder/obs-studio/basic"
 cp "$shared_dir/ssh.conf" "$HOME/.ssh/config"
 cp "$shared_dir/tokyonight-moon.tmTheme" "$XDG_CONFIG_HOME/bat/themes"
 
