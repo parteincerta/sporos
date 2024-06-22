@@ -46,7 +46,7 @@ fish_add_path --path "$HOMEBREW_PREFIX/bin"
 fish_add_path --path --append "$HOME"/.docker/bin
 fish_add_path --path --append "$HOME"/.local/bin
 
-if [ (type -q python3) ]
+if type -q python3 &>/dev/null
 	set python3_bin (python3 -c "import site; print(site.USER_BASE + '/bin')")
 	fish_add_path --path --append $python3_bin
 end

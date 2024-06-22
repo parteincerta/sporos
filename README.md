@@ -3,8 +3,12 @@ A set of configuration files and scripts that I use to seed and maintain my
 development environment across all the computers I use.
 
 ## macOS
-- To performe the whole setup: `bash macos/<hostname>/bootstrap.sh`
-- To install/update only the dotfiles: `bash macos/<hostname>/configure.sh`
+
+## Prologue
+
+## Setup
+- To perform the whole setup: `bash macos/<hostname>/bootstrap.sh`
+- To re-install the dotfiles: `bash macos/<hostname>/configure.sh`
 
 ### Maintenance
 - ASDF maintenance commands:
