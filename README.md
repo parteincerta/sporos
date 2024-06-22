@@ -3,12 +3,18 @@ A set of configuration files and scripts that I use to seed and maintain my
 development environment across all the computers I use.
 
 ## macOS
-
-## Prologue
-
-## Setup
-- To perform the whole setup: `bash macos/<hostname>/bootstrap.sh`
-- To re-install the dotfiles: `bash macos/<hostname>/configure.sh`
+- Optionally follow the preliminary macOS [setup guide](macos/REAME.md).
+- Install Apple CLI Tools `xcode-select --install`.
+- Add the following location to Spotlight Privacy list `/Library/Developer`.
+- Clone this repo and run: `bash macos/<hostname>/bootstrap.sh`
+- Start neovim and let the LSP servers install.
+- Clone the [containers](https://github.com/parteincerta/containers) repo and
+  setup the Docker containers.
+- Open the new applications and configure them as needed.
+- Disable automatic updates: `bash shared_macos/scripts/disable-updates.sh`.
+- Revisit Notifications, Login Items, Spotlight and re-access accordingly.
+- Configure VPNs and show them in the Menu Bar.
+- Reboot.
 
 ### Maintenance
 - ASDF maintenance commands:
@@ -17,6 +23,10 @@ development environment across all the computers I use.
   * Install latest available version: `asdf install <plugin> latest:<major>`.
   * Update plugins: `asdf plugin-update <plugin|--all>`.
   * Use the latest version globally: `asdf global <plugin> latest:<major>`.
+- Dotfiles maintenance commands:
+  - To re-install the dotfiles: `bash macos/<hostname>/configure.sh`.
+  - To export configurations: `bash shared_macos/scripts/export-defaults.sh`.
+  - To disable browser updates: `bash shared_macos/scripts/disable-updates.sh`.
 - Homebrew maintenance commands:
   - Update Homebrew and the list of formulae: `brew update`.
   - List outdated formulae: `brew outdated --greedy`.
