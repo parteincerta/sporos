@@ -36,14 +36,16 @@ defaults write com.apple.dock autohide-delay -int 0
 defaults write com.apple.dock autohide-time-modifier -float 0.30
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-# Doesn't work on macOS Sonoma
 # defaults write com.apple.Safari DebugDisableTabHoverPreview 1
-
 defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 defaults write -g NSWindowShouldDragOnGesture -bool true
+
+
+log_info "\t >>> Installing Apple Rosetta"
+/usr/sbin/softwareupdate --install-rosetta --agree-to-license
+
 
 if [ -z "$(command -v brew)" ]; then
 	log_info "\t >>> Installing Homebrew"

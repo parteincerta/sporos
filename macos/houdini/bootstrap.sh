@@ -37,11 +37,11 @@ defaults write com.apple.dock autohide-time-modifier -float 0.30
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 defaults write com.apple.Safari DebugDisableTabHoverPreview 1
-
 defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 defaults write -g NSWindowShouldDragOnGesture -bool true
+
 
 if [ -z "$(command -v brew)" ]; then
 	log_info "\t >>> Installing Homebrew"
