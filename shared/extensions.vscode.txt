@@ -37,6 +37,7 @@ svelte.svelte-vscode
 usernamehw.errorlens
 VisualStudioExptTeam.intellicode-api-usage-examples
 VisualStudioExptTeam.vscodeintellicode
+vscjava.vscode-java-pack
 vscodevim.vim
 xabikos.JavaScriptSnippets
 ziglang.vscode-zig
