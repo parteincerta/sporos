@@ -21,6 +21,8 @@ if [ "$1" == "shell" ]; then
 	rm -rf "$TMPDIR"/mongosh*
 
 
+	# This could just be a simple `brew install mongosh` but it has an uncessary
+	# dependecy on Node.js/NPM.
 	if [ "$system" = "Darwin" ]; then
 		[ "$arch" = "x86_64" ] && arch="x64" || true
 		url="https://downloads.mongodb.com/compass/mongosh-${mongo_sh_version}-darwin-${arch}.zip"
