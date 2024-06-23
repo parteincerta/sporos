@@ -12,7 +12,7 @@ development environment across all the computers I use.
   - If the machine has an external drive, reinstall the dotfiles before
     accepting Docker's ToS just so it's disk is created in the external storage
     instead of in the internal one: `bash macos/<hostname>/configure.sh`.
-- Disable auto-updates for some apps: `bash shared_macos/scripts/disable-updates.sh`.
+- Disable auto-updates: `bash shared_macos/scripts/disable-updates.sh`.
 - Clone the [containers](https://github.com/parteincerta/containers) repo and
   setup the Docker containers.
 - Revisit Notifications, Login Items, Spotlight and re-access accordingly.
@@ -27,9 +27,9 @@ development environment across all the computers I use.
   * Update plugins: `asdf plugin-update <plugin|--all>`.
   * Use the latest version globally: `asdf global <plugin> latest:<major>`.
 - Dotfiles maintenance commands:
-  - To re-install the dotfiles: `bash macos/<hostname>/configure.sh`.
-  - To export configurations: `bash shared_macos/scripts/export-defaults.sh`.
-  - To re-disable auto-updates: `bash shared_macos/scripts/disable-updates.sh`.
+  - Install the dotfiles: `bash macos/<hostname>/configure.sh`.
+  - Export configurations: `bash shared_macos/scripts/export-defaults.sh`.
+  - Disable auto-updates: `bash shared_macos/scripts/disable-updates.sh`.
 - Homebrew maintenance commands:
   - Update Homebrew and the list of formulae: `brew update`.
   - List outdated formulae: `brew outdated --greedy`.
