@@ -38,6 +38,7 @@ defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # defaults write com.apple.Safari DebugDisableTabHoverPreview 1
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
