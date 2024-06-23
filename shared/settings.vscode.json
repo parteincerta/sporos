@@ -8,6 +8,11 @@
 	"editor.lineHeight": 1.4,
 	"editor.minimap.enabled": false,
 	"editor.occurrencesHighlight": "multiFile",
+	"editor.quickSuggestions": {
+		"comments": false,
+		"other": true,
+		"strings": true
+	},
 	"editor.renderFinalNewline": "off",
 	"editor.stickyScroll.enabled": false,
 	"editor.suggest.preview": true,
