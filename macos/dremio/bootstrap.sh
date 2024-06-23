@@ -67,11 +67,10 @@ brew install ${homebrew_cli[*]}
 
 
 log_info "\t >>> Installing Homebrew casks"
-microsoft=(microsoft-{excel,powerpoint,remote-desktop,word})
 homebrew_casks=(
 	alt-tab betterdisplay bruno docker fork google-chrome iina intellij-idea-ce
-	kitty mac-mouse-fix ${microsoft[*]} numi obs slack tableplus tailscale
-	temurin@8 temurin@11 visual-studio-code zoom
+	kitty mac-mouse-fix numi obs slack tableplus tailscale temurin@8 temurin@11
+	visual-studio-code zoom
 )
 brew install --cask ${homebrew_casks[*]}
 
