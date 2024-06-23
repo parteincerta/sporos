@@ -11,13 +11,17 @@ source "$shared_dir"/scripts/helper.sh
 host_dir="$(cd $shared_dir/../macos/$system_hostname >/dev/null && pwd)"
 trap trap_error ERR
 
+# Activity Monitor
+actmon_key="com.apple.ActivityMonitor"
+actmon_file="$host_dir/plist/${actmon_key}.plist"
+
 # AltTab
 alttab_key="com.lwouis.alt-tab-macos"
 alttab_file="$shared_dir_macos/plist/${alttab_key}.plist"
 
 # BetterDisplay
 betterdisplay_key="pro.betterdisplay.BetterDisplay"
-betterdisplay_file="$host_dir/${betterdisplay_key}.plist"
+betterdisplay_file="$host_dir/plist/${betterdisplay_key}.plist"
 
 # OBS
 obs_dir="$HOME/Library/Application Support/obs-studio/basic"
@@ -33,6 +37,9 @@ macmousefix_file="$shared_dir_macos/plist/${macmousefix_key}.plist"
 # rectangle_chords_file="$shared_dir_macos/plist/${rectangle_chords_key}.plist"
 
 [ "$1" = "--source-keys-only" ] && return 0 || true
+
+log_info ">>> Exporting Activity Monitor settings..."
+defaults export "$actmon_key" "$actmon_file"
 
 log_info ">>> Exporting AltTab settings..."
 defaults export "$alttab_key" "$alttab_file"
