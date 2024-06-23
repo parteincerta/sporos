@@ -23,12 +23,12 @@ alttab_file="$shared_dir_macos/plist/${alttab_key}.plist"
 betterdisplay_key="pro.betterdisplay.BetterDisplay"
 betterdisplay_file="$host_dir/plist/${betterdisplay_key}.plist"
 
-# OBS
-obs_dir="$HOME/Library/Application Support/obs-studio/basic"
-
 # Mac Mouse Fix
 macmousefix_key="com.nuebling.mac-mouse-fix"
 macmousefix_file="$shared_dir_macos/plist/${macmousefix_key}.plist"
+
+# OBS
+obs_dir="$HOME/Library/Application Support/obs-studio/basic"
 
 # Rectangle
 # rectangle_key="com.knollsoft.Rectangle"
