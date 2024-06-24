@@ -93,15 +93,16 @@ pip3 install --user pynvim
 
 
 log_info "\t >>> Installing ASDF packages"
-asdf plugin-add "bun"
-asdf install "bun" "latest:1"
-asdf global "bun" "latest:1"
+asdf plugin-add bun
+asdf install bun latest:1
+asdf global bun latest:1
 
-asdf plugin-add "nodejs"
+asdf plugin-add nodejs
 # Workaround to build Node.js v14 on Apple Silicon.
 # https://github.com/nodejs/node/issues/52230#issuecomment-2148778308
-CPPFLAGS='-Wno-enum-constexpr-conversion' asdf install "nodejs" "latest:14"
-asdf install "nodejs" "latest:18"
+CPPFLAGS='-Wno-enum-constexpr-conversion' asdf install nodejs latest:14
+asdf install nodejs latest:18
+asdf global nodejs latest:18
 
 
 log_info "\t >>> Installing MongoDB Shell and Tools"

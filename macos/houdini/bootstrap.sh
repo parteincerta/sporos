@@ -88,13 +88,14 @@ pip3 install --user pynvim
 
 
 log_info "\t >>> Installing ASDF packages"
-asdf plugin-add "bun"
-asdf install "bun" "latest:1"
-asdf global "bun" "latest:1"
+asdf plugin-add bun
+asdf install bun latest:1
+asdf global bun latest:1
 
-asdf plugin-add "nodejs"
-asdf install "nodejs" "latest:14"
-asdf install "nodejs" "latest:18"
+asdf plugin-add nodejs
+asdf install nodejs latest:14
+asdf install nodejs latest:18
+asdf global nodejs latest:18
 
 
 log_info "\t >>> Installing MongoDB Shell and Tools"
