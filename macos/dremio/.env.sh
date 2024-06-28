@@ -73,9 +73,9 @@ command -v python3 &>/dev/null &&
 	[ -d "$python3_bin" ] &&
 	export PATH="$PATH:$python3_bin" || true
 
-java_home="$(/usr/libexec/java_home)"
-[ -d "$java_home" ] &&
-	export JAVA_HOME="$java_home" || true
+java_home="/usr/libexec/java_home"
+command -v $java_home &>/dev/null &&
+	export JAVA_HOME="$($java_home)" || true
 
 if [ $(shopt -q login_shell) ]; then
 	NOFILE=$(sysctl -n kern.maxfilesperproc)

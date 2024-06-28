@@ -51,8 +51,9 @@ if type -q python3 &>/dev/null
 	fish_add_path --path --append $python3_bin
 end
 
-test -d /usr/libexec/java_home &&
-	set --export JAVA_HOME "/usr/libexec/java_home"
+set java_home /usr/libexec/java_home
+type -q $java_home &>/dev/null &&
+	set --export JAVA_HOME ($java_home)
 
 if status --is-login
 	set NOFILE (sysctl -n kern.maxfilesperproc)
