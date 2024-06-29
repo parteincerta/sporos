@@ -29,6 +29,7 @@ return {
 			ensure_installed = {
 				"bashls",
 				"clangd",
+				-- "jdtls",
 				"jsonls",
 				"lua_ls",
 				"pyright",
@@ -59,6 +60,12 @@ return {
 				"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clangd",
 			}
 		end ]]
+
+		-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jdtls
+		local lspconfig_jdtls = {
+			capabilities = cmp_caps,
+			cmd = { "jdtls" },
+		}
 
 		-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
 		local lspconfig_jsonls = {
@@ -98,6 +105,9 @@ return {
 		if lspconfig.clangd then
 			lspconfig.clangd.setup(lspconfig_clangd)
 		end
+		if lspconfig.jdtls then
+			lspconfig.jsonls.setup(lspconfig_jdtls)
+		end
 		if lspconfig.jsonls then
 			lspconfig.jsonls.setup(lspconfig_jsonls)
 		end
@@ -116,9 +126,6 @@ return {
 	end,
 	dependencies = {{
 			"hrsh7th/cmp-nvim-lsp"
-		},{
-			"williamboman/mason-lspconfig.nvim",
-			version = "v1.*",
 		},{
 			"neovim/nvim-lspconfig",
 			tag = "v0.1.8",
@@ -141,6 +148,9 @@ return {
 					vim.fn.sign_define(hl, { text = d_icon, texthl = hl, numhl = hl })
 				end
 			end,
-		},
-	},
+		},{
+			"williamboman/mason-lspconfig.nvim",
+			version = "v1.*",
+		}
+	}
 }
