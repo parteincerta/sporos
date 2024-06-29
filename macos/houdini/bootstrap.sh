@@ -92,6 +92,10 @@ asdf plugin-add bun
 asdf install bun latest:1
 asdf global bun latest:1
 
+asdf plugin-add java
+asdf install java latest:temurin-21
+asdf global java latest:temurin-21
+
 asdf plugin-add nodejs
 asdf install nodejs latest:14
 asdf install nodejs latest:18

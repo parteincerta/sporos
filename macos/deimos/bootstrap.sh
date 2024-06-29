@@ -97,6 +97,10 @@ asdf plugin-add bun
 asdf install bun latest:1
 asdf global bun latest:1
 
+asdf plugin-add java
+asdf install java latest:temurin-21
+asdf global java latest:temurin-21
+
 asdf plugin-add nodejs
 # Workaround to build Node.js v14 on Apple Silicon.
 # https://github.com/nodejs/node/issues/52230#issuecomment-2148778308
