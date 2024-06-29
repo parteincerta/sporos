@@ -96,6 +96,10 @@ asdf plugin-add java
 asdf install java latest:temurin-21
 asdf global java latest:temurin-21
 
+asdf plugin-add gradle
+asdf install gradle latest:8
+asdf global gradle latest:8
+
 asdf plugin-add nodejs
 asdf install nodejs latest:14
 asdf install nodejs latest:18
