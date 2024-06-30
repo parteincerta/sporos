@@ -174,6 +174,16 @@ function ambient --description "(re)Apply specific environment settings on deman
 	bash -l -c "ambient $argv"
 end
 
+function brew --description "Homebrew hook to handle specific commands"
+	set homebrew (which brew)
+	if [ (string match "upgrade*" "$argv") ]
+		echo "Homebrew's upgrade commands should be executed in Bash."
+		echo "To force-execute them in Fish start the command with: $homebrew"
+	else
+		$homebrew $argv
+	end
+end
+
 function clipit --description "Copy a file or directory into the clipboard."
 	bash -l -c "clipit $argv"
 end
