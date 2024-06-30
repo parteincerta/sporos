@@ -71,8 +71,8 @@ brew install ${homebrew_cli[*]}
 # Hence the usage of --ignore-dependencies.
 brew install --ignore-dependencies gradle jdtls maven
 
-# Java's LSP needs Homebrew's Python (see `brew info jdtls`) but we don't so we
-# unlink it after it's installed.
+# Java's LSP needs Homebrew's Python (see `brew info jdtls`) but we don't so
+# lets unlink it after installation.
 brew install python@3.12
 brew unlink python@3.12
 
