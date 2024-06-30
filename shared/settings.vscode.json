@@ -50,8 +50,8 @@
 	},
 	"Lua.diagnostics.globals": [ "vim" ],
 	"python.analysis.typeCheckingMode": "basic",
-	"vim.whichwrap": "b,s,h,l",
 	"vim.leader": "<space>",
+	"vim.whichwrap": "b,s,h,l",
 	"vim.normalModeKeyBindingsNonRecursive": [{
 		"before": ["<S-h>"],
 		"commands": ["workbench.action.previousEditor"],
