@@ -74,7 +74,7 @@ if shopt -q login_shell; then
 		export PATH="$PATH:$PYTHON3_BIN_PATH"
 
 	[ -z "$JAVA_HOME" ] && command -v asdf &>/dev/null &&
-		JAVA_HOME="$(asdf which java)/../.." &&
+		JAVA_HOME="$(asdf which java 2>/dev/null)/../.." &&
 		[ -d "$JAVA_HOME" ] &&
 		export JAVA_HOME="$(realpath $JAVA_HOME)"
 fi
