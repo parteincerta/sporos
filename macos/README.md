@@ -59,7 +59,7 @@
     - General: Show all items in Desktop.
     - General: New finder window opens in the home folder.
     - Sidebar: Show home folder and hide tags.
-    - Advanced: Search performs and search in the current folder.
+    - Advanced: Search performs a search in the current folder.
   - View: Show Path Bar.
   - Home and Applications folders: Icons 52x52, reduce grid and sort by `name`.
   - Other folders: Columns layout.
