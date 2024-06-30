@@ -60,16 +60,28 @@ log_info "\t >>> Installing Homebrew apps"
 homebrew_cli=(
 	7zip aria2 asdf bat bash bash-completion@2 bear bzip2 coreutils eza fd
 	findutils fish font-jetbrains-mono-nerd-font fzf gettext git-delta gnupg
-	gsed jq lf libpq maven miniserve mkcert moreutils neovim oha pbzip2 pigz
-	python@3.11 ripgrep tokei xz zstd
+	gsed jq lf libpq miniserve mkcert moreutils neovim oha pbzip2 pigz
+	python@3.11 python@3.12 ripgrep tokei xz zstd
 )
 brew install ${homebrew_cli[*]}
+
+
+# `jdtls` has two dependencies: `openjdk` and `python@3.12`.
+# - `openjdk` will be handled by temurin package.
+# - `python@3.12` will be installed next.
+# hence the usage of --ignore-dependencies.
+brew install --ignore-dependencies jdtls maven
+
+# Java's LSP needs Homebrew's Python (see `brew info jdtls`) but we don't so we
+# unlink it after it's installed.
+brew install python@3.12
+brew unlink python@3.12
 
 
 log_info "\t >>> Installing Homebrew casks"
 homebrew_casks=(
 	alt-tab betterdisplay bruno docker fork google-chrome iina intellij-idea-ce
-	kitty mac-mouse-fix numi obs slack tableplus tailscale temurin@8 temurin@11
+	kitty mac-mouse-fix numi obs slack tableplus tailscale temurin@11
 	visual-studio-code zoom
 )
 brew install --cask ${homebrew_casks[*]}

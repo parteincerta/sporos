@@ -3,16 +3,6 @@
 	<toolchain>
 		<type>jdk</type>
 		<provides>
-		  <version>1.8</version>
-		  <vendor>sun</vendor>
-		</provides>
-		<configuration>
-		  <jdkHome>/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home</jdkHome>
-		</configuration>
-	</toolchain>
-	<toolchain>
-		<type>jdk</type>
-		<provides>
 		  <version>11</version>
 		  <vendor>sun</vendor>
 		</provides>
