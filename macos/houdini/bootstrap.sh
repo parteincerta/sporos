@@ -61,6 +61,12 @@ homebrew_cli=(
 )
 brew install ${homebrew_cli[*]}
 
+# Java's LSP needs Homebrew's Python (see `brew info jdtls`) but we don't so we
+# unlink it after it's installed.
+brew install python@3.12
+brew install --ignore-dependencies jdtls
+brew unlink python@3.12
+
 
 log_info "\t >>> Installing Homebrew casks"
 compass="mongodb-compass-isolated-edition"

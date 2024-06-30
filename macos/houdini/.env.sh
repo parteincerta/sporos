@@ -53,16 +53,28 @@ homebrew_pg_bin="$HOMEBREW_PREFIX/opt/libpq/bin"
 [[ ! "$PATH" =~ $homebrew_bin ]] &&
 	export PATH="$homebrew_bin:$PATH" || true
 
-[ -d "$PATH:$HOME/.docker/bin" ] &&
+[ -d "$HOME/.docker/bin" ] &&
 [[ ! "$PATH" =~ $HOME/.docker/bin ]] &&
 	export PATH="$PATH:$HOME/.docker/bin" || true
 
-[ -d "$PATH:$HOME/.local/bin" ] &&
+[ -d "$HOME/.local/bin" ] &&
 [[ ! "$PATH" =~ $HOME/.local/bin ]] &&
 	export PATH="$PATH:$HOME/.local/bin" || true
 
-[[ ! "$PATH" =~ Python ]] &&
-command -v python3 &>/dev/null &&
-	python3_bin="$(python3 -c "import site; print(site.USER_BASE + '/bin')")" &&
-	[ -d "$python3_bin" ] &&
-	export PATH="$PATH:$python3_bin" || true
+if shopt -q login_shell; then
+	command -v asdf &>/dev/null &&
+		PYTHON3="$(asdf which python3 2>/dev/null)" || true
+
+	[ -z "$PYTHON3" ] &&
+		PYTHON3="/usr/bin/python3" || true
+
+	PYTHON3_BIN_PATH="$($PYTHON3 -c "import site; print(site.USER_BASE + '/bin')")"
+	[ -d "$$PYTHON3_BIN_PATH" ] &&
+	[[ ! "$PATH" =~ $PYTHON3_BIN_PATH ]] &&
+		export PATH="$PATH:$PYTHON3_BIN_PATH" || true
+
+	[ -z "$JAVA_HOME" ] && command -v asdf &>/dev/null &&
+		JAVA_HOME="$(asdf which java)/../.." &&
+		[ -d "$JAVA_HOME" ] &&
+		export JAVA_HOME="$(realpath $JAVA_HOME)"
+fi
