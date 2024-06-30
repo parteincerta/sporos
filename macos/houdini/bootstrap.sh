@@ -64,7 +64,7 @@ brew install ${homebrew_cli[*]}
 # `jdtls` has two dependencies: `openjdk` and `python@3.12`.
 # `openjdk` will be handled by ASDF. `python@3.12` will be installed next.
 # Hence the usage of --ignore-dependencies.
-brew install --ignore-dependencies jdtls
+brew install --ignore-dependencies gradle jdtls maven
 
 # Java's LSP needs Homebrew's Python (see `brew info jdtls`) but we don't so we
 # unlink it after it's installed.
@@ -105,10 +105,6 @@ asdf global bun latest:1
 asdf plugin-add java
 asdf install java latest:temurin-21
 asdf global java latest:temurin-21
-
-asdf plugin-add gradle
-asdf install gradle latest:8
-asdf global gradle latest:8
 
 asdf plugin-add nodejs
 asdf install nodejs latest:14
