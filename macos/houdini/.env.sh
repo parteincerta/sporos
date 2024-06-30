@@ -31,11 +31,11 @@ export NVIM_PAGER="env IS_PAGER=yes nvim -n -i NONE -R"
 
 [ -z "$HOMEBREW_PREFIX" ] &&
 	command -v /usr/local/bin/brew &>/dev/null &&
-	export HOMEBREW_PREFIX="/usr/local" || true
+	export HOMEBREW_PREFIX="/usr/local"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -s "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ] &&
-	source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" || true
+	source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
 
 homebrew_bin="$HOMEBREW_PREFIX/bin"
 homebrew_sbin="$HOMEBREW_PREFIX/sbin"
@@ -43,35 +43,35 @@ homebrew_pg_bin="$HOMEBREW_PREFIX/opt/libpq/bin"
 
 [ -d $homebrew_pg_bin ] &&
 [[ ! "$PATH" =~ $homebrew_pg_bin ]] &&
-	export PATH="$homebrew_pg_bin:$PATH" || true
+	export PATH="$homebrew_pg_bin:$PATH"
 
 [ -d $homebrew_sbin ] &&
 [[ ! "$PATH" =~ $homebrew_sbin ]] &&
-	export PATH="$homebrew_sbin:$PATH" || true
+	export PATH="$homebrew_sbin:$PATH"
 
 [ -d $homebrew_bin ] &&
 [[ ! "$PATH" =~ $homebrew_bin ]] &&
-	export PATH="$homebrew_bin:$PATH" || true
+	export PATH="$homebrew_bin:$PATH"
 
 [ -d "$HOME/.docker/bin" ] &&
 [[ ! "$PATH" =~ $HOME/.docker/bin ]] &&
-	export PATH="$PATH:$HOME/.docker/bin" || true
+	export PATH="$PATH:$HOME/.docker/bin"
 
 [ -d "$HOME/.local/bin" ] &&
 [[ ! "$PATH" =~ $HOME/.local/bin ]] &&
-	export PATH="$PATH:$HOME/.local/bin" || true
+	export PATH="$PATH:$HOME/.local/bin"
 
 if shopt -q login_shell; then
 	command -v asdf &>/dev/null &&
-		PYTHON3="$(asdf which python3 2>/dev/null)" || true
+		PYTHON3="$(asdf which python3 2>/dev/null)"
 
 	[ -z "$PYTHON3" ] &&
-		PYTHON3="/usr/bin/python3" || true
+		PYTHON3="/usr/bin/python3"
 
 	PYTHON3_BIN_PATH="$($PYTHON3 -c "import site; print(site.USER_BASE + '/bin')")"
 	[ -d "$$PYTHON3_BIN_PATH" ] &&
 	[[ ! "$PATH" =~ $PYTHON3_BIN_PATH ]] &&
-		export PATH="$PATH:$PYTHON3_BIN_PATH" || true
+		export PATH="$PATH:$PYTHON3_BIN_PATH"
 
 	[ -z "$JAVA_HOME" ] && command -v asdf &>/dev/null &&
 		JAVA_HOME="$(asdf which java)/../.." &&

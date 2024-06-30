@@ -13,6 +13,16 @@ pushd "$this_script_abs_path" >/dev/null
 trap "popd >/dev/null" EXIT
 
 
+xcode_cli_tools_path="$(xcode-select --print-path)"
+if $?; then
+	log_info "\t >>> XCode CLI Tools available at: $xcode_cli_tools_path"
+else
+	log_error "\t >>> XCode CLI Tools not available."
+	log_error "\t >>> To install them: \$ xcode-select --install"
+	exit 1
+fi
+
+
 source .env.sh || true
 bootstrap_mark_file="$XDG_CACHE_HOME/.bootstrapped"
 if [ -s "$bootstrap_mark_file" ]; then
@@ -84,7 +94,7 @@ brew install --cask ${homebrew_casks[*]}
 
 
 log_info "\t >>> Sourcing environment variables and re-installing dotfiles"
-source .env.sh
+source .env.sh || true
 /bin/bash configure.sh
 bat cache --build
 
