@@ -8,7 +8,7 @@ development environment across all the computers I use.
 - Add the following location to Spotlight Privacy list `/Library/Developer`.
 - Clone this repo and run: `bash macos/<hostname>/bootstrap.sh`.
 - Start neovim and let the LSP servers install.
-- Open the new applications and configure them as needed.
+- Open applications and configure them as needed.
   - If the machine has an external drive, reinstall the dotfiles before
     accepting Docker's ToS just so it's disk is created in the external storage
     instead of in the internal one: `bash macos/<hostname>/configure.sh`.
