@@ -1,11 +1,9 @@
 -- Jump anywhere.
--- https://github.com/phaazon/hop.nvim
-
--- NOTE: Temporarily using mistweaverco/hop.nvim because #340 hasn't landed
--- yet. https://github.com/phaazon/hop.nvim/pull/340
+-- https://github.com/smoka7/hop.nvim
 
 return {
-	"mistweaverco/hop.nvim",
+	"smoka7/hop.nvim",
+	version = "v2.*",
 	config = function ()
 		require("hop").setup({
 			case_insensitive = true,
