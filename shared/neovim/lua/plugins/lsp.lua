@@ -29,7 +29,7 @@ return {
 			ensure_installed = {
 				"bashls",
 				"clangd",
-				-- "jdtls",
+				"jdtls",
 				"jsonls",
 				"lua_ls",
 				"pyright",
@@ -106,7 +106,7 @@ return {
 			lspconfig.clangd.setup(lspconfig_clangd)
 		end
 		if lspconfig.jdtls then
-			lspconfig.jsonls.setup(lspconfig_jdtls)
+			lspconfig.jdtls.setup(lspconfig_jdtls)
 		end
 		if lspconfig.jsonls then
 			lspconfig.jsonls.setup(lspconfig_jsonls)
