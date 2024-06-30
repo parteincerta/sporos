@@ -61,10 +61,14 @@ homebrew_cli=(
 )
 brew install ${homebrew_cli[*]}
 
+# `jdtls` has two dependencies: `openjdk` and `python@3.12`.
+# `openjdk` will be handled by ASDF. `python@3.12` will be installed next.
+# Hence the usage of --ignore-dependencies.
+brew install --ignore-dependencies jdtls
+
 # Java's LSP needs Homebrew's Python (see `brew info jdtls`) but we don't so we
 # unlink it after it's installed.
 brew install python@3.12
-brew install --ignore-dependencies jdtls
 brew unlink python@3.12
 
 

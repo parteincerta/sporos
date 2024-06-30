@@ -66,6 +66,17 @@ homebrew_cli=(
 brew install ${homebrew_cli[*]}
 
 
+# `jdtls` has two dependencies: `openjdk` and `python@3.12`.
+# `openjdk` will be handled by ASDF. `python@3.12` will be installed next.
+# Hence the usage of --ignore-dependencies.
+brew install --ignore-dependencies jdtls
+
+# Java's LSP needs Homebrew's Python (see `brew info jdtls`) but we don't so we
+# unlink it after it's installed.
+brew install python@3.12
+brew unlink python@3.12
+
+
 log_info "\t >>> Installing Homebrew casks"
 compass="mongodb-compass-isolated-edition"
 microsoft=(microsoft-{excel,powerpoint,remote-desktop,word})

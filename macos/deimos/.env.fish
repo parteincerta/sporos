@@ -46,7 +46,18 @@ fish_add_path --path "$HOMEBREW_PREFIX/bin"
 fish_add_path --path --append "$HOME"/.docker/bin
 fish_add_path --path --append "$HOME"/.local/bin
 
-if type -q python3 &>/dev/null
-	set python3_bin (python3 -c "import site; print(site.USER_BASE + '/bin')")
-	fish_add_path --path --append $python3_bin
+if status --is-login
+	type -q asdf &&
+		set PYTHON3 (asdf which python3 2>/dev/null)
+
+	[ -z "$PYTHON3" ] &&
+		set PYTHON3 "/usr/bin/python3"
+
+	set PYTHON3_BIN_PATH ($PYTHON3 -c "import site; print(site.USER_BASE + '/bin')")
+	fish_add_path --path --append "$PYTHON3_BIN_PATH"
+
+	[ -z "$JAVA_HOME" ] && type -q asdf &&
+		set JAVA_HOME (asdf which java)/../.. &&
+		[ -d "$JAVA_HOME" ] &&
+		set --export JAVA_HOME (realpath $JAVA_HOME)
 end
