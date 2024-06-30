@@ -22,7 +22,7 @@ fi
 source .env.sh || true
 
 mkdir -p \
-"$HOME"/{.gnupg,.ssh/sockets} \
+"$HOME"/{.gnupg,.m2,.ssh/sockets} \
 "$HOME"/.local/{bin,share/lf} \
 "$HOME"/Library/{KeyBindings,LaunchAgents} \
 "$HOME/Library/Application Support/Code/User/" \
@@ -30,6 +30,7 @@ mkdir -p \
 "$HOME/Library/Application Support/obs-studio/basic/" \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
 "$XDG_CACHE_HOME"/bun/{bin,cache/{install,transpiler},pkg} \
+"$XDG_CACHE_HOME/gradle" \
 "$XDG_CONFIG_HOME"/{bat/themes,fd,fish,git,kitty,lf,nvim} \
 "$CODE" \
 "$DOWNLOADS"/{Brave,Safari} \
