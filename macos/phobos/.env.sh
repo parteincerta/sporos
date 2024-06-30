@@ -55,7 +55,6 @@ homebrew_pg_bin="$HOMEBREW_PREFIX/opt/libpq/bin"
 [[ ! "$PATH" =~ $homebrew_bin ]] &&
 	export PATH="$homebrew_bin:$PATH" || true
 
-
 [ -d "$HOME/.docker/bin" ] &&
 [[ ! "$PATH" =~ $HOME/.docker/bin ]] &&
 	export PATH="$PATH:$HOME/.docker/bin" || true

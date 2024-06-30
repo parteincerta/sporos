@@ -59,27 +59,21 @@ homebrew_python_bin="$HOMEBREW_PREFIX/opt/python@3.11/libexec/bin"
 [[ ! "$PATH" =~ $homebrew_bin ]] &&
 	export PATH="$homebrew_bin:$PATH" || true
 
-[ -d "$PATH:$HOME/.docker/bin" ] &&
+[ -d "$HOME/.docker/bin" ] &&
 [[ ! "$PATH" =~ $HOME/.docker/bin ]] &&
 	export PATH="$PATH:$HOME/.docker/bin" || true
 
-[ -d "$PATH:$HOME/.local/bin" ] &&
+[ -d "$HOME/.local/bin" ] &&
 [[ ! "$PATH" =~ $HOME/.local/bin ]] &&
 	export PATH="$PATH:$HOME/.local/bin" || true
 
-[[ ! "$PATH" =~ Python ]] &&
-command -v python3 &>/dev/null &&
-	python3_bin="$(python3 -c "import site; print(site.USER_BASE + '/bin')")" &&
-	[ -d "$python3_bin" ] &&
-	export PATH="$PATH:$python3_bin" || true
-
-java_home="/usr/libexec/java_home"
-command -v $java_home &>/dev/null &&
-	export JAVA_HOME="$($java_home)" || true
-
-if [ $(shopt -q login_shell) ]; then
+if shopt -q login_shell; then
 	NOFILE=$(sysctl -n kern.maxfilesperproc)
 	NOPROC=$(sysctl -n kern.maxproc)
 	ulimit -n "$NOFILE"
 	ulimit -u "$NOPROC"
+
+	java_home="/usr/libexec/java_home"
+	command -v $java_home &>/dev/null &&
+		export JAVA_HOME="$($java_home)" || true
 fi

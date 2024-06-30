@@ -46,18 +46,13 @@ fish_add_path --path "$HOMEBREW_PREFIX/bin"
 fish_add_path --path --append "$HOME"/.docker/bin
 fish_add_path --path --append "$HOME"/.local/bin
 
-if type -q python3
-	set python3_bin (python3 -c "import site; print(site.USER_BASE + '/bin')")
-	fish_add_path --path --append $python3_bin
-end
-
-set java_home /usr/libexec/java_home
-type -q $java_home &&
-	set --export JAVA_HOME ($java_home)
-
 if status --is-login
 	set NOFILE (sysctl -n kern.maxfilesperproc)
 	set NOPROC (sysctl -n kern.maxproc)
 	ulimit -n "$NOFILE"
 	ulimit -u "$NOPROC"
+
+	set java_home /usr/libexec/java_home
+	type -q $java_home &&
+		set --export JAVA_HOME ($java_home)
 end
