@@ -24,7 +24,7 @@ development environment across all the computers I use.
   * Add new plugin: `asdf plugin-add <plugin>`.
   * Check latest available version: `asdf latest <plugin> [major]`.
   * Install latest available version: `asdf install <plugin> latest:<major>`.
-  * Update plugins: `asdf plugin-update <plugin|--all>`.
+  * Update plugins: `asdf plugin-update <<plugin>|--all>`.
   * Use the latest version globally: `asdf global <plugin> latest:<major>`.
 - Dotfiles maintenance commands:
   - Install the dotfiles: `bash macos/<hostname>/configure.sh`.
