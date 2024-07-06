@@ -4,6 +4,7 @@ bmalehorn.vscode-fish
 christian-kohler.path-intellisense
 dbaeumer.vscode-eslint
 dnicolson.binary-plist
+DotJoshJohnson.xml
 ecmel.vscode-html-css
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
