@@ -113,6 +113,7 @@ asdf install bun latest:1
 asdf global bun latest:1
 
 asdf plugin-add java
+asdf install java latest:graalvm-community-21
 asdf install java latest:temurin-21
 asdf global java latest:temurin-21
 
