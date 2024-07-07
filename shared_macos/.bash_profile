@@ -441,13 +441,19 @@ secrm () {
 
 		elif [ -d "$item" ]; then
 			chmod u+wx "$item"
-			pushd "$item" >/dev/null
-				secrm $(eza -ah --color=never "../$item")
-				local res=$?
-			popd >/dev/null
-			[ $res -eq 0 ] &&
+			local children=$(eza -ah --color=never "$item")
+			if [ -z "$children" ]; then
 				rmdir "$item" &&
 				echo "rmdir $item/"
+			else
+				pushd "$item" >/dev/null
+					secrm $children
+					local res=$?
+				popd >/dev/null
+				[ $res -eq 0 ] &&
+					rmdir "$item" &&
+					echo "rmdir $item/"
+			fi
 		fi
 	done
 }
