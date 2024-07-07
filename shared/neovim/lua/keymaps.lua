@@ -47,7 +47,7 @@ function ()
 	end
 end, defaultOpts)
 
-vim.api.nvim_set_keymap("n", "çd", ":TroubleToggle document_diagnostics<CR>", defaultOpts)
+vim.api.nvim_set_keymap("n", "çd", ":Trouble diagnostics toggle<CR>", defaultOpts)
 vim.api.nvim_set_keymap("n", "çi", ":IBLToggle<CR>", defaultOpts)
 vim.api.nvim_set_keymap("n", "çm", ":MarkdownPreviewToggle<CR>", defaultOpts)
 vim.api.nvim_set_keymap("n", "ço", ":SymbolsOutline<CR>", defaultOpts)
