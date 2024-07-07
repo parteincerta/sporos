@@ -123,6 +123,10 @@ asdf install nodejs latest:14
 asdf install nodejs latest:18
 asdf global nodejs latest:18
 
+asdf plugin-add zig
+asdf install zig latest:0
+asdf global zig latest:0
+
 
 log_info "\t >>> Installing MongoDB Shell and Tools"
 source "$shared_dir/scripts/install-mongo-utils.sh" shell
