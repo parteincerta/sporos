@@ -76,6 +76,7 @@ brew install --ignore-dependencies jdtls maven
 # unlink it after it's installed.
 brew install python@3.12
 brew unlink python@3.12
+brew unlink openssl@3
 
 
 log_info "\t >>> Installing Homebrew casks"
