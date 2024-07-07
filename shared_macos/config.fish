@@ -176,7 +176,7 @@ end
 
 function brew --description "Homebrew hook to handle specific commands"
 	set homebrew (which brew)
-	if [ (string match "upgrade*" "$argv") ]
+	if [ (string match -- "upgrade*" "$argv") ]
 		echo "Homebrew's upgrade commands should be executed in Bash."
 		echo "To force-execute them in Fish start the command with: $homebrew"
 	else
