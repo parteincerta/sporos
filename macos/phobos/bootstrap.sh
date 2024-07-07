@@ -82,7 +82,8 @@ brew install ${homebrew_cli[*]}
 brew install --ignore-dependencies gradle jdtls maven
 
 # Java's LSP needs Homebrew's Python (see `brew info jdtls`) but we don't so
-# lets unlink it after installation.
+# lets unlink it after installation. Also unlink openssl@3 in favor of Apple's
+# OpenSSL.
 brew install python@3.12
 brew unlink python@3.12
 brew unlink openssl@3

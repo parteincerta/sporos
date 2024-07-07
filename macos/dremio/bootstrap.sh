@@ -61,7 +61,7 @@ homebrew_cli=(
 	7zip aria2 asdf bat bash bash-completion@2 bear bzip2 coreutils eza fd
 	findutils fish font-jetbrains-mono-nerd-font fzf gettext git-delta gnupg
 	gsed jq lf libpq miniserve mkcert moreutils neovim oha pbzip2 pigz
-	python@3.11 python@3.12 ripgrep tokei xz zstd
+	python@3.11 ripgrep tokei xz zstd
 )
 brew install ${homebrew_cli[*]}
 
@@ -73,7 +73,8 @@ brew install ${homebrew_cli[*]}
 brew install --ignore-dependencies jdtls maven
 
 # Java's LSP needs Homebrew's Python (see `brew info jdtls`) but we don't so we
-# unlink it after it's installed.
+# lets unlink it after installation. Also unlink openssl@3 in favor of Apple's
+# OpenSSL.
 brew install python@3.12
 brew unlink python@3.12
 brew unlink openssl@3
