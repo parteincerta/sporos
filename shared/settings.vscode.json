@@ -52,6 +52,23 @@
 	"python.analysis.typeCheckingMode": "basic",
 	"vim.leader": "<space>",
 	"vim.whichwrap": "b,s,h,l",
+	"vim.visualModeKeyBindingsNonRecursive": [{
+		"before": ["<"],
+		"after": ["<","g","v"],
+		"silent": true
+	},{
+		"before": [">"],
+		"after": [">","g","v"],
+		"silent": true
+	},{
+		"before": ["<S-j>"],
+		"commands": ["editor.action.moveLinesDownAction"],
+		"silent": true
+	},{
+		"before": ["<S-k>"],
+		"commands": ["editor.action.moveLinesUpAction"],
+		"silent": true
+	}],
 	"vim.normalModeKeyBindingsNonRecursive": [{
 		"before": ["<S-h>"],
 		"commands": ["workbench.action.previousEditor"],
