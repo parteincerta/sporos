@@ -3,7 +3,7 @@ A set of configuration files and scripts that I use to seed and maintain my
 development environment across all the computers I use.
 
 ## macOS
-- Optionally follow the preliminary macOS [setup guide](macos/REAME.md).
+- Optionally follow the preliminary macOS [setup guide](macos/README.md).
 - Install Apple CLI Tools `xcode-select --install`.
 - Add the following location to Spotlight Privacy list `/Library/Developer`.
 - Clone this repo and run: `bash macos/<hostname>/bootstrap.sh`.
