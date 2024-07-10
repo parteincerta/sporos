@@ -90,7 +90,7 @@ microsoft=(microsoft-{excel,powerpoint,remote-desktop,word})
 homebrew_casks=(
 	1kc-razer alt-tab araxis-merge basictex betterdisplay brave-browser bruno
 	$compass docker fork iina kitty mac-mouse-fix ${microsoft[*]} numi obs
-	tableplus transmission visual-studio-code zoom
+	tableplus transmission visual-studio-code zed zoom
 )
 brew install --cask ${homebrew_casks[*]}
 
