@@ -99,9 +99,12 @@ cp "$TMPDIR/settings.vscode.json" "$vscode_settings_dir/settings.json"
 
 # NOTE: The following can only be patched once Homebrew is installed.
 if [ -n "$HOMEBREW_PREFIX" ]; then
+	cp "$shared_dir/zed.settings.json" "$TMPDIR/"
 	cp "$shared_dir_macos/kitty.conf" "$TMPDIR/"
+	sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR/zed.settings.json"
 	sed -i '' "s|%font_size|$font_size|g" "$TMPDIR/kitty.conf"
 	sed -i '' "s|%homebrew_path|$HOMEBREW_PREFIX|g" "$TMPDIR/kitty.conf"
+	mv "$TMPDIR/zed.settings.json" "$XDG_CONFIG_HOME/zed/settings.json"
 	mv "$TMPDIR/kitty.conf" "$XDG_CONFIG_HOME/kitty/kitty.conf"
 	cp "$shared_dir/kitty_theme.conf" "$XDG_CONFIG_HOME/kitty/"
 fi
