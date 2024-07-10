@@ -13,8 +13,8 @@ pushd "$this_script_abs_path" >/dev/null
 trap "popd >/dev/null" EXIT
 
 
-xcode_cli_tools_path="$(xcode-select --print-path)"
-if [ $? ]; then
+xcode_cli_tools_path="$(xcode-select --print-path 2>/dev/null || true)"
+if [ -d "$xcode_cli_tools_path" ]; then
 	log_info "\t >>> XCode CLI Tools available at: $xcode_cli_tools_path"
 else
 	log_error "\t >>> XCode CLI Tools not available."
