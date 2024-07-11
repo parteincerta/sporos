@@ -1,6 +1,7 @@
 {
 	"editor.cursorBlinking": "blink",
 	"editor.cursorSmoothCaretAnimation": "off",
+	"editor.fontFamily": "JetBrainsMonoNL Nerd Font Mono",
 	"editor.fontSize": "%font_size",
 	"editor.guides.bracketPairs": "active",
 	"editor.guides.bracketPairsHorizontal": false,
@@ -51,6 +52,7 @@
 	},
 	"Lua.diagnostics.globals": [ "vim" ],
 	"python.analysis.typeCheckingMode": "basic",
+  "vim.foldfix": true,
 	"vim.leader": "<space>",
 	"vim.whichwrap": "b,s,h,l",
 	"vim.visualModeKeyBindingsNonRecursive": [{
