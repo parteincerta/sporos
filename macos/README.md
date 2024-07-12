@@ -22,7 +22,7 @@
   - `/opt` and `/usr/local`.
   - `/System/Library/Frameworks`.
   - `~/{Desktop,Developer,Documents,Downloads,Library}`
-  - `~/{.cache,.config,.local,.ssh}`
+  - `~/{.cache,.config,.local,.m2,.ssh}`
 - Desktop & Dock
   - Minimize using the `Scale Effect`.
   - Disable: Minimize windows into application icon.

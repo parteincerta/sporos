@@ -38,9 +38,12 @@ mkdir -p \
 
 rm -rf "$XDG_CONFIG_HOME/nvim/"{init.lua,lua/}
 
-cp .env.fish "$XDG_CONFIG_HOME/fish"
-cp .env.sh "$HOME"
-cp "$shared_dir_macos/.bash_profile" "$HOME"
+cp .env.fish "$XDG_CONFIG_HOME/fish/"
+cp .env.sh "$HOME/"
+cp "$shared_dir_macos/.bash_profile" "$HOME/"
+cp "$shared_dir_macos/.zprofile" "$HOME/"
+cp "$shared_dir_macos/.zshenv" "$HOME/"
+cp "$shared_dir_macos/.zshrc" "$HOME/"
 cp "$shared_dir_macos/config.fish" "$XDG_CONFIG_HOME/fish/"
 cp "$shared_dir_macos/lfrc" "$XDG_CONFIG_HOME/lf/"
 
