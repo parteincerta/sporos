@@ -19,7 +19,7 @@ if [ "houdini" != "$system_hostname" ]; then
 	exit 1
 fi
 
-source .env.sh || true
+source "$shared_dir_macos/.bash_profile" || true
 
 mkdir -p \
 "$HOME"/{.gnupg,.m2,.ssh/sockets} \
@@ -31,7 +31,7 @@ mkdir -p \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
 "$XDG_CACHE_HOME"/bun/{bin,cache/{install,transpiler},pkg} \
 "$XDG_CACHE_HOME/gradle" \
-"$XDG_CONFIG_HOME"/{bat/themes,fd,fish,git,kitty,lf,nvim} \
+"$XDG_CONFIG_HOME"/{bat/themes,fd,fish,git,kitty,lf,mise,nvim} \
 "$CODE"/{github,icnew/{git-icone,misc},parteincerta} \
 "$DOCUMENTS"/{Misc,Recordings,Remote,Screenshots} \
 "$DOWNLOADS"/{Brave,Safari,Torrents}
@@ -39,11 +39,7 @@ mkdir -p \
 rm -rf "$XDG_CONFIG_HOME/nvim/"{init.lua,lua/}
 
 cp .env.fish "$XDG_CONFIG_HOME/fish/"
-cp .env.sh "$HOME/"
 cp "$shared_dir_macos/.bash_profile" "$HOME/"
-cp "$shared_dir_macos/.zprofile" "$HOME/"
-cp "$shared_dir_macos/.zshenv" "$HOME/"
-cp "$shared_dir_macos/.zshrc" "$HOME/"
 cp "$shared_dir_macos/config.fish" "$XDG_CONFIG_HOME/fish/"
 cp "$shared_dir_macos/lfrc" "$XDG_CONFIG_HOME/lf/"
 
@@ -58,10 +54,12 @@ cp "$shared_dir/keybindings.vscode.json" "$vscode_cache_dir/keybindings.json"
 cp "$shared_dir/keybindings.vscode.json" "$vscode_settings_dir/keybindings.json"
 cp "$shared_dir/lficons" "$XDG_CONFIG_HOME/lf/icons"
 cp "$shared_dir/lfpreview" "$HOME/.local/bin/"
+cp mise.toml "$XDG_CONFIG_HOME/mise/config.toml"
 cp -R "$shared_dir/neovim/"* "$XDG_CONFIG_HOME/nvim/"
 cp -R obs/* "$app_support_folder/obs-studio/basic"
 cp "$shared_dir/ssh.conf" "$HOME/.ssh/config"
 cp "$shared_dir/tokyonight-moon.tmTheme" "$XDG_CONFIG_HOME/bat/themes"
+cp "$shared_dir/zed.keymaps.json" "$XDG_CONFIG_HOME/zed/keymaps.json"
 
 ln -sf "$HOME/.bash_profile" "$HOME/.bashrc"
 chmod u=rwx,g=,o= "$HOME/.gnupg"
@@ -70,6 +68,7 @@ chmod u=rwx,g=,o= "$HOME/.ssh"
 chmod u=rwx,g=,o= "$HOME/.ssh/sockets"
 chmod u+x "$HOME/.local/bin/lfpreview"
 
+touch "$HOME/.bash_sessions_disable"
 touch "$HOME/.hushlogin"
 touch "$XDG_CONFIG_HOME/lf/bookmarks"
 
@@ -97,17 +96,18 @@ sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR/settings.vscode.json"
 cp "$TMPDIR/settings.vscode.json" "$vscode_cache_dir/settings.json"
 cp "$TMPDIR/settings.vscode.json" "$vscode_settings_dir/settings.json"
 
+cp "$shared_dir/zed.settings.json" "$TMPDIR/"
+sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR/zed.settings.json"
+mv "$TMPDIR/zed.settings.json" "$XDG_CONFIG_HOME/zed/settings.json"
+
 (echo "cat <<EOF"; cat "$shared_dir_macos/lfmarks"; echo EOF) |
 	sh >"$HOME/.local/share/lf/marks"
 
 # NOTE: The following can only be patched once Homebrew is installed.
 if [ -n "$HOMEBREW_PREFIX" ]; then
-	cp "$shared_dir/zed.settings.json" "$TMPDIR/"
 	cp "$shared_dir_macos/kitty.conf" "$TMPDIR/"
-	sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR/zed.settings.json"
 	sed -i '' "s|%font_size|$font_size|g" "$TMPDIR/kitty.conf"
 	sed -i '' "s|%homebrew_path|$HOMEBREW_PREFIX|g" "$TMPDIR/kitty.conf"
-	mv "$TMPDIR/zed.settings.json" "$XDG_CONFIG_HOME/zed/settings.json"
 	mv "$TMPDIR/kitty.conf" "$XDG_CONFIG_HOME/kitty/kitty.conf"
 	cp "$shared_dir/kitty_theme.conf" "$XDG_CONFIG_HOME/kitty/"
 fi

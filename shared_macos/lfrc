@@ -2,7 +2,6 @@
 # Repository: https://github.com/gokcehan/lf
 # Wiki: https://github.com/gokcehan/lf/wiki
 
-
 cmd archive ${{
 	set -f
 
@@ -265,13 +264,12 @@ cmd pager ${{
 
 
 cmd secure_rm ${{
+    source "$HOME/.bash_profile"
+    IFS=$'\n'
 	if [ -n "$fx" ]; then
-		IFS="$(printf '\n\t')"; for item in $fx
-		do
-			bash -c "secrm \"$item\""
-		done
+		for item in $fx; do secrm "$item"; done
 	else
-		IFS="$(printf '\n\t')" bash -c "secrm $f"
+		secrm "$f"
 	fi
 }}
 
@@ -316,11 +314,12 @@ map W push :cd_quit<enter>
 map X secure_rm
 map Y push :copy_clipboard<enter>
 
+# set cursoractivefmt "\033[7;37m"
+set cursorpreviewfmt "\033[7m"
 set icons
 set preview
 set previewer lfpreview
 set promptfmt "\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m"
-# set cursoractivefmt "\033[7;37m"
-set cursorpreviewfmt "\033[7m"
 set ratios 2:4
+set shell bash
 set wrapscroll

@@ -23,7 +23,7 @@ else
 fi
 
 
-source .env.sh || true
+source "$shared_dir_macos/.bash_profile" || true
 bootstrap_mark_file="$XDG_CACHE_HOME/.bootstrapped"
 if [ -s "$bootstrap_mark_file" ]; then
 	log_warning ">>> This system was previously bootstrapped."
@@ -38,7 +38,7 @@ if [ "houdini" != "$system_hostname" ]; then
 fi
 
 log_info "\t >>> Installing dotfiles"
-/bin/bash configure.sh
+source configure.sh
 
 
 log_info "\t >>> Configuring the Desktop and keyboard"
@@ -63,15 +63,15 @@ fi
 
 
 log_info "\t >>> Installing Homebrew apps"
+fonts=(font-jetbrains-mono-nerd-font)
 homebrew_cli=(
-	7zip aria2 asdf bat bash bash-completion@2 bear bzip2 coreutils eza fd
-	findutils fish font-jetbrains-mono-nerd-font fzf gettext git-delta gnupg
-	gsed jq lf libpq miniserve mkcert moreutils neovim oha pbzip2 pigz rclone
-	ripgrep tokei xz zstd
+	7zip aria2 bat bash bash-completion@2 bear bzip2 coreutils eza fd findutils
+    fish ${fonts[*]} fzf gettext git-delta gnupg gsed jq lf libpq miniserve mise
+    mkcert moreutils neovim oha pbzip2 pigz rclone ripgrep tokei xz zstd
 )
 brew install ${homebrew_cli[*]}
 
-# `jdtls` has two dependencies: `openjdk` and `python@3.12`.
+# `jdtls` has many dependencies, among them: `openjdk` and `python@3.12`.
 # `openjdk` will be handled by ASDF. `python@3.12` will be installed next.
 # Hence the usage of --ignore-dependencies.
 brew install --ignore-dependencies gradle jdtls maven
@@ -96,8 +96,8 @@ brew install --cask ${homebrew_casks[*]}
 
 
 log_info "\t >>> Sourcing environment variables and re-installing dotfiles"
-source .env.sh || true
-/bin/bash configure.sh
+source "$shared_dir_macos/.bash_profile" || true
+source configure.sh
 bat cache --build
 
 log_info "\t >>> Setting up the hosts file"
