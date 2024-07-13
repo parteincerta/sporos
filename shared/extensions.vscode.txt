@@ -35,6 +35,7 @@ redhat.vscode-yaml
 rebornix.toggle
 sumneko.lua
 svelte.svelte-vscode
+tamasfe.even-better-toml
 usernamehw.errorlens
 VisualStudioExptTeam.intellicode-api-usage-examples
 VisualStudioExptTeam.vscodeintellicode
