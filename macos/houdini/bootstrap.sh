@@ -72,7 +72,7 @@ homebrew_cli=(
 brew install ${homebrew_cli[*]}
 
 # `jdtls` has many dependencies, among them: `openjdk` and `python@3.12`.
-# `openjdk` will be handled by ASDF. `python@3.12` will be installed next.
+# `openjdk` will be handled by mise. `python@3.12` will be installed next.
 # Hence the usage of --ignore-dependencies.
 brew install --ignore-dependencies gradle jdtls maven
 
@@ -104,29 +104,13 @@ log_info "\t >>> Setting up the hosts file"
 source "$shared_dir/scripts/install-hosts.sh" houdini
 
 
-log_info "\t >>> Installing PIP packages"
+log_info "\t >>> Installing pip packages"
 pip3 install --user wheel
 pip3 install --user pynvim
 
 
-log_info "\t >>> Installing ASDF packages"
-asdf plugin-add bun
-asdf install bun latest:1
-asdf global bun latest:1
-
-asdf plugin-add java
-asdf install java latest:graalvm-community-21
-asdf install java latest:temurin-21
-asdf global java latest:temurin-21
-
-asdf plugin-add nodejs
-asdf install nodejs latest:14
-asdf install nodejs latest:18
-asdf global nodejs latest:18
-
-asdf plugin-add zig
-asdf install zig latest:0
-asdf global zig latest:0
+log_info "\t >>> Installing mise packages"
+mise install
 
 
 log_info "\t >>> Installing MongoDB Shell and Tools"
