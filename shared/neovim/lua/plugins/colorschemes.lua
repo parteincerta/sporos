@@ -6,6 +6,12 @@ return {
 	enabled = true,
 	version = "2.x",
 	config = function ()
+        if os.getenv("COLORTERM") ~= "truecolor" then
+            vim.cmd[[set notermguicolors]]
+            vim.cmd[[colorscheme default]]
+            return
+        end
+
 		local tokyo = require("tokyonight")
 		tokyo.setup({
 			style = 'moon',
@@ -39,8 +45,8 @@ return {
 			styles = {
 				comments = { italic = false },
 			},
-		})
 
-		vim.cmd[[colorscheme tokyonight-moon]]
+            vim.cmd[[colorscheme tokyonight-moon]]
+		})
 	end,
 }

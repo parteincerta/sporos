@@ -6,6 +6,10 @@ return {
 	main = "ibl",
 	version = "3.*",
 	config = function ()
+        if os.getenv("COLORTERM") ~= "truecolor" then
+            return
+        end
+
 		vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = "#E06C75" })
 		vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { fg = "#E5C07B" })
 		vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { fg = "#61AFEF" })

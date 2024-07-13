@@ -38,7 +38,6 @@ vim.opt.spell = false                           -- Spellchecker disabled by defa
 vim.opt.splitbelow = true                       -- Horizontal split goes bellow the current window.
 vim.opt.splitright = true                       -- Vertical split goes to the right of the current window.
 vim.opt.swapfile = false                        -- Disable swap file creation.
-vim.opt.termguicolors = true                    -- Enable 24-bit color depth. Uses 'gui' highlight groups instead of 'cterm'.
 vim.opt.undofile = true                         -- Persist undo history.
 vim.opt.whichwrap:append("h,l")                 -- Let these keys move cursor to the prev/next line.
 vim.opt.wrap = false                            -- Wrap text.
