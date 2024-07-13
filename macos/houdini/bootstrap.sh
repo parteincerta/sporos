@@ -27,8 +27,8 @@ source "$shared_dir_macos/.bash_profile" || true
 bootstrap_mark_file="$XDG_CACHE_HOME/.bootstrapped"
 if [ -s "$bootstrap_mark_file" ]; then
     log_warning ">>> This system was previously bootstrapped."
-    log_warning ">>> To restart the process: \$ rm $bootstrap_mark_file"
     exit 1
+    log_warning ">>> To restart the process: \$ rm $bootstrap_mark_file"
 fi
 
 if [ "houdini" != "$system_hostname" ]; then
@@ -56,9 +56,9 @@ killall Dock
 
 
 if [ -z "$(command -v brew)" ]; then
-	log_info "\t >>> Installing Homebrew"
-	homebrew_url="https://raw.githubusercontent.com/Homebrew/install/master/install.sh"
-	/bin/bash -c "$(curl --fail --location --silent --show-error $homebrew_url)"
+    log_info "\t >>> Installing Homebrew"
+    homebrew_url="https://raw.githubusercontent.com/Homebrew/install/master/install.sh"
+    /bin/bash -c "$(curl --fail --location --silent --show-error $homebrew_url)"
 fi
 
 
@@ -110,7 +110,7 @@ pip3 install --user pynvim
 
 
 log_info "\t >>> Installing mise packages"
-mise install
+MISE_YES=1 mise install
 
 
 log_info "\t >>> Installing MongoDB Shell and Tools"

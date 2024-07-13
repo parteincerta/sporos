@@ -14,9 +14,9 @@ trap "popd >/dev/null" EXIT
 
 
 if [ "houdini" != "$system_hostname" ]; then
-	log_warning ">>> This configuration script belongs to another host: houdini".
-	log_warning ">>> The current host is: $system_hostname"
-	exit 1
+    log_warning ">>> This configuration script belongs to another host: houdini".
+    log_warning ">>> The current host is: $system_hostname"
+    exit 1
 fi
 
 source "$shared_dir_macos/.bash_profile" || true
@@ -101,13 +101,13 @@ sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR/zed.settings.json"
 mv "$TMPDIR/zed.settings.json" "$XDG_CONFIG_HOME/zed/settings.json"
 
 (echo "cat <<EOF"; cat "$shared_dir_macos/lfmarks"; echo EOF) |
-	sh >"$HOME/.local/share/lf/marks"
+    sh >"$HOME/.local/share/lf/marks"
 
 # NOTE: The following can only be patched once Homebrew is installed.
 if [ -n "$HOMEBREW_PREFIX" ]; then
-	cp "$shared_dir_macos/kitty.conf" "$TMPDIR/"
-	sed -i '' "s|%font_size|$font_size|g" "$TMPDIR/kitty.conf"
-	sed -i '' "s|%homebrew_path|$HOMEBREW_PREFIX|g" "$TMPDIR/kitty.conf"
-	mv "$TMPDIR/kitty.conf" "$XDG_CONFIG_HOME/kitty/kitty.conf"
-	cp "$shared_dir/kitty_theme.conf" "$XDG_CONFIG_HOME/kitty/"
+    cp "$shared_dir_macos/kitty.conf" "$TMPDIR/"
+    sed -i '' "s|%font_size|$font_size|g" "$TMPDIR/kitty.conf"
+    sed -i '' "s|%homebrew_path|$HOMEBREW_PREFIX|g" "$TMPDIR/kitty.conf"
+    mv "$TMPDIR/kitty.conf" "$XDG_CONFIG_HOME/kitty/kitty.conf"
+    cp "$shared_dir/kitty_theme.conf" "$XDG_CONFIG_HOME/kitty/"
 fi
