@@ -47,9 +47,27 @@ fi
 
 [ -n "$HOMEBREW_PREFIX" ] &&
     export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar" &&
-    export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew" &&
-    export INFOPATH="$HOMEBREW_PREFIX/share/info:$INFOPATH" &&
-    export MANPATH="$HOMEBREW_PREFIX/share/man:$MANPATH"
+    export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
+
+[ -n "$HOMEBREW_PREFIX" ] &&
+[[ ! "$INFOPATH" = *"$HOMEBREW_PREFIX/share/info"* ]] && {
+    [ -z "$INFOPATH" ] &&
+        export INFOPATH="$HOMEBREW_PREFIX/share/info" ||
+        export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH}"
+}
+
+[[ ! "/usr/share/man" =~ *"$MANPATH"* ]] && {
+    [ -z "$MANPATH" ] &&
+        export MANPATH="/usr/share/man" ||
+        export MANPATH="/usr/share/man:${MANPATH}"
+}
+
+[ -n "$HOMEBREW_PREFIX" ] &&
+[[ ! "$MANPATH" = *"$HOMEBREW_PREFIX/share/man"* ]] && {
+    [ -z "$MANPATH" ] &&
+        export MANPATH="$HOMEBREW_PREFIX/share/man" ||
+        export MANPATH="$HOMEBREW_PREFIX/share/man:${MANPATH}"
+}
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -d "$HOMEBREW_PREFIX/opt/libpq/bin" ] &&
