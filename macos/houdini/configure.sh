@@ -31,14 +31,13 @@ mkdir -p \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
 "$XDG_CACHE_HOME"/bun/{bin,cache/{install,transpiler},pkg} \
 "$XDG_CACHE_HOME/gradle" \
-"$XDG_CONFIG_HOME"/{bat/themes,fd,fish,git,kitty,lf,mise,nvim} \
+"$XDG_CONFIG_HOME"/{bat/themes,fd,fish/functions,git,kitty,lf,mise,nvim} \
 "$CODE"/{github,icnew/{git-icone,misc},parteincerta} \
 "$DOCUMENTS"/{Misc,Recordings,Remote,Screenshots} \
 "$DOWNLOADS"/{Brave,Safari,Torrents}
 
 rm -rf "$XDG_CONFIG_HOME/nvim/"{init.lua,lua/}
 
-cp .env.fish "$XDG_CONFIG_HOME/fish/"
 cp "$shared_dir_macos/.bash_profile" "$HOME/"
 cp "$shared_dir_macos/config.fish" "$XDG_CONFIG_HOME/fish/"
 cp "$shared_dir_macos/lfrc" "$XDG_CONFIG_HOME/lf/"
@@ -47,6 +46,8 @@ app_support_folder="$HOME/Library/Application Support"
 vscode_cache_dir="$XDG_CACHE_HOME/code/data/User"
 vscode_settings_dir="$app_support_folder/Code/User"
 
+cp "$shared_dir/.inputrc" "$HOME/"
+cp "$shared_dir/functions.fish" "$XDG_CONFIG_HOME/fish/functions/"
 cp "$shared_dir/git.conf" "$XDG_CONFIG_HOME/git/config"
 cp "$shared_dir/gpg.conf" "$HOME/.gnupg/"
 cp "$shared_dir/fdignore" "$XDG_CONFIG_HOME/fd/ignore"
