@@ -155,11 +155,13 @@ set fish_escape_delay_ms 30
 
 function fish_mode_prompt;
 end
+
 function prompt_cwd
     set_color green
     echo -n (prompt_pwd)
     set_color $fish_color_normal
 end
+
 function prompt_sh_level
     if [ "$SHLVL" -gt "1" ]
         set_color black --background white
@@ -168,6 +170,7 @@ function prompt_sh_level
         echo -n " "
     end
 end
+
 function prompt_vi_mode
     if [ "$fish_bind_mode" = "default" ]
         set_color --background red
@@ -183,14 +186,11 @@ function prompt_vi_mode
         [ $SHLVL -eq 1 ] && echo -n " "
     end
 end
-function prompt_right
-    set -l str (date '+%a %T')
-    set -l columns (math $COLUMNS - (echo "$str" | wc -c))
-    echo -n (printf "%-"$columns"s%s" " " "$str")
-end
+
 function fish_prompt
     echo -en "$(prompt_vi_mode)$(prompt_sh_level)$(prompt_cwd) · "
 end
+
 function fish_right_prompt
     printf '%s %s' $(__fish_git_prompt) (date '+%a %T')
 end
