@@ -19,21 +19,6 @@ export SHELL_SESSIONS_DISABLE=1
 export VOLUMES="/Volumes"
 export YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn"
 
-export BAT_THEME="ansi"
-export EDITOR="nvim"
-export FZF_DEFAULT_COMMAND="fd --hidden --threads 2 --type f"
-FZF_DEFAULT_OPTS="--ansi --border=rounded --cycle --height=100% "
-FZF_DEFAULT_OPTS+="--layout=reverse --tabstop=4 --tiebreak=chunk,length,begin"
-export FZF_DEFAULT_OPTS
-export FZF_ALT_C_COMMAND="fd --hidden --threads 2 --type d"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export GPG_TTY=$(tty)
-export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_NO_INSTALL_CLEANUP=1
-export LESSCHARSET="UTF-8"
-export MANPAGER="env IS_PAGER=yes nvim -n -i NONE +Man!"
-export NVIM_PAGER="env IS_PAGER=yes nvim -n -i NONE -R"
-
 if [ -z "$HOMEBREW_PREFIX" ]; then
     _arch="$(uname -m)"
     if [ "$_arch" = "arm64" ]; then
@@ -152,7 +137,8 @@ secrm () {
         local item="$i"
         if [ -f "$item" ]; then
             [ "$SECRM_VERBOSE" = "1" ] && echo "shred $item"
-            shred --iterations=3 --force --random-source=/dev/urandom --remove=wipe --zero "$item"
+            shred --iterations=3 --force --random-source=/dev/urandom \
+                --remove=wipe --zero "$item" 1>/dev/null
 
         elif [ -h "$item" ]; then
             [ "$SECRM_VERBOSE" = "1" ] && echo "rm $item"
@@ -162,7 +148,6 @@ secrm () {
             chmod u+wx "$item"
             local children=$(/bin/ls -1A "$item")
             if [ -n "$children" ]; then
-                echo children "$children"
                 pushd "$item" >/dev/null
                 secrm $children
                 local res=$?
@@ -176,18 +161,93 @@ secrm () {
     done
 }
 
-
 # ============================= #
 # INTERACTIVE ENVIRONMENT SETUP #
 # ============================= #
 [[ ! $- == *i* ]] && return 0
 
+export BAT_THEME="ansi"
 export CLICOLOR=1
+export EDITOR="nvim"
+export FZF_DEFAULT_COMMAND="fd --hidden --threads 2 --type f"
+FZF_DEFAULT_OPTS="--ansi --border=rounded --cycle --height=100% "
+FZF_DEFAULT_OPTS+="--layout=reverse --tabstop=4 --tiebreak=chunk,length,begin"
+export FZF_DEFAULT_OPTS
+export FZF_ALT_C_COMMAND="fd --hidden --threads 2 --type d"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export GPG_TTY=$(tty)
 export HISTSIZE=32768
 export HISTFILESIZE=32768
 export HISTCONTROL=ignoreboth:ereasedups
 export HISTIGNORE="?:??:???:????:?????"
 export HISTTIMEFORMAT="%F %T "
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+export LESSCHARSET="UTF-8"
+export MANPAGER="env IS_PAGER=yes nvim -n -i NONE +Man!"
+export NVIM_PAGER="env IS_PAGER=yes nvim -n -i NONE -R"
+export PROMPT_DIRTRIM=2
+
+# 256-color table reference
+# https://github.com/ThomasDickey/old-xterm/blob/master/vttests/256colors2.pl
+color_reset='\x1b[0m'
+color_fg_dark_black='\x1b[38;5;0m'
+color_fg_dark_red='\x1b[38;5;1m'
+color_fg_dark_green='\x1b[38;5;2m'
+color_fg_dark_yellow='\x1b[38;5;3m'
+color_fg_dark_blue='\x1b[38;5;4m'
+color_fg_dark_purple='\x1b[38;5;5m'
+color_fg_dark_cyan='\x1b[38;5;6m'
+color_fg_dark_white='\x1b[38;5;7m'
+
+color_fg_light_black='\x1b[38;5;8m'
+color_fg_light_red='\x1b[38;5;9m'
+color_fg_light_green='\x1b[38;5;10m'
+color_fg_light_yellow='\x1b[38;5;11m'
+color_fg_light_blue='\x1b[38;5;12m'
+color_fg_light_purple='\x1b[38;5;14m'
+color_fg_light_cyan='\x1b[38;5;14m'
+color_fg_light_white='\x1b[38;5;15m'
+
+color_bg_dark_black='\x1b[48;5;0m'
+color_bg_dark_red='\x1b[48;5;1m'
+color_bg_dark_green='\x1b[48;5;2m'
+color_bg_dark_yellow='\x1b[48;5;3m'
+color_bg_dark_blue='\x1b[48;5;4m'
+color_bg_dark_purple='\x1b[48;5;5m'
+color_bg_dark_cyan='\x1b[48;5;6m'
+color_bg_dark_white='\x1b[48;5;7m'
+
+color_bg_light_black='\x1b[48;5;8m'
+color_bg_light_red='\x1b[48;5;9m'
+color_bg_light_green='\x1b[48;5;10m'
+color_bg_light_yellow='\x1b[48;5;11m'
+color_bg_light_blue='\x1b[48;5;12m'
+color_bg_light_purple='\x1b[48;5;14m'
+color_bg_light_cyan='\x1b[48;5;14m'
+color_bg_light_white='\x1b[48;5;15m'
+
+prompt_git() {
+    if git rev-parse --is-inside-work-tree &>/dev/null; then
+        local git_status="$(git status --porcelain --short)"
+        if [ $! ]; then
+            local git_status_dirty=$([ $(echo $git_status | grep . | wc -l) -gt 0 ] && echo "*")
+            local git_branch_name="$(git branch --show-current)"
+            printf "${color_fg_dark_red}$git_branch_name$git_status_dirty${color_reset} "
+        fi
+    fi
+}
+prompt_lf_level() {
+    if [ -n "$LF_LEVEL" ]; then
+        printf "${color_bg_dark_green}${color_fg_dark_black} $LF_LEVEL ${color_reset} "
+    fi
+}
+prompt_sh_level() {
+    if [ "$SHLVL" -gt "1" ]; then
+        printf "${color_bg_dark_white}${color_fg_dark_black} $(($SHLVL - 1)) ${color_reset} "
+    fi
+}
+export PS1='\D{%a} \t $(prompt_sh_level)$(printf $color_fg_dark_green)\w$(printf $color_reset) $(prompt_git)\n· '
 
 [ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ] &&
     source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
@@ -204,6 +264,15 @@ clear_screen_and_scrollback_buffer() {
     printf '\e[3J'
 }
 
+vi_mode_edit_wo_executing () {
+    local tmp_file="$(mktemp)"
+    printf '%s\n' "$READLINE_LINE" > "$tmp_file"
+    "$EDITOR" "$tmp_file"
+    READLINE_LINE="$(cat "$tmp_file")"
+    READLINE_POINT="${#READLINE_LINE}"
+    rm -f "$tmp_file"
+}
+
 # Start lf in the current directory or in the given one.
 e () {
     lf "$1"
@@ -212,6 +281,17 @@ e () {
         [ -d "$dir" ] && cd "$dir"
         rm -rf "$TMPDIR/lfcd"
     fi
+}
+
+# Pager-like implementation using neovim
+pager () {
+    local target="-"
+    [ -n "$1" ] && target="$1"
+
+    nvim -n -u NONE -i NONE -R \
+        -c "map q :q<CR>" \
+        -c "set laststatus=0" -c "set number" \
+        -c "syntax on" "$target"
 }
 
 # Purge temporary data from some programs.
@@ -250,6 +330,7 @@ test_underline_colors () {
         "\x1b[0m \x1b[4;58:2:0:255:0:0mred underline (true color)\x1b[0m"
 }
 
+alias -- -="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -326,7 +407,6 @@ alias tar="COPYFILE_DISABLE=1 tar"
 alias whicha="which -a"
 
 shopt -s checkwinsize
-PROMPT_DIRTRIM=2
 bind Space:magic-space
 shopt -s globstar 2>/dev/null
 shopt -s nocaseglob
@@ -348,6 +428,7 @@ shopt -s cmdhist
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a"
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+bind -m vi -x '"v": "vi_mode_edit_wo_executing"'
 bind -m vi-insert '"\C-k": "clear_screen_and_scrollback_buffer\n"'
 bind -m vi-insert '"\C-l": "clear_screen\n"'
 bind -m vi-insert '"\C-p": history-search-backward'
@@ -360,65 +441,3 @@ shopt -s dirspell 2>/dev/null
 shopt -s cdspell 2>/dev/null
 CDPATH="."
 shopt -s cdable_vars
-
-# 256-color table reference
-# https://github.com/ThomasDickey/old-xterm/blob/master/vttests/256colors2.pl
-
-color_reset='\x1b[0m'
-color_fg_dark_black='\x1b[38;5;0m'
-color_fg_dark_red='\x1b[38;5;1m'
-color_fg_dark_green='\x1b[38;5;2m'
-color_fg_dark_yellow='\x1b[38;5;3m'
-color_fg_dark_blue='\x1b[38;5;4m'
-color_fg_dark_purple='\x1b[38;5;5m'
-color_fg_dark_cyan='\x1b[38;5;6m'
-color_fg_dark_white='\x1b[38;5;7m'
-
-color_fg_light_black='\x1b[38;5;8m'
-color_fg_light_red='\x1b[38;5;9m'
-color_fg_light_green='\x1b[38;5;10m'
-color_fg_light_yellow='\x1b[38;5;11m'
-color_fg_light_blue='\x1b[38;5;12m'
-color_fg_light_purple='\x1b[38;5;14m'
-color_fg_light_cyan='\x1b[38;5;14m'
-color_fg_light_white='\x1b[38;5;15m'
-
-color_bg_dark_black='\x1b[48;5;0m'
-color_bg_dark_red='\x1b[48;5;1m'
-color_bg_dark_green='\x1b[48;5;2m'
-color_bg_dark_yellow='\x1b[48;5;3m'
-color_bg_dark_blue='\x1b[48;5;4m'
-color_bg_dark_purple='\x1b[48;5;5m'
-color_bg_dark_cyan='\x1b[48;5;6m'
-color_bg_dark_white='\x1b[48;5;7m'
-
-color_bg_light_black='\x1b[48;5;8m'
-color_bg_light_red='\x1b[48;5;9m'
-color_bg_light_green='\x1b[48;5;10m'
-color_bg_light_yellow='\x1b[48;5;11m'
-color_bg_light_blue='\x1b[48;5;12m'
-color_bg_light_purple='\x1b[48;5;14m'
-color_bg_light_cyan='\x1b[48;5;14m'
-color_bg_light_white='\x1b[48;5;15m'
-
-prompt_git() {
-    if git rev-parse --is-inside-work-tree &>/dev/null; then
-        local git_status="$(git status --porcelain --short)"
-        if [ $! ]; then
-            local git_status_dirty=$([ $(echo $git_status | grep . | wc -l) -gt 0 ] && echo "*")
-            local git_branch_name="$(git branch --show-current)"
-            printf "${color_fg_dark_red}$git_branch_name$git_status_dirty${color_reset} "
-        fi
-    fi
-}
-prompt_lf_level() {
-    if [ -n "$LF_LEVEL" ]; then
-        printf "${color_bg_dark_green}${color_fg_dark_black} $LF_LEVEL ${color_reset}"
-    fi
-}
-prompt_sh_level() {
-    if [ "$SHLVL" -gt "1" ]; then
-        printf "${color_bg_dark_white}${color_fg_dark_black} $(($SHLVL - 1)) ${color_reset}"
-    fi
-}
-export PS1='\D{%a}, \t $(prompt_sh_level) \w $(prompt_git)\n· '
