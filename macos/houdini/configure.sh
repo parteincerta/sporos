@@ -31,7 +31,7 @@ mkdir -p \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
 "$XDG_CACHE_HOME"/bun/{bin,cache/{install,transpiler},pkg} \
 "$XDG_CACHE_HOME/gradle" \
-"$XDG_CONFIG_HOME"/{bat/themes,fd,fish/functions,git,kitty,lf,mise,nvim} \
+"$XDG_CONFIG_HOME"/{bat/themes,fd,fish/functions,git,kitty,lf,mise,nvim,zed} \
 "$CODE"/{github,icnew/{git-icone,misc},parteincerta} \
 "$DOCUMENTS"/{Misc,Recordings,Remote,Screenshots} \
 "$DOWNLOADS"/{Brave,Safari,Torrents}
