@@ -179,7 +179,7 @@ export GPG_TTY=$(tty)
 export HISTSIZE=32768
 export HISTFILESIZE=32768
 export HISTCONTROL=ignoreboth:ereasedups
-export HISTIGNORE="?:??:???:????:?????"
+export HISTIGNORE="?"
 export HISTTIMEFORMAT="%F %T "
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
@@ -428,9 +428,9 @@ shopt -s cmdhist
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a"
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
-bind -m vi -x '"v": "vi_mode_edit_wo_executing"'
-bind -m vi-insert '"\C-k": "clear_screen_and_scrollback_buffer\n"'
-bind -m vi-insert '"\C-l": "clear_screen\n"'
+bind -m vi -x '"v": " vi_mode_edit_wo_executing"'
+bind -m vi-insert '"\C-k": " clear_screen_and_scrollback_buffer\n"'
+bind -m vi-insert '"\C-l": " clear_screen\n"'
 bind -m vi-insert '"\C-p": history-search-backward'
 bind -m vi-insert '"\C-n": history-search-forward'
 bind '"\e[C": forward-char'
