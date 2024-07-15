@@ -188,11 +188,11 @@ function prompt_vi_mode
 end
 
 function fish_prompt
-    echo -en "$(prompt_vi_mode)$(prompt_sh_level)$(prompt_cwd) · "
+    echo -n "$(prompt_vi_mode)$(prompt_sh_level)$(prompt_cwd) · "
 end
 
 function fish_right_prompt
-    printf '%s %s' $(__fish_git_prompt) (date '+%a %T')
+    echo -n "$(__fish_git_prompt) $(date '+%a %T')"
 end
 
 if type -ft fzf &>/dev/null
