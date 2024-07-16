@@ -167,11 +167,12 @@ secrm () {
 [[ ! $- == *i* ]] && return 0
 
 export BAT_THEME="ansi"
+export CDPATH="."
 export CLICOLOR=1
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="fd --hidden --threads 2 --type f"
-FZF_DEFAULT_OPTS="--ansi --border=rounded --cycle --height=100% "
-FZF_DEFAULT_OPTS+="--layout=reverse --tabstop=4 --tiebreak=chunk,length,begin"
+export FZF_DEFAULT_OPTS="--ansi --border=rounded --cycle --height=100% "
+export FZF_DEFAULT_OPTS+="--layout=reverse --tabstop=4 --tiebreak=chunk,length,begin"
 export FZF_DEFAULT_OPTS
 export FZF_ALT_C_COMMAND="fd --hidden --threads 2 --type d"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -186,6 +187,7 @@ export HOMEBREW_NO_INSTALL_CLEANUP=1
 export LESSCHARSET="UTF-8"
 export MANPAGER="env IS_PAGER=yes nvim -n -i NONE +Man!"
 export NVIM_PAGER="env IS_PAGER=yes nvim -n -i NONE -R"
+export PROMPT_COMMAND="history -a" # Add previous command to history immediately
 export PROMPT_DIRTRIM=2
 
 # 256-color table reference
@@ -425,7 +427,6 @@ bind "set vi-cmd-mode-string (vi)"
 bind "set vi-ins-mode-string"
 shopt -s histappend
 shopt -s cmdhist
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a"
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 bind -m vi -x '"v": " vi_mode_edit_wo_executing"'
@@ -440,5 +441,4 @@ shopt -s autocd 2>/dev/null
 shopt -s direxpand 2>/dev/null
 shopt -s dirspell 2>/dev/null
 shopt -s cdspell 2>/dev/null
-CDPATH="."
 shopt -s cdable_vars
