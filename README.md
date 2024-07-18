@@ -41,7 +41,7 @@ development environment across all the computers I use.
   * List installed plugins: `mise plugins list`.
   * List all available plugins: `mise plugins list-all`.
   * Install a new plugin: `mise plugins install <plugin>`.
-  * Upgrade installed plugins: `mise plugins upgrade`.
+  * Update installed plugins: `mise plugins upgrade`.
   * List outdated installed tools: `mise outdated`.
   * Check latest available tool version: `mise latest <plugin>[@version]`.
   * Install latest available tool version: `mise instasll <plugin>[@version]`.

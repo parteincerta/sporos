@@ -145,17 +145,17 @@ secrm () {
             rm "$item" >/dev/null
 
         elif [ -d "$item" ]; then
-            chmod u+wx "$item"
+            chmod u+rwx "$item"
             local children=$(/bin/ls -1A "$item")
             if [ -n "$children" ]; then
                 pushd "$item" >/dev/null
                 secrm $children
                 local res=$?
                 popd >/dev/null
-            fi
-            if [ $res -eq 0 ]; then
-                [ "$SECRM_VERBOSE" = "1" ] && echo "rmdir $item/"
-                rmdir "$item"
+                if [ $res -eq 0 ]; then
+                    [ "$SECRM_VERBOSE" = "1" ] && echo "rmdir $item/"
+                    rmdir "$item"
+                fi
             fi
         fi
     done
