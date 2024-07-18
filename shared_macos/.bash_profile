@@ -173,7 +173,6 @@ export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="fd --hidden --threads 2 --type f"
 export FZF_DEFAULT_OPTS="--ansi --border=rounded --cycle --height=100% "
 export FZF_DEFAULT_OPTS+="--layout=reverse --tabstop=4 --tiebreak=chunk,length,begin"
-export FZF_DEFAULT_OPTS
 export FZF_ALT_C_COMMAND="fd --hidden --threads 2 --type d"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export GPG_TTY=$(tty)
@@ -263,7 +262,7 @@ clear_screen() {
 
 clear_screen_and_scrollback_buffer() {
     clear_screen
-    printf '\e[3J'
+    printf "\e[3J"
 }
 
 vi_mode_edit_wo_executing () {
@@ -430,7 +429,7 @@ shopt -s cmdhist
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 bind -m vi -x '"v": " vi_mode_edit_wo_executing"'
-bind -m vi-insert '"\C-e": " __fzf_cd__\n"'
+bind -m vi-insert '"\C-e": " `__fzf_cd__`\n"'
 bind -m vi-insert '"\C-k": "\C-w clear_screen_and_scrollback_buffer\n"'
 bind -m vi-insert '"\C-l": "\C-w clear_screen\n"'
 bind -m vi-insert '"\C-p": history-search-backward'
