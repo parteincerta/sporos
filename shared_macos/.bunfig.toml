@@ -1,8 +1,8 @@
 telemetry = false
 
 [install]
-globalDir = "#bun_install_globalDir"
-globalBinDir = "#bun_install_globalBinDir"
+globalDir = "#bun.install.globalDir"
+globalBinDir = "#bun.install.globalBinDir"
 
 [install.cache]
-dir = "#bun_install_cache_dir"
+dir = "#bun.install.cache.dir"

@@ -23,7 +23,7 @@ else
 fi
 
 
-source .env.sh || true
+source "$shared_dir_macos/.bash_profile" || true
 bootstrap_mark_file="$XDG_CACHE_HOME/.bootstrapped"
 if [ -s "$bootstrap_mark_file" ]; then
 	log_warning ">>> This system was previously bootstrapped."
@@ -46,7 +46,6 @@ defaults write com.apple.dock autohide-delay -int 0
 defaults write com.apple.dock autohide-time-modifier -float 0.30
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-# defaults write com.apple.Safari DebugDisableTabHoverPreview 1
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write -g InitialKeyRepeat -int 10
@@ -67,17 +66,18 @@ fi
 
 
 log_info "\t >>> Installing Homebrew apps"
+# NOTE: `gettext` is installed to have `envsubst`
+fonts=(font-jetbrains-mono-nerd-font)
 homebrew_cli=(
-	7zip aria2 asdf bat bash bash-completion@2 bear bzip2 coreutils eza fd
-	findutils fish font-jetbrains-mono-nerd-font fzf gettext git-delta gnupg
-	gsed jq lf libpq miniserve mkcert moreutils neovim oha pbzip2 pigz rclone
-	ripgrep tokei xz zstd
+	7zip aria2 bat bash bash-completion@2 bzip2 coreutils eza fd findutils fish
+	${fonts[*]} fzf gettext git-delta gnupg gsed jq lf libpq miniserve mise
+	mkcert moreutils neovim oha pbzip2 pigz rclone ripgrep tokei xz zstd
 )
 brew install ${homebrew_cli[*]}
 
 
-# `jdtls` has two dependencies: `openjdk` and `python@3.12`.
-# `openjdk` will be handled by ASDF. `python@3.12` will be installed next.
+# `jdtls` has many dependencies, among them: `openjdk` and `python@3.12`.
+# JDK will be handled by `mise`. `python@3.12` will be installed next.
 # Hence the usage of --ignore-dependencies.
 brew install --ignore-dependencies gradle jdtls maven
 
@@ -93,47 +93,32 @@ log_info "\t >>> Installing Homebrew casks"
 compass="mongodb-compass-isolated-edition"
 microsoft=(microsoft-{excel,powerpoint,remote-desktop,word})
 homebrew_casks=(
-	alt-tab araxis-merge basictex betterdisplay brave-browser bruno chatgpt
-	$compass docker fork iina kitty mac-mouse-fix ${microsoft[*]} numi obs
-	signal tableplus transmission visual-studio-code whatsapp zoom
+	alt-tab basictex betterdisplay brave-browser bruno chatgpt $compass
+	dbeaver-community docker fork iina kitty mac-mouse-fix ${microsoft[*]} numi
+	obs signal transmission visual-studio-code whatsapp zed zoom
 )
 brew install --cask ${homebrew_casks[*]}
 
 
 log_info "\t >>> Sourcing environment variables and re-installing dotfiles"
-source .env.sh
-/bin/bash configure.sh
+source "$shared_dir_macos/.bash_profile" || true
+source configure.sh
 bat cache --build
+
 
 log_info "\t >>> Setting up the hosts file"
 source "$shared_dir/scripts/install-hosts.sh" phobos
 
 
-log_info "\t >>> Installing PIP packages"
+log_info "\t >>> Installing pip packages"
 pip3 install --user wheel
 pip3 install --user pynvim
 
 
-log_info "\t >>> Installing ASDF packages"
-asdf plugin-add bun
-asdf install bun latest:1
-asdf global bun latest:1
-
-asdf plugin-add
-asdf install java latest:graalvm-community-21
-asdf install java latest:temurin-21
-asdf global java latest:temurin-21
-
-asdf plugin-add nodejs
-# Workaround to build Node.js v14 on Apple Silicon.
+log_info "\t >>> Installing mise packages"
+# The CPPFLAGS env var is a workaround to build Node.js v14 on Apple Silicon.
 # https://github.com/nodejs/node/issues/52230#issuecomment-2148778308
-CPPFLAGS='-Wno-enum-constexpr-conversion' asdf install nodejs latest:14
-asdf install nodejs latest:18
-asdf global nodejs latest:18
-
-asdf plugin-add zig
-asdf install zig latest:0
-asdf global zig latest:0
+CPPFLAGS='-Wno-enum-constexpr-conversion' MISE_YES=1 mise install
 
 
 log_info "\t >>> Installing MongoDB Shell and Tools"

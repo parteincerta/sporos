@@ -77,6 +77,10 @@ fi
 [[ ! ":$PATH:" == *":$HOME/.local/bin:"* ]] &&
     export PATH="$PATH:$HOME/.local/bin"
 
+[ -d "$XDG_CACHE_HOME/bun/bin" ] &&
+[[ ! ":$PATH:" == *":$XDG_CACHE_HOME/bun/bin:"* ]] &&
+    export PATH="$PATH:$XDG_CACHE_HOME/bun/bin"
+
 type -ft mise &>/dev/null &&
     eval "$(mise activate --shims bash)"
 

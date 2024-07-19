@@ -61,6 +61,7 @@ fish_add_path --path "$HOMEBREW_PREFIX/sbin"
 fish_add_path --path "$HOMEBREW_PREFIX/bin"
 fish_add_path --path --append "$HOME/.docker/bin"
 fish_add_path --path --append "$HOME/.local/bin"
+fish_add_path --path --append "$XDG_CACHE_HOME/bun/bin"
 
 ! set -q MISE_SHELL &&
 type -ft mise &>/dev/null &&
