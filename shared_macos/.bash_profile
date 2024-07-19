@@ -35,20 +35,20 @@ fi
     export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
-[[ ! "$INFOPATH" = *"$HOMEBREW_PREFIX/share/info"* ]] && {
+[[ ! ":$INFOPATH:" == *":$HOMEBREW_PREFIX/share/info:"* ]] && {
     [ -z "$INFOPATH" ] &&
         export INFOPATH="$HOMEBREW_PREFIX/share/info" ||
         export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH}"
 }
 
-[[ ! "/usr/share/man" =~ *"$MANPATH"* ]] && {
+[[ ! ":$MANPATH:" == *":/usr/share/man:"* ]] && {
     [ -z "$MANPATH" ] &&
         export MANPATH="/usr/share/man" ||
         export MANPATH="/usr/share/man:${MANPATH}"
 }
 
 [ -n "$HOMEBREW_PREFIX" ] &&
-[[ ! "$MANPATH" = *"$HOMEBREW_PREFIX/share/man"* ]] && {
+[[ ! ":$MANPATH:" == *":$HOMEBREW_PREFIX/share/man:"* ]] && {
     [ -z "$MANPATH" ] &&
         export MANPATH="$HOMEBREW_PREFIX/share/man" ||
         export MANPATH="$HOMEBREW_PREFIX/share/man:${MANPATH}"
@@ -56,25 +56,25 @@ fi
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -d "$HOMEBREW_PREFIX/opt/libpq/bin" ] &&
-[[ ! "$PATH" = *"$HOMEBREW_PREFIX/opt/libpq/bin"* ]] &&
+[[ ! ":$PATH:" == *":$HOMEBREW_PREFIX/opt/libpq/bin:"* ]] &&
     export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -d "$HOMEBREW_PREFIX/sbin" ] &&
-[[ ! "$PATH" = *"$HOMEBREW_PREFIX/sbin"* ]] &&
+[[ ! ":$PATH:" == *":$HOMEBREW_PREFIX/sbin:"* ]] &&
     export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -d "$HOMEBREW_PREFIX/bin" ] &&
-[[ ! "$PATH" = *"$HOMEBREW_PREFIX/bin"* ]] &&
+[[ ! ":$PATH:" == *":$HOMEBREW_PREFIX/bin:"* ]] &&
     export PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
 [ -d "$HOME/.docker/bin" ] &&
-[[ ! "$PATH" = *"$HOME/.docker/bin"* ]] &&
+[[ ! ":$PATH:" == *":$HOME/.docker/bin:"* ]] &&
     export PATH="$PATH:$HOME/.docker/bin"
 
 [ -d "$HOME/.local/bin" ] &&
-[[ ! "$PATH" = *"$HOME/.local/bin"* ]] &&
+[[ ! ":$PATH:" == *":$HOME/.local/bin:"* ]] &&
     export PATH="$PATH:$HOME/.local/bin"
 
 type -ft mise &>/dev/null &&
