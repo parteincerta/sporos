@@ -2,7 +2,7 @@
 	"editor.cursorBlinking": "blink",
 	"editor.cursorSmoothCaretAnimation": "off",
 	"editor.fontFamily": "JetBrainsMonoNL Nerd Font Mono",
-	"editor.fontSize": "%font_size",
+	"editor.fontSize": 0,
 	"editor.guides.bracketPairs": "active",
 	"editor.guides.bracketPairsHorizontal": false,
 	"editor.guides.indentation": false,

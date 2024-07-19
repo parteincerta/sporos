@@ -93,12 +93,13 @@ mv "$TMPDIR/.bunfig.toml" "$XDG_CONFIG_HOME/"
 font_size="10.5"
 
 cp "$shared_dir/settings.vscode.json" "$TMPDIR/"
-sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR/settings.vscode.json"
+sed -i '' "/\"editor.fontSize\"/s/0/$font_size/" "$TMPDIR/settings.vscode.json"
 cp "$TMPDIR/settings.vscode.json" "$vscode_cache_dir/settings.json"
 cp "$TMPDIR/settings.vscode.json" "$vscode_settings_dir/settings.json"
 
 cp "$shared_dir/zed.settings.json" "$TMPDIR/"
-sed -i '' "s|\"%font_size\"|$font_size|g" "$TMPDIR/zed.settings.json"
+sed -i '' "/\"buffer_font_size\"/s/0/$font_size/" "$TMPDIR/zed.settings.json"
+sed -i '' "/\"font_size\"/s/0/$font_size/" "$TMPDIR/zed.settings.json"
 mv "$TMPDIR/zed.settings.json" "$XDG_CONFIG_HOME/zed/settings.json"
 
 (echo "cat <<EOF"; cat "$shared_dir_macos/lfmarks"; echo EOF) |

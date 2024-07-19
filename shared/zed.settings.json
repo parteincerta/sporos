@@ -3,12 +3,12 @@
 {
   "auto_update": false,
   "buffer_font_family": "JetBrainsMonoNL Nerd Font Mono",
-  "buffer_font_size": "%font_size",
+  "buffer_font_size": 0,
   "ensure_final_newline_on_save": true,
   "hard_tabs": false,
   "terminal": {
     "font_family": "JetBrainsMonoNL Nerd Font Mono",
-    "font_size": "%font_size",
+    "font_size": 0,
     "env": {
       "SHELL": "fish"
     },
