@@ -29,9 +29,10 @@ development environment across all the computers I use.
   * List outdated formulae: `brew outdated --greedy`.
   * Upgrade all installed formulae and casks: `brew upgrade --greedy`.
   * Purge cache: `brew cleanup [--dry-run]`.
-  * List dependencies of a formula: `brew deps --tree <pkg>`.
-  * List installed dependencies of a formula: `brew uses --installed <pkg>`.
+  * List dependencies of a formula: `brew deps --tree <formula>`.
+  * List installed dependencies of a formula: `brew uses --installed <formula>`.
   * List installed formulae which are not dependencies of others: `brew leaves`.
+  * List artifacts of a formula: `brew ls <formula>`.
 - Hosts file maintenance steps:
   * Check for [hosts files][macos-maintenance-01] update.
   * Update the version reference in
