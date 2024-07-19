@@ -25,6 +25,7 @@
 	"telemetry.telemetryLevel": "off",
 	"update.mode": "none",
 	"window.autoDetectColorScheme": true,
+	"window.newWindowDimensions": "inherit",
 	"window.zoomLevel": 0.0,
 	"workbench.colorTheme": null,
 	"workbench.iconTheme": "material-icon-theme",
