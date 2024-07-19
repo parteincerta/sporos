@@ -14,9 +14,9 @@ trap "popd >/dev/null" EXIT
 
 
 if [ "houdini" != "$system_hostname" ]; then
-    log_warning ">>> This configuration script belongs to another host: houdini".
-    log_warning ">>> The current host is: $system_hostname"
-    exit 1
+	log_warning ">>> This configuration script belongs to another host: houdini".
+	log_warning ">>> The current host is: $system_hostname"
+	exit 1
 fi
 
 source "$shared_dir_macos/.bash_profile" || true
@@ -29,7 +29,7 @@ mkdir -p \
 "$HOME/Library/Application Support/com.nuebling.mac-mouse-fix/" \
 "$HOME/Library/Application Support/obs-studio/basic/" \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
-"$XDG_CACHE_HOME"/bun/{bin,cache/{install,transpiler},pkg} \
+"$XDG_CACHE_HOME/bun"/{bin,cache/{install,transpiler},lib} \
 "$XDG_CACHE_HOME/gradle" \
 "$XDG_CONFIG_HOME"/{bat/themes,fd,fish/functions,git,kitty,lf,mise,nvim,zed} \
 "$CODE"/{github,icnew/{git-icone,misc},parteincerta} \
@@ -85,9 +85,9 @@ cp "$macmousefix_file" "$app_support_folder/com.nuebling.mac-mouse-fix/config.pl
 # bust be patched before being put in their place.
 
 cp "$shared_dir_macos/.bunfig.toml" "$TMPDIR/"
-sed -i '' "s|#bun_install_globalDir|$XDG_CACHE_HOME/bun/pkgs|" "$TMPDIR/.bunfig.toml"
-sed -i '' "s|#bun_install_globalBinDir|$XDG_CACHE_HOME/bun/bin|" "$TMPDIR/.bunfig.toml"
-sed -i '' "s|#bun_install_cache_dir|$XDG_CACHE_HOME/bun/cache/install|" "$TMPDIR/.bunfig.toml"
+sed -i '' "s|#bun.install.globalDir|$XDG_CACHE_HOME/bun/lib|" "$TMPDIR/.bunfig.toml"
+sed -i '' "s|#bun.install.globalBinDir|$XDG_CACHE_HOME/bun/bin|" "$TMPDIR/.bunfig.toml"
+sed -i '' "s|#bun.install.cache.dir|$XDG_CACHE_HOME/bun/cache/install|" "$TMPDIR/.bunfig.toml"
 mv "$TMPDIR/.bunfig.toml" "$XDG_CONFIG_HOME/"
 
 font_size="10.5"
@@ -103,13 +103,13 @@ sed -i '' "/\"font_size\"/s/0/$font_size/" "$TMPDIR/zed.settings.json"
 mv "$TMPDIR/zed.settings.json" "$XDG_CONFIG_HOME/zed/settings.json"
 
 (echo "cat <<EOF"; cat "$shared_dir_macos/lfmarks"; echo EOF) |
-    sh >"$HOME/.local/share/lf/marks"
+	sh >"$HOME/.local/share/lf/marks"
 
 # NOTE: The following can only be patched once Homebrew is installed.
 if [ -n "$HOMEBREW_PREFIX" ]; then
-    cp "$shared_dir_macos/kitty.conf" "$TMPDIR/"
-    sed -i '' "s|%font_size|$font_size|g" "$TMPDIR/kitty.conf"
-    sed -i '' "s|%homebrew_path|$HOMEBREW_PREFIX|g" "$TMPDIR/kitty.conf"
-    mv "$TMPDIR/kitty.conf" "$XDG_CONFIG_HOME/kitty/kitty.conf"
-    cp "$shared_dir/kitty_theme.conf" "$XDG_CONFIG_HOME/kitty/"
+	cp "$shared_dir_macos/kitty.conf" "$TMPDIR/"
+	sed -i '' "s|%font_size|$font_size|g" "$TMPDIR/kitty.conf"
+	sed -i '' "s|%homebrew_path|$HOMEBREW_PREFIX|g" "$TMPDIR/kitty.conf"
+	mv "$TMPDIR/kitty.conf" "$XDG_CONFIG_HOME/kitty/kitty.conf"
+	cp "$shared_dir/kitty_theme.conf" "$XDG_CONFIG_HOME/kitty/"
 fi

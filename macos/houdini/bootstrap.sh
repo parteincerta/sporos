@@ -15,26 +15,26 @@ trap "popd >/dev/null" EXIT
 
 xcode_cli_tools_path="$(xcode-select --print-path 2>/dev/null || true)"
 if [ -d "$xcode_cli_tools_path" ]; then
-    log_info "\t >>> XCode CLI Tools available at: $xcode_cli_tools_path"
+	log_info "\t >>> XCode CLI Tools available at: $xcode_cli_tools_path"
 else
-    log_error "\t >>> XCode CLI Tools not available."
-    log_error "\t >>> To install them: \$ xcode-select --install"
-    exit 1
+	log_error "\t >>> XCode CLI Tools not available."
+	log_error "\t >>> To install them: \$ xcode-select --install"
+	exit 1
 fi
 
 
 source "$shared_dir_macos/.bash_profile" || true
 bootstrap_mark_file="$XDG_CACHE_HOME/.bootstrapped"
 if [ -s "$bootstrap_mark_file" ]; then
-    log_warning ">>> This system was previously bootstrapped."
-    exit 1
-    log_warning ">>> To restart the process: \$ rm $bootstrap_mark_file"
+	log_warning ">>> This system was previously bootstrapped."
+	exit 1
+	log_warning ">>> To restart the process: \$ rm $bootstrap_mark_file"
 fi
 
 if [ "houdini" != "$system_hostname" ]; then
-    log_warning ">>> This bootstrap script belongs to another host: houdini".
-    log_warning ">>> The current host is: $system_hostname"
-    exit 1
+	log_warning ">>> This bootstrap script belongs to another host: houdini".
+	log_warning ">>> The current host is: $system_hostname"
+	exit 1
 fi
 
 log_info "\t >>> Installing dotfiles"
@@ -56,23 +56,24 @@ killall Dock
 
 
 if [ -z "$(command -v brew)" ]; then
-    log_info "\t >>> Installing Homebrew"
-    homebrew_url="https://raw.githubusercontent.com/Homebrew/install/master/install.sh"
-    /bin/bash -c "$(curl --fail --location --silent --show-error $homebrew_url)"
+	log_info "\t >>> Installing Homebrew"
+	homebrew_url="https://raw.githubusercontent.com/Homebrew/install/master/install.sh"
+	/bin/bash -c "$(curl --fail --location --silent --show-error $homebrew_url)"
 fi
 
 
 log_info "\t >>> Installing Homebrew apps"
+# NOTE: `gettext` is installed to have `envsubst`
 fonts=(font-jetbrains-mono-nerd-font)
 homebrew_cli=(
-    7zip aria2 bat bash bash-completion@2 bear bzip2 coreutils eza fd findutils
-    fish ${fonts[*]} fzf gettext git-delta gnupg gsed jq lf libpq miniserve mise
-    mkcert moreutils neovim oha pbzip2 pigz rclone ripgrep tokei xz zstd
+	7zip aria2 bat bash bash-completion@2 bear bzip2 coreutils eza fd findutils
+	fish ${fonts[*]} fzf gettext git-delta gnupg gsed jq lf libpq miniserve mise
+	mkcert moreutils neovim oha pbzip2 pigz rclone ripgrep tokei xz zstd
 )
 brew install ${homebrew_cli[*]}
 
 # `jdtls` has many dependencies, among them: `openjdk` and `python@3.12`.
-# `openjdk` will be handled by mise. `python@3.12` will be installed next.
+# JDK will be handled by `mise``. `python@3.12` will be installed next.
 # Hence the usage of --ignore-dependencies.
 brew install --ignore-dependencies gradle jdtls maven
 
@@ -88,9 +89,9 @@ log_info "\t >>> Installing Homebrew casks"
 compass="mongodb-compass-isolated-edition"
 microsoft=(microsoft-{excel,powerpoint,remote-desktop,word})
 homebrew_casks=(
-    1kc-razer alt-tab araxis-merge basictex betterdisplay brave-browser bruno
-    $compass dbeaver-community docker fork iina kitty mac-mouse-fix ${microsoft[*]}
-    numi obs tableplus transmission visual-studio-code zed zoom
+	1kc-razer alt-tab basictex betterdisplay brave-browser bruno $compass
+	dbeaver-community docker fork iina kitty mac-mouse-fix ${microsoft[*]}
+	numi obs transmission visual-studio-code zed zoom
 )
 brew install --cask ${homebrew_casks[*]}
 
@@ -99,6 +100,7 @@ log_info "\t >>> Sourcing environment variables and re-installing dotfiles"
 source "$shared_dir_macos/.bash_profile" || true
 source configure.sh
 bat cache --build
+
 
 log_info "\t >>> Setting up the hosts file"
 source "$shared_dir/scripts/install-hosts.sh" houdini
@@ -139,13 +141,13 @@ sudo pmset -b autopoweroffdelay 604800 # 7 days
 
 log_info "\t >>> Ignoring Focusrite Scarlett Solo automount"
 echo "UUID=DC798778-543D-396B-A11F-2EC42F3500F9 none msdos ro,noauto" |
-    sudo tee -a /etc/fstab >/dev/null
+	sudo tee -a /etc/fstab >/dev/null
 
 
 if [ -z "$(grep "$HOMEBREW_PREFIX/bin/bash" /etc/shells)" ]; then
-    log_info "\t >>> Setting Homebrew's bash as the default shell"
-    echo "$HOMEBREW_PREFIX/bin/bash" | sudo tee -a /etc/shells
-    chsh -s "$HOMEBREW_PREFIX/bin/bash" "$(whoami)"
+	log_info "\t >>> Setting Homebrew's bash as the default shell"
+	echo "$HOMEBREW_PREFIX/bin/bash" | sudo tee -a /etc/shells
+	chsh -s "$HOMEBREW_PREFIX/bin/bash" "$(whoami)"
 fi
 
 

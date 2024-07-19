@@ -19,41 +19,41 @@ set --export VOLUMES "/Volumes"
 set --export YARN_CACHE_FOLDER "$XDG_CACHE_HOME/yarn"
 
 if [ -z "$HOMEBREW_PREFIX" ]
-    set --local _arch (uname -m)
-    if [ "$_arch" = "arm64" ]
-        type -ft /opt/homebrew/bin/brew &>/dev/null &&
-            set --export HOMEBREW_PREFIX "/opt/homebrew"
-    else if [ "$_arch" = "x86_64" ]
-        type -ft /usr/local/bin/brew &>/dev/null &&
-            set --export HOMEBREW_PREFIX "/usr/local"
-    end
+	set --local _arch (uname -m)
+	if [ "$_arch" = "arm64" ]
+		type -ft /opt/homebrew/bin/brew &>/dev/null &&
+			set --export HOMEBREW_PREFIX "/opt/homebrew"
+	else if [ "$_arch" = "x86_64" ]
+		type -ft /usr/local/bin/brew &>/dev/null &&
+			set --export HOMEBREW_PREFIX "/usr/local"
+	end
 end
 
 [ -n "$HOMEBREW_PREFIX" ] &&
-    set --export HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar" &&
-    set --export HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX/Homebrew"
+	set --export HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar" &&
+	set --export HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX/Homebrew"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 ! string match -q "*$HOMEBREW_PREFIX/share/info:*" "$INFOPATH"  &&
 begin
-    [ -z "$INFOPATH" ] &&
-        set --export INFOPATH "$HOMEBREW_PREFIX/share/info" ||
-        set --export INFOPATH "$HOMEBREW_PREFIX/share/info:$INFOPATH"
+	[ -z "$INFOPATH" ] &&
+		set --export INFOPATH "$HOMEBREW_PREFIX/share/info" ||
+		set --export INFOPATH "$HOMEBREW_PREFIX/share/info:$INFOPATH"
 end
 
 ! string match -q "*/usr/share/man:*" "$MANPATH"  &&
 begin
-    [ -z "$MANPATH" ] &&
-        set --export MANPATH "/usr/share/man" ||
-        set --export MANPATH "/usr/share/man:$MANPATH"
+	[ -z "$MANPATH" ] &&
+		set --export MANPATH "/usr/share/man" ||
+		set --export MANPATH "/usr/share/man:$MANPATH"
 end
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 ! string match -q "*$HOMEBREW_PREFIX/share/man:*" "$MANPATH"  &&
 begin
-    [ -z "$MANPATH" ] &&
-        set --export MANPATH "$HOMEBREW_PREFIX/share/man" ||
-        set --export MANPATH "$HOMEBREW_PREFIX/share/man:$MANPATH"
+	[ -z "$MANPATH" ] &&
+		set --export MANPATH "$HOMEBREW_PREFIX/share/man" ||
+		set --export MANPATH "$HOMEBREW_PREFIX/share/man:$MANPATH"
 end
 
 fish_add_path --path "$HOMEBREW_PREFIX/opt/libpq/bin"
@@ -65,50 +65,50 @@ fish_add_path --path --append "$XDG_CACHE_HOME/bun/bin"
 
 ! set -q MISE_SHELL &&
 type -ft mise &>/dev/null &&
-    mise activate --shims fish | source
+	mise activate --shims fish | source
 
 # ============== #
 # USER FUNCTIONS #
 # ============== #
 
 function gpg_dec_file --description "Decrypt password-encrypted file."
-    set --local src "$1"
-    set --local dst "$2"
-    if [ -s "$src" ]
-        [ -z "$dst" ] && gpg --decrypt "$src" 2>/dev/null | pager
-        [ -n "$dst" ] && gpg --symmetric "$src" > "$dst"
-    end
+	set --local src "$1"
+	set --local dst "$2"
+	if [ -s "$src" ]
+		[ -z "$dst" ] && gpg --decrypt "$src" 2>/dev/null | pager
+		[ -n "$dst" ] && gpg --symmetric "$src" > "$dst"
+	end
 end
 
 function gpg_enc_file --description "Encrypt a file with a password."
-    set --local src "$1"
-    set --local dst "$2"
-    if [ -s "$src" ]
-        [ -z "$dst" ] && gpg --symmetric "$src"
-        [ -n "$dst" ] && gpg --symmetric "$src" "$dst"
-    end
+	set --local src "$1"
+	set --local dst "$2"
+	if [ -s "$src" ]
+		[ -z "$dst" ] && gpg --symmetric "$src"
+		[ -n "$dst" ] && gpg --symmetric "$src" "$dst"
+	end
 end
 
 function mkcd --description "Create a directory if it doesn't exist and cd into it."
-    if [ -n "$argv[1]" ]
-        mkdir -p "$argv[1]" && cd "$argv[1]"
-    else
-        echo "Usage: mkcd <dir>"
-    end
+	if [ -n "$argv[1]" ]
+		mkdir -p "$argv[1]" && cd "$argv[1]"
+	else
+		echo "Usage: mkcd <dir>"
+	end
 end
 
 function secrm --description "Remove files in a secure manner using GNU shred."
-    bash --login -c "secrm $argv"
+	bash --login -c "secrm $argv"
 end
 
 # Adapted from https://stackoverflow.com/a/44811468
 # Sanite a string to produce a valid file name
 function sanitize --description ""
-    set --local s $argv[1]
-    set --local s (echo "$s" | sed 's/[^[:alnum:]]\./-/g')
-    set --local s (echo "$s" | sed -E 's/-+/-/g')
-    set --local s (string trim --char=- -- "$s")
-    echo "$s"
+	set --local s $argv[1]
+	set --local s (echo "$s" | sed 's/[^[:alnum:]]\./-/g')
+	set --local s (echo "$s" | sed -E 's/-+/-/g')
+	set --local s (string trim --char=- -- "$s")
+	echo "$s"
 end
 
 # ============================= #
@@ -158,123 +158,123 @@ function fish_mode_prompt;
 end
 
 function prompt_cwd
-    set_color green
-    echo -n (prompt_pwd)
-    set_color $fish_color_normal
+	set_color green
+	echo -n (prompt_pwd)
+	set_color $fish_color_normal
 end
 
 function prompt_sh_level
-    if [ "$SHLVL" -gt "1" ]
-        set_color black --background white
-        echo -n " $(math $SHLVL - 1) "
-        set_color $fish_color_normal
-        echo -n " "
-    end
+	if [ "$SHLVL" -gt "1" ]
+		set_color black --background white
+		echo -n " $(math $SHLVL - 1) "
+		set_color $fish_color_normal
+		echo -n " "
+	end
 end
 
 function prompt_vi_mode
-    if [ "$fish_bind_mode" = "default" ]
-        set_color --background red
-        set_color black
-        echo -n " C "
-        set_color normal
-        [ $SHLVL -eq 1 ] && echo -n " "
-    else if [ "$fish_bind_mode" = "visual" ]
-        set_color --background yellow
-        set_color black
-        echo -n " V "
-        set_color normal
-        [ $SHLVL -eq 1 ] && echo -n " "
-    end
+	if [ "$fish_bind_mode" = "default" ]
+		set_color --background red
+		set_color black
+		echo -n " C "
+		set_color normal
+		[ $SHLVL -eq 1 ] && echo -n " "
+	else if [ "$fish_bind_mode" = "visual" ]
+		set_color --background yellow
+		set_color black
+		echo -n " V "
+		set_color normal
+		[ $SHLVL -eq 1 ] && echo -n " "
+	end
 end
 
 function fish_prompt
-    echo -n "$(prompt_vi_mode)$(prompt_sh_level)$(prompt_cwd) · "
+	echo -n "$(prompt_vi_mode)$(prompt_sh_level)$(prompt_cwd) · "
 end
 
 function fish_right_prompt
-    echo -n "$(__fish_git_prompt) $(date '+%a %T')"
+	echo -n "$(__fish_git_prompt) $(date '+%a %T')"
 end
 
 if type -ft fzf &>/dev/null
-    fzf --fish | source
+	fzf --fish | source
 end
 
 function brew --description "Homebrew hook to handle specific commands"
-    set --local homebrew (type -fp brew)
-    if [ $argv[1] = "install" ] || [ $argv[1] = "upgrade" ]
-        echo "Homebrew's install and upgrade commands should be executed in Bash (Apple Terminal)."
-        echo "To force-execute them in Fish start the command with: $homebrew"
-    else
-        $homebrew $argv
-    end
+	set --local homebrew (type -fp brew)
+	if [ $argv[1] = "install" ] || [ $argv[1] = "upgrade" ]
+		echo "Homebrew's install and upgrade commands should be executed in Bash (Apple Terminal)."
+		echo "To force-execute them in Fish start the command with: $homebrew"
+	else
+		$homebrew $argv
+	end
 end
 
 function clear_screen --description "Clear the screen and move the previous content to the scrollback buffer."
-    printf "\e[H\e[2J"
+	printf "\e[H\e[2J"
 end
 
 function clear_screen_and_scrollback_buffer --description "Clear the screen and purge the scrollback buffer."
-    clear_screen
-    printf '\e[3J'
+	clear_screen
+	printf '\e[3J'
 end
 
 function e --description "Start lf in the current directory or in the given one."
-    lf "$argv[1]"
-    if [ -f "$TMPDIR/lfcd" ]
-        set --local dir (cat "$TMPDIR/lfcd")
-        [ -d "$dir" ] && cd "$dir"
-        rm -rf "$TMPDIR/lfcd"
-    end
+	lf "$argv[1]"
+	if [ -f "$TMPDIR/lfcd" ]
+		set --local dir (cat "$TMPDIR/lfcd")
+		[ -d "$dir" ] && cd "$dir"
+		rm -rf "$TMPDIR/lfcd"
+	end
 end
 
 function pager --description "Pager-like implementation using neovim"
-    set --function target "-"
-    if [ -n "$argv[1]" ]
-        set --function target "$argv[1]"
-    end
+	set --function target "-"
+	if [ -n "$argv[1]" ]
+		set --function target "$argv[1]"
+	end
 
-    nvim -n -u NONE -i NONE -R \
-        -c "map q :q<CR>" \
-        -c "set laststatus=0" -c "set number" \
-        -c "syntax on" "$target"
+	nvim -n -u NONE -i NONE -R \
+		-c "map q :q<CR>" \
+		-c "set laststatus=0" -c "set number" \
+		-c "syntax on" "$target"
 end
 
 function purge --description "Purge temporary data from some programs."
-    if [ "$argv[1]" = "fish" ]
-        echo 'yes' | history clear &>/dev/null
+	if [ "$argv[1]" = "fish" ]
+		echo 'yes' | history clear &>/dev/null
 
-    else if [ "$argv[1]" = "clipboard" ]
-        pbcopy < /dev/null
+	else if [ "$argv[1]" = "clipboard" ]
+		pbcopy < /dev/null
 
-    else if [ "$argv[1]" = "nvim" ]
-        for file in "$XDG_DATA_HOME"/nvim/shada/*.shada
-            rm -f "$file"
-        end
-        for file in "$XDG_STATE_HOME"/nvim/shada/*.shada
-            rm -f "$file"
-        end
+	else if [ "$argv[1]" = "nvim" ]
+		for file in "$XDG_DATA_HOME"/nvim/shada/*.shada
+			rm -f "$file"
+		end
+		for file in "$XDG_STATE_HOME"/nvim/shada/*.shada
+			rm -f "$file"
+		end
 
-        [ -d "$XDG_STATE_HOME"/nvim/undo/ ] &&
-        [ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
-            rm -rf "$XDG_STATE_HOME"/nvim/undo/*
+		[ -d "$XDG_STATE_HOME"/nvim/undo/ ] &&
+		[ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
+			rm -rf "$XDG_STATE_HOME"/nvim/undo/*
 
-    else if [ "$argv[1]" = "bash" ]
-        bash -i -c "purge $argv"
-    else
-        echo "Usage purge bash|clipboard|fish|nvim."
-    end
+	else if [ "$argv[1]" = "bash" ]
+		bash -i -c "purge $argv"
+	else
+		echo "Usage purge bash|clipboard|fish|nvim."
+	end
 end
 
 function test_underline_styles --description "Prints underline text in several styles."
-    echo -e "\x1b[4:0m4:0 none\x1b[0m \x1b[4:1m4:1 straight\x1b[0m " \
-        "\x1b[4:2m4:2 double\x1b[0m \x1b[4:3m4:3 curly" \
-        "\x1b[0m \x1b[4:4m4:4 dotted\x1b[0m \x1b[4:5m4:5 dashed\x1b[0m"
+	echo -e "\x1b[4:0m4:0 none\x1b[0m \x1b[4:1m4:1 straight\x1b[0m " \
+		"\x1b[4:2m4:2 double\x1b[0m \x1b[4:3m4:3 curly" \
+		"\x1b[0m \x1b[4:4m4:4 dotted\x1b[0m \x1b[4:5m4:5 dashed\x1b[0m"
 end
 
 function test_underline_colors --description "Prints text with colored underlines"
-    echo -e "\x1b[4;58:5:203mred underline (256)" \
-        "\x1b[0m \x1b[4;58:2:0:255:0:0mred underline (true color)\x1b[0m"
+	echo -e "\x1b[4;58:5:203mred underline (256)" \
+		"\x1b[0m \x1b[4;58:2:0:255:0:0mred underline (true color)\x1b[0m"
 end
 
 abbr -a -- - 'cd -'
@@ -374,7 +374,7 @@ bind --mode insert --key nul edit_command_buffer
 bind --mode visual --key nul edit_command_buffer
 
 if type -q fzf-cd-widget &>/dev/null
-    bind --mode default \ce fzf-cd-widget
-    bind --mode insert \ce fzf-cd-widget
-    bind --mode visual \ce fzf-cd-widget
+	bind --mode default \ce fzf-cd-widget
+	bind --mode insert \ce fzf-cd-widget
+	bind --mode visual \ce fzf-cd-widget
 end

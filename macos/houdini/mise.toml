@@ -6,7 +6,7 @@ plugin_autoupdate_last_check_duration = "0"
 [tools]
 bun = "1"
 go = "1"
-java = [ "temurin-21", "graalvm-community-21" ]
-node = [ "18", "14" ]
+java = "temurin-21"
+node = ["18","14"]
 usage = "0"
 zig = "0"

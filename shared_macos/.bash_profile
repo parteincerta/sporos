@@ -20,69 +20,69 @@ export VOLUMES="/Volumes"
 export YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn"
 
 if [ -z "$HOMEBREW_PREFIX" ]; then
-    _arch="$(uname -m)"
-    if [ "$_arch" = "arm64" ]; then
-        type -ft /opt/homebrew/bin/brew &>/dev/null &&
-            export HOMEBREW_PREFIX="/opt/homebrew"
-    elif [ "$_arch" = "x86_64" ]; then
-        type -ft /usr/local/bin/brew &>/dev/null &&
-            export HOMEBREW_PREFIX="/usr/local"
-    fi
+	_arch="$(uname -m)"
+	if [ "$_arch" = "arm64" ]; then
+		type -ft /opt/homebrew/bin/brew &>/dev/null &&
+			export HOMEBREW_PREFIX="/opt/homebrew"
+	elif [ "$_arch" = "x86_64" ]; then
+		type -ft /usr/local/bin/brew &>/dev/null &&
+			export HOMEBREW_PREFIX="/usr/local"
+	fi
 fi
 
 [ -n "$HOMEBREW_PREFIX" ] &&
-    export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar" &&
-    export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
+	export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar" &&
+	export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [[ ! ":$INFOPATH:" == *":$HOMEBREW_PREFIX/share/info:"* ]] && {
-    [ -z "$INFOPATH" ] &&
-        export INFOPATH="$HOMEBREW_PREFIX/share/info" ||
-        export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH}"
+	[ -z "$INFOPATH" ] &&
+		export INFOPATH="$HOMEBREW_PREFIX/share/info" ||
+		export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH}"
 }
 
 [[ ! ":$MANPATH:" == *":/usr/share/man:"* ]] && {
-    [ -z "$MANPATH" ] &&
-        export MANPATH="/usr/share/man" ||
-        export MANPATH="/usr/share/man:${MANPATH}"
+	[ -z "$MANPATH" ] &&
+		export MANPATH="/usr/share/man" ||
+		export MANPATH="/usr/share/man:${MANPATH}"
 }
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [[ ! ":$MANPATH:" == *":$HOMEBREW_PREFIX/share/man:"* ]] && {
-    [ -z "$MANPATH" ] &&
-        export MANPATH="$HOMEBREW_PREFIX/share/man" ||
-        export MANPATH="$HOMEBREW_PREFIX/share/man:${MANPATH}"
+	[ -z "$MANPATH" ] &&
+		export MANPATH="$HOMEBREW_PREFIX/share/man" ||
+		export MANPATH="$HOMEBREW_PREFIX/share/man:${MANPATH}"
 }
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -d "$HOMEBREW_PREFIX/opt/libpq/bin" ] &&
 [[ ! ":$PATH:" == *":$HOMEBREW_PREFIX/opt/libpq/bin:"* ]] &&
-    export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
+	export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -d "$HOMEBREW_PREFIX/sbin" ] &&
 [[ ! ":$PATH:" == *":$HOMEBREW_PREFIX/sbin:"* ]] &&
-    export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
+	export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
 [ -d "$HOMEBREW_PREFIX/bin" ] &&
 [[ ! ":$PATH:" == *":$HOMEBREW_PREFIX/bin:"* ]] &&
-    export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+	export PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
 [ -d "$HOME/.docker/bin" ] &&
 [[ ! ":$PATH:" == *":$HOME/.docker/bin:"* ]] &&
-    export PATH="$PATH:$HOME/.docker/bin"
+	export PATH="$PATH:$HOME/.docker/bin"
 
 [ -d "$HOME/.local/bin" ] &&
 [[ ! ":$PATH:" == *":$HOME/.local/bin:"* ]] &&
-    export PATH="$PATH:$HOME/.local/bin"
+	export PATH="$PATH:$HOME/.local/bin"
 
 [ -d "$XDG_CACHE_HOME/bun/bin" ] &&
 [[ ! ":$PATH:" == *":$XDG_CACHE_HOME/bun/bin:"* ]] &&
-    export PATH="$PATH:$XDG_CACHE_HOME/bun/bin"
+	export PATH="$PATH:$XDG_CACHE_HOME/bun/bin"
 
 type -ft mise &>/dev/null &&
-    eval "$(mise activate --shims bash)"
+	eval "$(mise activate --shims bash)"
 
 # ============== #
 # USER FUNCTIONS #
@@ -90,79 +90,79 @@ type -ft mise &>/dev/null &&
 
 # Decrypt password-encrypted file.
 gpg_dec_file () {
-    local src="$1"
-    local dst="$2"
-    if [ -s "$src" ]; then
-        [ -z "$dst" ] && gpg --decrypt "$src" 2>/dev/null | pager
-        [ -n "$dst" ] && gpg --symmetric "$src" > "$dst"
-    fi
+	local src="$1"
+	local dst="$2"
+	if [ -s "$src" ]; then
+		[ -z "$dst" ] && gpg --decrypt "$src" 2>/dev/null | pager
+		[ -n "$dst" ] && gpg --symmetric "$src" > "$dst"
+	fi
 }
 
 # Encrypt a file with a password.
 gpg_enc_file () {
-    local src="$1"
-    local dst="$2"
-    if [ -s "$src" ]; then
-        [ -z "$dst" ] && gpg --symmetric "$src"
-        [ -n "$dst" ] && gpg --symmetric "$src" "$dst"
-    fi
+	local src="$1"
+	local dst="$2"
+	if [ -s "$src" ]; then
+		[ -z "$dst" ] && gpg --symmetric "$src"
+		[ -n "$dst" ] && gpg --symmetric "$src" "$dst"
+	fi
 }
 
 # Create a directory if it doesn't exist and cd into it.
 mkcd () {
-    if [ -n "$1" ]; then
-        mkdir -p "$1" && cd "$1"
-    else
-        echo "Usage: mkcd <dir>"
-    fi
+	if [ -n "$1" ]; then
+		mkdir -p "$1" && cd "$1"
+	else
+		echo "Usage: mkcd <dir>"
+	fi
 }
 
 # Taken from https://stackoverflow.com/a/44811468
 # Sanite a string to produce a valid file name.
 sanitize () {
-    local s="$1"
-    s="${s//[^[:alnum:]\.]/-}"
-    s="${s//+(-)/-}"
-    s="${s/#-}"
-    s="${s/%-}"
-    echo "$s"
-    # ... or convert to lowercase
-    # echo "${s,,}"
+	local s="$1"
+	s="${s//[^[:alnum:]\.]/-}"
+	s="${s//+(-)/-}"
+	s="${s/#-}"
+	s="${s/%-}"
+	echo "$s"
+	# ... or convert to lowercase
+	# echo "${s,,}"
 }
 
 # Remove files in a secure manner using GNU shred.
 secrm () {
-    if [ $# -eq 0 ]; then
-        echo "Usage: secrm <file>|<dir>"
-        return 1
-    fi
+	if [ $# -eq 0 ]; then
+		echo "Usage: secrm <file>|<dir>"
+		return 1
+	fi
 
-    for i in "$@"; do
-        local item="$i"
-        if [ -f "$item" ]; then
-            [ "$SECRM_VERBOSE" = "1" ] && echo "shred $item"
-            shred --iterations=3 --force --random-source=/dev/urandom \
-                --remove=wipe --zero "$item" 1>/dev/null
+	for i in "$@"; do
+		local item="$i"
+		if [ -f "$item" ]; then
+			[ "$SECRM_VERBOSE" = "1" ] && echo "shred $item"
+			shred --iterations=3 --force --random-source=/dev/urandom \
+				--remove=wipe --zero "$item" 1>/dev/null
 
-        elif [ -h "$item" ]; then
-            [ "$SECRM_VERBOSE" = "1" ] && echo "rm $item"
-            rm "$item" >/dev/null
+		elif [ -h "$item" ]; then
+			[ "$SECRM_VERBOSE" = "1" ] && echo "rm $item"
+			rm "$item" >/dev/null
 
-        elif [ -d "$item" ]; then
-            chmod u+rwx "$item"
-            local children=$(/bin/ls -1A "$item")
-            if [ -n "$children" ]; then
-                pushd "$item" >/dev/null
-                secrm $children
-                local res=$?
-                popd >/dev/null
-                if [ $res -eq 0 ]; then
-                    [ "$SECRM_VERBOSE" = "1" ] && echo "rmdir $item/"
-                    rmdir "$item"
-                fi
-            fi
-        fi
-    done
+		elif [ -d "$item" ]; then
+			chmod u+rwx "$item"
+			local children=$(/bin/ls -1A "$item")
+			if [ -n "$children" ]; then
+				pushd "$item" >/dev/null
+				secrm $children
+				local res=$?
+				popd >/dev/null
+				if [ $res -eq 0 ]; then
+					[ "$SECRM_VERBOSE" = "1" ] && echo "rmdir $item/"
+					rmdir "$item"
+				fi
+			fi
+		fi
+	done
 }
 
 # ============================= #
@@ -233,106 +233,106 @@ color_bg_light_cyan='\x1b[48;5;14m'
 color_bg_light_white='\x1b[48;5;15m'
 
 prompt_git() {
-    if git rev-parse --is-inside-work-tree &>/dev/null; then
-        local git_status="$(git status --porcelain --short)"
-        if [ $! ]; then
-            local git_status_dirty=$([ $(echo $git_status | grep . | wc -l) -gt 0 ] && echo "*")
-            local git_branch_name="$(git branch --show-current)"
-            printf "${color_fg_dark_red}$git_branch_name$git_status_dirty${color_reset} "
-        fi
-    fi
+	if git rev-parse --is-inside-work-tree &>/dev/null; then
+		local git_status="$(git status --porcelain --short)"
+		if [ $! ]; then
+			local git_status_dirty=$([ $(echo $git_status | grep . | wc -l) -gt 0 ] && echo "*")
+			local git_branch_name="$(git branch --show-current)"
+			printf "${color_fg_dark_red}$git_branch_name$git_status_dirty${color_reset} "
+		fi
+	fi
 }
 prompt_lf_level() {
-    if [ -n "$LF_LEVEL" ]; then
-        printf "${color_bg_dark_green}${color_fg_dark_black} $LF_LEVEL ${color_reset} "
-    fi
+	if [ -n "$LF_LEVEL" ]; then
+		printf "${color_bg_dark_green}${color_fg_dark_black} $LF_LEVEL ${color_reset} "
+	fi
 }
 prompt_sh_level() {
-    if [ "$SHLVL" -gt "1" ]; then
-        printf "${color_bg_dark_white}${color_fg_dark_black} $(($SHLVL - 1)) ${color_reset} "
-    fi
+	if [ "$SHLVL" -gt "1" ]; then
+		printf "${color_bg_dark_white}${color_fg_dark_black} $(($SHLVL - 1)) ${color_reset} "
+	fi
 }
 export PS1='\D{%a} \t $(prompt_sh_level)$(printf $color_fg_dark_green)\w$(printf $color_reset) $(prompt_git)\n· '
 
 [ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ] &&
-    source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+	source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 
 type -ft fzf &>/dev/null &&
-    eval "$(fzf --bash)"
+	eval "$(fzf --bash)"
 
 clear_screen() {
-    printf "\e[H\e[2J"
+	printf "\e[H\e[2J"
 }
 
 clear_screen_and_scrollback_buffer() {
-    clear_screen
-    printf "\e[3J"
+	clear_screen
+	printf "\e[3J"
 }
 
 vi_mode_edit_wo_executing () {
-    local tmp_file="$(mktemp)"
-    printf '%s\n' "$READLINE_LINE" > "$tmp_file"
-    "$EDITOR" "$tmp_file"
-    READLINE_LINE="$(cat "$tmp_file")"
-    READLINE_POINT="${#READLINE_LINE}"
-    rm -f "$tmp_file"
+	local tmp_file="$(mktemp)"
+	printf '%s\n' "$READLINE_LINE" > "$tmp_file"
+	"$EDITOR" "$tmp_file"
+	READLINE_LINE="$(cat "$tmp_file")"
+	READLINE_POINT="${#READLINE_LINE}"
+	rm -f "$tmp_file"
 }
 
 # Start lf in the current directory or in the given one.
 e () {
-    lf "$1"
-    if [ -f "$TMPDIR/lfcd" ]; then
-        local dir=$(cat "$TMPDIR/lfcd")
-        [ -d "$dir" ] && cd "$dir"
-        rm -rf "$TMPDIR/lfcd"
-    fi
+	lf "$1"
+	if [ -f "$TMPDIR/lfcd" ]; then
+		local dir=$(cat "$TMPDIR/lfcd")
+		[ -d "$dir" ] && cd "$dir"
+		rm -rf "$TMPDIR/lfcd"
+	fi
 }
 
 # Pager-like implementation using neovim
 pager () {
-    local target="-"
-    [ -n "$1" ] && target="$1"
+	local target="-"
+	[ -n "$1" ] && target="$1"
 
-    nvim -n -u NONE -i NONE -R \
-        -c "map q :q<CR>" \
-        -c "set laststatus=0" -c "set number" \
-        -c "syntax on" "$target"
+	nvim -n -u NONE -i NONE -R \
+		-c "map q :q<CR>" \
+		-c "set laststatus=0" -c "set number" \
+		-c "syntax on" "$target"
 }
 
 # Purge temporary data from some programs.
 purge () {
-    if [ "$1" == "bash" ]; then
-        history -c
-        [ -f "$HOME/.bash_history" ] && secrm "$HOME/.bash_history"
+	if [ "$1" == "bash" ]; then
+		history -c
+		[ -f "$HOME/.bash_history" ] && secrm "$HOME/.bash_history"
 
-    elif [ "$1" == "clipboard" ]; then
-        pbcopy < /dev/null
+	elif [ "$1" == "clipboard" ]; then
+		pbcopy < /dev/null
 
-    elif [ "$1" == "nvim" ]; then
-        for file in "$XDG_DATA_HOME"/nvim/shada/*.shada; do
-            rm -f "$file"
-        done
-        for file in "$XDG_STATE_HOME"/nvim/shada/*.shada; do
-            rm -f "$file"
-        done
+	elif [ "$1" == "nvim" ]; then
+		for file in "$XDG_DATA_HOME"/nvim/shada/*.shada; do
+			rm -f "$file"
+		done
+		for file in "$XDG_STATE_HOME"/nvim/shada/*.shada; do
+			rm -f "$file"
+		done
 
-        [ -d "$XDG_STATE_HOME/nvim/undo" ] &&
-        [ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
-            rm -rf "$XDG_STATE_HOME"/nvim/undo/*
+		[ -d "$XDG_STATE_HOME/nvim/undo" ] &&
+		[ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
+			rm -rf "$XDG_STATE_HOME"/nvim/undo/*
 
-    else echo "Usage purge bash|clipboard|nvim."
-    fi
+	else echo "Usage purge bash|clipboard|nvim."
+	fi
 }
 
 test_underline_styles () {
-    echo -e "\x1b[4:0m4:0 none\x1b[0m \x1b[4:1m4:1 straight\x1b[0m " \
-        "\x1b[4:2m4:2 double\x1b[0m \x1b[4:3m4:3 curly" \
-        "\x1b[0m \x1b[4:4m4:4 dotted\x1b[0m \x1b[4:5m4:5 dashed\x1b[0m"
+	echo -e "\x1b[4:0m4:0 none\x1b[0m \x1b[4:1m4:1 straight\x1b[0m " \
+		"\x1b[4:2m4:2 double\x1b[0m \x1b[4:3m4:3 curly" \
+		"\x1b[0m \x1b[4:4m4:4 dotted\x1b[0m \x1b[4:5m4:5 dashed\x1b[0m"
 }
 
 test_underline_colors () {
-    echo -e "\x1b[4;58:5:203mred underline (256)" \
-        "\x1b[0m \x1b[4;58:2:0:255:0:0mred underline (true color)\x1b[0m"
+	echo -e "\x1b[4;58:5:203mred underline (256)" \
+		"\x1b[0m \x1b[4;58:2:0:255:0:0mred underline (true color)\x1b[0m"
 }
 
 alias -- -="cd -"
