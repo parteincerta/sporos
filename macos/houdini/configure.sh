@@ -22,7 +22,7 @@ fi
 source "$shared_dir_macos/.bash_profile" || true
 
 mkdir -p \
-"$HOME"/{.gnupg,.m2,.ssh/sockets} \
+"$HOME"/{.gnupg,.m2,.local/{bin,share/lf},.ssh/sockets} \
 "$HOME"/.local/{bin,share/lf} \
 "$HOME"/Library/{KeyBindings,LaunchAgents} \
 "$HOME/Library/Application Support/Code/User/" \
