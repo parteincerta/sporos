@@ -210,12 +210,8 @@ function brew --description "Homebrew hook to handle specific commands"
 	end
 end
 
-function clear_screen --description "Clear the screen and move the previous content to the scrollback buffer."
-	printf "\e[H\e[2J"
-end
-
 function clear_screen_and_scrollback_buffer --description "Clear the screen and purge the scrollback buffer."
-	clear_screen
+	clear
 	printf '\e[3J'
 end
 
@@ -366,9 +362,9 @@ bind --mode visual \cy accept-autosuggestion execute
 bind --mode default \ck 'clear_screen_and_scrollback_buffer; commandline -f repaint'
 bind --mode insert \ck 'clear_screen_and_scrollback_buffer; commandline -f repaint'
 bind --mode visual \ck 'clear_screen_and_scrollback_buffer; commandline -f repaint'
-bind --mode default \cl 'clear_screen; commandline -f repaint'
-bind --mode insert \cl 'clear_screen; commandline -f repaint'
-bind --mode visual \cl 'clear_screen; commandline -f repaint'
+bind --mode default \cl 'clear; commandline -f repaint'
+bind --mode insert \cl 'clear; commandline -f repaint'
+bind --mode visual \cl 'clear; commandline -f repaint'
 bind --mode default --key nul edit_command_buffer
 bind --mode insert --key nul edit_command_buffer
 bind --mode visual --key nul edit_command_buffer
