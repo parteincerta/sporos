@@ -66,8 +66,8 @@ log_info "\t >>> Installing Homebrew apps"
 # NOTE: `gettext` is installed to have `envsubst`
 fonts=(font-jetbrains-mono-nerd-font)
 homebrew_cli=(
-	7zip aria2 bat bash bash-completion@2 bear bzip2 coreutils eza fd findutils
-	fish ${fonts[*]} fzf gettext git-delta gnupg gsed jq lf libpq miniserve mise
+	7zip aria2 bat bash bash-completion@2 bzip2 coreutils eza fd findutils fish
+	${fonts[*]} fzf gettext git-delta gnupg gsed jq lf libpq miniserve mise
 	mkcert moreutils neovim oha pbzip2 pigz rclone ripgrep tokei xz zstd
 )
 brew install ${homebrew_cli[*]}
@@ -90,8 +90,8 @@ compass="mongodb-compass-isolated-edition"
 microsoft=(microsoft-{excel,powerpoint,remote-desktop,word})
 homebrew_casks=(
 	1kc-razer alt-tab basictex betterdisplay brave-browser bruno $compass
-	dbeaver-community docker fork iina kitty mac-mouse-fix ${microsoft[*]}
-	numi obs transmission visual-studio-code zed zoom
+	dbeaver-community docker fork iina kitty mac-mouse-fix ${microsoft[*]} numi
+	obs transmission visual-studio-code zed zoom
 )
 brew install --cask ${homebrew_casks[*]}
 
