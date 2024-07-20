@@ -30,7 +30,7 @@ mkdir -p \
 "$XDG_CACHE_HOME"/{ads,code}/{data/User,extensions} \
 "$XDG_CACHE_HOME/bun"/{bin,cache/{install,transpiler},lib} \
 "$XDG_CACHE_HOME/gradle" \
-"$XDG_CONFIG_HOME"/{bat/themes,fd,fish/functions,git,kitty,lf,mise,nvim,zed} \
+"$XDG_CONFIG_HOME"/{bat/themes,fd,fish/functions,git,kitty,lf,mise,nvim,pip,zed} \
 "$CODE"/{github,icnew/{git-icone,misc},parteincerta} \
 "$DOCUMENTS"/{Misc,Recordings,Remote,Screenshots} \
 "$DOWNLOADS"/{Brave,Safari,Torrents}
@@ -57,6 +57,7 @@ cp "$shared_dir/lfpreview" "$HOME/.local/bin/"
 cp mise.toml "$XDG_CONFIG_HOME/mise/config.toml"
 cp -R "$shared_dir/neovim/"* "$XDG_CONFIG_HOME/nvim/"
 cp -R obs/* "$app_support_folder/obs-studio/basic"
+cp "$shared_dir/pip.conf" "$XDG_CONFIG_HOME/pip/"
 cp "$shared_dir/ssh.conf" "$HOME/.ssh/config"
 cp "$shared_dir/tokyonight-moon.tmTheme" "$XDG_CONFIG_HOME/bat/themes"
 cp "$shared_dir/zed.keymaps.json" "$XDG_CONFIG_HOME/zed/keymaps.json"
