@@ -260,12 +260,8 @@ export PS1='\D{%a} \t $(prompt_sh_level)$(printf $color_fg_dark_green)\w$(printf
 type -ft fzf &>/dev/null &&
 	eval "$(fzf --bash)"
 
-clear_screen() {
-	printf "\e[H\e[2J"
-}
-
 clear_screen_and_scrollback_buffer() {
-	clear_screen
+	clear
 	printf "\e[3J"
 }
 
@@ -435,7 +431,7 @@ bind '"\e[B": history-search-forward'
 bind -m vi -x '"v": " vi_mode_edit_wo_executing"'
 bind -m vi-insert '"\C-e": " `__fzf_cd__`\n"'
 bind -m vi-insert '"\C-k": "\C-w clear_screen_and_scrollback_buffer\n"'
-bind -m vi-insert '"\C-l": "\C-w clear_screen\n"'
+bind -m vi-insert '"\C-l": "\C-w clear\n"'
 bind -m vi-insert '"\C-p": history-search-backward'
 bind -m vi-insert '"\C-n": history-search-forward'
 bind '"\e[C": forward-char'
