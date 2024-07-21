@@ -8,7 +8,7 @@ source "$this_script_rel_path/helper.sh"
 trap trap_error ERR
 trap "rm -rf $TMPDIR/{hosts,hosts-additions}" EXIT
 
-version="3.14.88"
+version="3.14.89"
 url="https://raw.githubusercontent.com/StevenBlack/hosts/${version}/hosts"
 system="$(uname -s)"
 
