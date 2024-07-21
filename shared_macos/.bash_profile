@@ -257,6 +257,7 @@ export PS1='\D{%a} \t $(prompt_sh_level)$(printf $color_fg_dark_green)\w$(printf
 [ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ] &&
 	source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 
+! type -t fzf-file-widget &>/dev/null &&
 type -ft fzf &>/dev/null &&
 	eval "$(fzf --bash)"
 

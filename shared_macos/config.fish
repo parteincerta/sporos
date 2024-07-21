@@ -21,10 +21,10 @@ set --export YARN_CACHE_FOLDER "$XDG_CACHE_HOME/yarn"
 if [ -z "$HOMEBREW_PREFIX" ]
 	set --local _arch (uname -m)
 	if [ "$_arch" = "arm64" ]
-		type -fq /opt/homebrew/bin/brew &>/dev/null &&
+		type -fq /opt/homebrew/bin/brew &&
 			set --export HOMEBREW_PREFIX "/opt/homebrew"
 	else if [ "$_arch" = "x86_64" ]
-		type -fq /usr/local/bin/brew &>/dev/null &&
+		type -fq /usr/local/bin/brew &&
 			set --export HOMEBREW_PREFIX "/usr/local"
 	end
 end
@@ -63,10 +63,10 @@ fish_add_path --path --append "$HOME/.docker/bin"
 fish_add_path --path --append "$HOME/.local/bin"
 fish_add_path --path --append "$XDG_CACHE_HOME/bun/bin"
 
-type -fq mise &>/dev/null &&
+type -fq mise &&
 	mise activate --shims fish | source
 
-type -fq python3 &>/dev/null &&
+type -fq python3 &&
 begin
 	set --local PYTHON3_BIN_PATH (python3 -c "import site; print(site.USER_BASE + '/bin')")
 	fish_add_path --path --append "$PYTHON3_BIN_PATH"
@@ -382,7 +382,7 @@ bind --mode default --key nul edit_command_buffer
 bind --mode insert --key nul edit_command_buffer
 bind --mode visual --key nul edit_command_buffer
 
-if type -q fzf-cd-widget &>/dev/null
+if type -q fzf-cd-widget
 	bind --mode default \ce fzf-cd-widget
 	bind --mode insert \ce fzf-cd-widget
 	bind --mode visual \ce fzf-cd-widget
