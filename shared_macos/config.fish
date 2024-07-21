@@ -21,10 +21,10 @@ set --export YARN_CACHE_FOLDER "$XDG_CACHE_HOME/yarn"
 if [ -z "$HOMEBREW_PREFIX" ]
 	set --local _arch (uname -m)
 	if [ "$_arch" = "arm64" ]
-		type -ft /opt/homebrew/bin/brew &>/dev/null &&
+		type -fq /opt/homebrew/bin/brew &>/dev/null &&
 			set --export HOMEBREW_PREFIX "/opt/homebrew"
 	else if [ "$_arch" = "x86_64" ]
-		type -ft /usr/local/bin/brew &>/dev/null &&
+		type -fq /usr/local/bin/brew &>/dev/null &&
 			set --export HOMEBREW_PREFIX "/usr/local"
 	end
 end
@@ -63,12 +63,14 @@ fish_add_path --path --append "$HOME/.docker/bin"
 fish_add_path --path --append "$HOME/.local/bin"
 fish_add_path --path --append "$XDG_CACHE_HOME/bun/bin"
 
-type -ft python3 &>/dev/null &&
+type -fq mise &>/dev/null &&
+	mise activate --shims fish | source
+
+type -fq python3 &>/dev/null &&
 begin
 	set --local PYTHON3_BIN_PATH (python3 -c "import site; print(site.USER_BASE + '/bin')")
 	fish_add_path --path --append "$PYTHON3_BIN_PATH"
 end
-
 
 # ============== #
 # USER FUNCTIONS #
@@ -202,9 +204,9 @@ function fish_right_prompt
 	echo -n "$(__fish_git_prompt) $(date '+%a %T')"
 end
 
-if type -ft fzf &>/dev/null
+! type -q fzf-cd-widget &&
+type -fq fzf &>/dev/null &&
 	fzf --fish | source
-end
 
 function brew --description "Homebrew hook to handle specific commands"
 	set --local homebrew (type -fp brew)
