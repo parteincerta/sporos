@@ -23,8 +23,7 @@ else
 fi
 
 
-source "$shared_dir_macos/.bash_profile" || true
-bootstrap_mark_file="$XDG_CACHE_HOME/.bootstrapped"
+bootstrap_mark_file="~/.bootstrapped"
 if [ -s "$bootstrap_mark_file" ]; then
 	log_warning ">>> This system was previously bootstrapped."
 	exit 1
@@ -59,6 +58,7 @@ if [ -z "$(command -v brew)" ]; then
 	log_info "\t >>> Installing Homebrew"
 	homebrew_url="https://raw.githubusercontent.com/Homebrew/install/master/install.sh"
 	/bin/bash -c "$(curl --fail --location --silent --show-error $homebrew_url)"
+	source "$shared_dir_macos/.bash_profile" || true
 fi
 
 
