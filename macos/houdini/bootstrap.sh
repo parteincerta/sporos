@@ -23,8 +23,8 @@ else
 fi
 
 
-bootstrap_mark_file="~/.bootstrapped"
-if [ -s "$bootstrap_mark_file" ]; then
+bootstrap_mark_file=~/.bootstrapped
+if [ -s $bootstrap_mark_file ]; then
 	log_warning ">>> This system was previously bootstrapped."
 	exit 1
 	log_warning ">>> To restart the process: \$ rm $bootstrap_mark_file"
@@ -151,5 +151,5 @@ if [ -z "$(grep "$HOMEBREW_PREFIX/bin/bash" /etc/shells)" ]; then
 fi
 
 
-echo "ok" > "$bootstrap_mark_file"
+echo "ok" > $bootstrap_mark_file
 log_success "\t >>> Finished!"
