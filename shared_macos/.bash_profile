@@ -55,31 +55,31 @@ fi
 }
 
 [ -n "$HOMEBREW_PREFIX" ] &&
-[ -d "$HOMEBREW_PREFIX/opt/libpq/bin" ] &&
 [[ ! ":$PATH:" == *":$HOMEBREW_PREFIX/opt/libpq/bin:"* ]] &&
 	export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
-[ -d "$HOMEBREW_PREFIX/sbin" ] &&
 [[ ! ":$PATH:" == *":$HOMEBREW_PREFIX/sbin:"* ]] &&
 	export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
 
 [ -n "$HOMEBREW_PREFIX" ] &&
-[ -d "$HOMEBREW_PREFIX/bin" ] &&
 [[ ! ":$PATH:" == *":$HOMEBREW_PREFIX/bin:"* ]] &&
 	export PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
-[ -d "$HOME/.docker/bin" ] &&
 [[ ! ":$PATH:" == *":$HOME/.docker/bin:"* ]] &&
 	export PATH="$PATH:$HOME/.docker/bin"
 
-[ -d "$HOME/.local/bin" ] &&
 [[ ! ":$PATH:" == *":$HOME/.local/bin:"* ]] &&
 	export PATH="$PATH:$HOME/.local/bin"
 
-[ -d "$XDG_CACHE_HOME/bun/bin" ] &&
 [[ ! ":$PATH:" == *":$XDG_CACHE_HOME/bun/bin:"* ]] &&
 	export PATH="$PATH:$XDG_CACHE_HOME/bun/bin"
+
+if [[ "$(type -ft python3)" == "file" ]]; then
+	PYTHON3_BIN_PATH="$(python3 -c "import site; print(site.USER_BASE + '/bin')")"
+	[[ ! ":$PATH:" == *":$PYTHON3_BIN_PATH:"* ]] &&
+		export PATH="$PATH:$PYTHON3_BIN_PATH"
+fi
 
 type -ft mise &>/dev/null &&
 	eval "$(mise activate --shims bash)"
@@ -301,6 +301,9 @@ purge () {
 		history -c
 		[ -f "$HOME/.bash_history" ] && secrm "$HOME/.bash_history"
 
+	elif [ "$1" == "cache" ]; then
+		sudo /usr/sbin/purge
+
 	elif [ "$1" == "clipboard" ]; then
 		pbcopy < /dev/null
 
@@ -316,7 +319,7 @@ purge () {
 		[ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
 			rm -rf "$XDG_STATE_HOME"/nvim/undo/*
 
-	else echo "Usage purge bash|clipboard|nvim."
+	else echo "Usage purge bash|cache|clipboard|nvim."
 	fi
 }
 

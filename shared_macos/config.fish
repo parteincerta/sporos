@@ -63,9 +63,12 @@ fish_add_path --path --append "$HOME/.docker/bin"
 fish_add_path --path --append "$HOME/.local/bin"
 fish_add_path --path --append "$XDG_CACHE_HOME/bun/bin"
 
-! set -q MISE_SHELL &&
-type -ft mise &>/dev/null &&
-	mise activate --shims fish | source
+type -ft python3 &>/dev/null &&
+begin
+	set --local PYTHON3_BIN_PATH (python3 -c "import site; print(site.USER_BASE + '/bin')")
+	fish_add_path --path --append "$PYTHON3_BIN_PATH"
+end
+
 
 # ============== #
 # USER FUNCTIONS #
@@ -115,6 +118,9 @@ end
 # INTERACTIVE ENVIRONMENT SETUP #
 # ============================= #
 ! status --is-interactive && return 0
+
+! set -q MISE_FISH_AUTO_ACTIVATE &&
+	set --universal MISE_FISH_AUTO_ACTIVATE "0"
 
 set --export BAT_THEME "tokyonight-moon"
 set --export EDITOR "nvim"
@@ -240,6 +246,9 @@ function purge --description "Purge temporary data from some programs."
 	if [ "$argv[1]" = "fish" ]
 		echo 'yes' | history clear &>/dev/null
 
+	else if [ "$argv[1]" = "cache" ]
+		sudo /usr/sbin/purge
+
 	else if [ "$argv[1]" = "clipboard" ]
 		pbcopy < /dev/null
 
@@ -257,8 +266,10 @@ function purge --description "Purge temporary data from some programs."
 
 	else if [ "$argv[1]" = "bash" ]
 		bash -i -c "purge $argv"
+
 	else
-		echo "Usage purge bash|clipboard|fish|nvim."
+		echo "Usage purge bash|cache|clipboard|fish|nvim."
+
 	end
 end
 
