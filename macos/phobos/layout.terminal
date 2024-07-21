@@ -23,45 +23,7 @@
 					<key>Tab Scrollback Restorable</key>
 					<true/>
 					<key>Tab Session Class ID</key>
-					<string>B42D8910-4930-41C1-A4E1-CB0D64B4416F</string>
-					<key>Tab Settings</key>
-					<dict>
-						<key>ProfileCurrentVersion</key>
-						<real>2.0699999999999998</real>
-						<key>name</key>
-						<string>tokyo-night</string>
-						<key>type</key>
-						<string>Window Settings</string>
-					</dict>
-					<key>Tab Settings Name</key>
-					<string>tokyo-night</string>
-					<key>TabSelected</key>
-					<true/>
-				</dict>
-			</array>
-			<key>WindowNumber</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>Origin</key>
-			<string>{1014, 956}</string>
-			<key>ScrollerStyle</key>
-			<integer>1</integer>
-			<key>ShowsTabBar</key>
-			<false/>
-			<key>ShowsTabBarInFullScreen</key>
-			<false/>
-			<key>Window Settings</key>
-			<array>
-				<dict>
-					<key>Tab Column Count</key>
-					<integer>100</integer>
-					<key>Tab Row Count</key>
-					<integer>41</integer>
-					<key>Tab Scrollback Restorable</key>
-					<true/>
-					<key>Tab Session Class ID</key>
-					<string>1C65DE1F-A807-4452-8042-F77E65C23655</string>
+					<string>BB9D5249-6F9F-4E07-81A4-A9A6BF615282</string>
 					<key>Tab Settings</key>
 					<dict>
 						<key>ProfileCurrentVersion</key>
