@@ -7,6 +7,7 @@
 	"editor.guides.bracketPairsHorizontal": false,
 	"editor.guides.indentation": false,
 	"editor.lineHeight": 1.4,
+	"editor.lineNumbers": "relative",
 	"editor.minimap.enabled": false,
 	"editor.occurrencesHighlight": "multiFile",
 	"editor.quickSuggestions": {
@@ -44,7 +45,6 @@
 	// "cSpell.enabled": false,
 	// "cSpell.includeRegExpList": [ "CStyleComment", "string" ],
 	// "cSpell.ignoreWords": [ "codesnap", "marreta" ],
-	"editor.lineNumbers": "on",
 	"extensions.experimental.affinity": {
 		"vscodevim.vim": 1
 	},
