@@ -6,6 +6,14 @@
   "buffer_font_size": 0,
   "ensure_final_newline_on_save": true,
   "hard_tabs": false,
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
+  },
+  "inlay_hints": {
+    "enabled": true
+  },
+  "relative_line_numbers": true,
   "terminal": {
     "font_family": "JetBrainsMonoNL Nerd Font Mono",
     "font_size": 0,
