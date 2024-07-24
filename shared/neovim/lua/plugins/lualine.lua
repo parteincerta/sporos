@@ -20,6 +20,7 @@ return {
 					statusline = { "neo-tree" }
 				},
 				ignore_focus = { "neo-tree" },
+				section_separators = {left = '', right = ''},
 			},
 			sections = {
 				lualine_a = {'mode'},
