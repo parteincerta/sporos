@@ -60,7 +60,7 @@
     - General: New finder window opens in the home folder.
     - Sidebar: Show home folder and hide tags.
     - Advanced: Search performs a search in the current folder.
-  - View: Show Path Bar.
+  - View: Show Path Bar, Hide Preview.
   - Home and Applications folders: Icons 52x52, reduce grid and sort by `name`.
   - Other folders: Columns layout.
   - Desktop: Icons 44x44, Sort by `kind`, enable `Show item info`, set Label
