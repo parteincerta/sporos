@@ -184,7 +184,7 @@
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
 	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGkCwwVFlUkbnVsbNQNDg8QERIT
-	FFZOU1NpemVYTlNmRmxhZ3NWTlNOYW1lViRjbGFzcyNAKAAAAAAAABAQgAKAA18QGEpl
+	FFZOU1NpemVYTlNmRmxhZ3NWTlNOYW1lViRjbGFzcyNAJAAAAAAAABAQgAKAA18QGEpl
 	dEJyYWluc01vbm9OTE5GTS1MaWdodNIXGBkaWiRjbGFzc25hbWVYJGNsYXNzZXNWTlNG
 	b250ohkbWE5TT2JqZWN0CBEaJCkyN0lMUVNYXmdud36FjpCSlK+0v8jP0gAAAAAAAAEB
 	AAAAAAAAABwAAAAAAAAAAAAAAAAAAADb
@@ -192,7 +192,7 @@
 	<key>FontAntialias</key>
 	<true/>
 	<key>FontHeightSpacing</key>
-	<integer>1</integer>
+	<real>0.90000000000000002</real>
 	<key>FontWidthSpacing</key>
 	<real>1</real>
 	<key>ProfileCurrentVersion</key>
@@ -226,6 +226,8 @@
 	<integer>100</integer>
 	<key>name</key>
 	<string>tokyo-night</string>
+	<key>rowCount</key>
+	<integer>30</integer>
 	<key>shellExitAction</key>
 	<integer>1</integer>
 	<key>type</key>
