@@ -254,8 +254,17 @@ prompt_sh_level() {
 }
 export PS1='\D{%a} \t $(prompt_sh_level)$(printf $color_fg_dark_green)\w$(printf $color_reset) $(prompt_git)\n· '
 
-[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ] &&
-	source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+bash_completion="$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+[ -r "$bash_completion" ] &&
+	source "$bash_completion"
+unset bash_completion
+
+cli_tools="/Library/Developer/CommandLineTools"
+git_completion="$cli_tools/usr/share/git-core/git-completion.bash"
+[ -r "$git_completion" ] &&
+	source "$git_completion"
+unset cli_tools
+unset git_completion
 
 ! type -t fzf-file-widget &>/dev/null &&
 type -ft fzf &>/dev/null &&
