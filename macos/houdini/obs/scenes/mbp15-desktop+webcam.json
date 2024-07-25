@@ -181,12 +181,12 @@
 						"locked": false,
 						"rot": 0.0,
 						"pos": {
-							"x": 2240.0,
-							"y": 1320.0
+							"x": 2880.0,
+							"y": 1515.0
 						},
 						"scale": {
-							"x": 1.0,
-							"y": 1.0
+							"x": -0.59375,
+							"y": 0.59375
 						},
 						"align": 5,
 						"bounds_type": 0,
@@ -245,8 +245,8 @@
 			"id": "macos-avcapture",
 			"versioned_id": "macos-avcapture",
 			"settings": {
-				"device": "DJH3361ZS07F6VTDR",
 				"device_name": "FaceTime HD Camera",
+				"device": "DJH3361ZS07F6VTDR",
 				"preset": "AVCaptureSessionPreset640x480"
 			},
 			"mixers": 255,
