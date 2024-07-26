@@ -223,6 +223,14 @@ function clear_screen_and_scrollback_buffer --description "Clear the screen and 
 	printf '\e[3J'
 end
 
+function code --description "Start VSCode with some default parameters"
+	set --local _code "$HOMEBREW_PREFIX/bin/code"
+	$_code \
+		--user-data-dir "$XDG_CACHE_HOME/code/data" \
+		--extensions-dir "$XDG_CACHE_HOME/code/extensions" \
+		$argv &>/dev/null
+end
+
 function e --description "Start lf in the current directory or in the given one."
 	lf "$argv[1]"
 	if [ -f "$TMPDIR/lfcd" ]
@@ -296,7 +304,6 @@ alias brewo="brew outdated"
 alias brewog="brew outdated --greedy"
 alias brews="brew search"
 alias brewu="brew update --verbose"
-alias code="code --user-data-dir $XDG_CACHE_HOME/code/data --extensions-dir $XDG_CACHE_HOME/code/extensions"
 alias compose="docker compose"
 alias gita="git add"
 alias gitaa="git add --all"

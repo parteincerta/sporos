@@ -275,13 +275,12 @@ clear_screen_and_scrollback_buffer() {
 	printf "\e[3J"
 }
 
-vi_mode_edit_wo_executing () {
-	local tmp_file="$(mktemp)"
-	printf '%s\n' "$READLINE_LINE" > "$tmp_file"
-	"$EDITOR" "$tmp_file"
-	READLINE_LINE="$(cat "$tmp_file")"
-	READLINE_POINT="${#READLINE_LINE}"
-	rm -f "$tmp_file"
+code () {
+	local _code="$HOMEBREW_PREFIX/bin/code"
+	$_code \
+		--user-data-dir "$XDG_CACHE_HOME/code/data" \
+		--extensions-dir "$XDG_CACHE_HOME/code/extensions" \
+		"$@" &>/dev/null
 }
 
 # Start lf in the current directory or in the given one.
@@ -344,6 +343,15 @@ test_underline_colors () {
 		"\x1b[0m \x1b[4;58:2:0:255:0:0mred underline (true color)\x1b[0m"
 }
 
+vi_mode_edit_wo_executing () {
+	local tmp_file="$(mktemp)"
+	printf '%s\n' "$READLINE_LINE" > "$tmp_file"
+	"$EDITOR" "$tmp_file"
+	READLINE_LINE="$(cat "$tmp_file")"
+	READLINE_POINT="${#READLINE_LINE}"
+	rm -f "$tmp_file"
+}
+
 alias -- -="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
@@ -354,7 +362,6 @@ alias brewo="brew outdated"
 alias brewog="brew outdated --greedy"
 alias brews="brew search"
 alias brewu="brew update --verbose"
-alias code="code --user-data-dir $XDG_CACHE_HOME/code/data --extensions-dir $XDG_CACHE_HOME/code/extensions"
 alias compose="docker compose"
 alias gita="git add"
 alias gitaa="git add --all"
