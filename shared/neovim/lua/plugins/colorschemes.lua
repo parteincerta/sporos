@@ -1,5 +1,5 @@
 -- Colorscheme
--- https://github.comfolke/tokyonight.nvim
+-- https://github.com/folke/tokyonight.nvim
 
 return {
     "folke/tokyonight.nvim",
