@@ -15,7 +15,7 @@ trap trap_exit EXIT
 arch="$(uname -m)"
 system="$(uname -s)"
 mongo_sh_version="2.2.12"
-mongo_tools_version="100.9.5"
+mongo_tools_version="100.10.0"
 
 if [ "$1" == "shell" ]; then
 	rm -rf "$TMPDIR"/mongosh*
