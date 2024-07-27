@@ -46,6 +46,7 @@ development environment across all the computers I use.
   * List outdated installed tools: `mise outdated`.
   * Check latest available tool version: `mise latest <plugin>[@version]`.
   * Install latest available tool version: `mise instasll <plugin>[@version]`.
+  * List available versions of a tool tools: `mise ls-remote <plugin>`.
   * Update all outdated tools: `mise upgrade`.
   * Update a given tool, if an update is available: `mise upgrade <plugin>@<version>`.
 - MongoDB utilities maintenance steps:
