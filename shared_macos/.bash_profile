@@ -81,8 +81,13 @@ if [[ "$(type -ft python3)" == "file" ]]; then
 		export PATH="$PATH:$PYTHON3_BIN_PATH"
 fi
 
+# NOTES:
+# - `PROMPT_COMMAND` needs to be set before running `mise activate bash`.
+#   Otherwise it won't have any effect.
+# - `history -a` will immediately add the previous command to Bash's history.
 type -ft mise &>/dev/null &&
-	eval "$(mise activate --shims bash)"
+	export PROMPT_COMMAND="history -a" &&
+	eval "$(mise activate bash)"
 
 # ============== #
 # USER FUNCTIONS #
@@ -190,7 +195,6 @@ export HOMEBREW_NO_INSTALL_CLEANUP=1
 export LESSCHARSET="UTF-8"
 export MANPAGER="env IS_PAGER=yes nvim -n -i NONE +Man!"
 export NVIM_PAGER="env IS_PAGER=yes nvim -n -i NONE -R"
-export PROMPT_COMMAND="history -a" # Add previous command to history immediately
 export PROMPT_DIRTRIM=2
 
 # 256-color table reference

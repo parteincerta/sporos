@@ -63,8 +63,9 @@ fish_add_path --path --append "$HOME/.docker/bin"
 fish_add_path --path --append "$HOME/.local/bin"
 fish_add_path --path --append "$XDG_CACHE_HOME/bun/bin"
 
-type -fq mise &&
-	mise activate --shims fish | source
+if type -fq mise &&
+	mise activate fish | source
+end
 
 type -fq python3 &&
 begin
