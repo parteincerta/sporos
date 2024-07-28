@@ -259,7 +259,6 @@ complete --command purge \
 function purge --description "Purge temporary data from some programs."
 	for item in $argv
 		if [ "$item" = "bash" ]
-			echo "Purging bash ..."
 			bash -i -c "purge bash"
 
 		else if [ "$item" = "cache" ]
