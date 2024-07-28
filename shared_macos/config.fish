@@ -253,15 +253,21 @@ function pager --description "Pager-like implementation using neovim"
 		-c "syntax on" "$target"
 end
 
+complete --command purge \
+	--argument "bash cache clipboard fish nvim" \
+	--exclusive
 function purge --description "Purge temporary data from some programs."
-	if [ "$argv[1]" = "fish" ]
-		echo 'yes' | history clear &>/dev/null
+	if [ "$argv[1]" = "bash" ]
+		bash -i -c "purge $argv"
 
 	else if [ "$argv[1]" = "cache" ]
 		sudo /usr/sbin/purge
 
 	else if [ "$argv[1]" = "clipboard" ]
 		pbcopy < /dev/null
+
+	else if [ "$argv[1]" = "fish" ]
+		echo 'yes' | history clear &>/dev/null
 
 	else if [ "$argv[1]" = "nvim" ]
 		for file in "$XDG_DATA_HOME"/nvim/shada/*.shada
@@ -274,9 +280,6 @@ function purge --description "Purge temporary data from some programs."
 		[ -d "$XDG_STATE_HOME"/nvim/undo/ ] &&
 		[ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
 			rm -rf "$XDG_STATE_HOME"/nvim/undo/*
-
-	else if [ "$argv[1]" = "bash" ]
-		bash -i -c "purge $argv"
 
 	else
 		echo "Usage purge bash|cache|clipboard|fish|nvim."
