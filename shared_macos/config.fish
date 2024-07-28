@@ -257,33 +257,35 @@ complete --command purge \
 	--argument "bash cache clipboard fish nvim" \
 	--exclusive
 function purge --description "Purge temporary data from some programs."
-	if [ "$argv[1]" = "bash" ]
-		bash -i -c "purge $argv"
+	for item in $argv
+		if [ "$item" = "bash" ]
+			echo "Purging bash ..."
+			bash -i -c "purge bash"
 
-	else if [ "$argv[1]" = "cache" ]
-		sudo /usr/sbin/purge
+		else if [ "$item" = "cache" ]
+			echo "Purging the cache ..."
+			sudo /usr/sbin/purge
 
-	else if [ "$argv[1]" = "clipboard" ]
-		pbcopy < /dev/null
+		else if [ "$item" = "clipboard" ]
+			echo "Purging the clipboard ..."
+			pbcopy < /dev/null
 
-	else if [ "$argv[1]" = "fish" ]
-		echo 'yes' | history clear &>/dev/null
+		else if [ "$item" = "fish" ]
+			echo "Purging the fish ..."
+			echo 'yes' | history clear &>/dev/null
 
-	else if [ "$argv[1]" = "nvim" ]
-		for file in "$XDG_DATA_HOME"/nvim/shada/*.shada
-			rm -f "$file"
+		else if [ "$item" = "nvim" ]
+			echo "Purging the nvim ..."
+			for file in "$XDG_DATA_HOME"/nvim/shada/*.shada
+				rm -f "$file"
+			end
+			for file in "$XDG_STATE_HOME"/nvim/shada/*.shada
+				rm -f "$file"
+			end
+			[ -d "$XDG_STATE_HOME"/nvim/undo/ ] &&
+			[ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
+				rm -rf "$XDG_STATE_HOME"/nvim/undo/*
 		end
-		for file in "$XDG_STATE_HOME"/nvim/shada/*.shada
-			rm -f "$file"
-		end
-
-		[ -d "$XDG_STATE_HOME"/nvim/undo/ ] &&
-		[ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
-			rm -rf "$XDG_STATE_HOME"/nvim/undo/*
-
-	else
-		echo "Usage purge bash|cache|clipboard|fish|nvim."
-
 	end
 end
 

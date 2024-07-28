@@ -311,30 +311,33 @@ pager () {
 # Purge temporary data from some programs.
 complete -W "bash cache clipboard nvim" purge
 purge () {
-	if [ "$1" == "bash" ]; then
-		history -c
-		[ -f "$HOME/.bash_history" ] && secrm "$HOME/.bash_history"
+	for item in "$@"; do
+		if [ "$item" == "bash" ]; then
+			echo "Purging bash ..."
+			history -c
+			[ -f "$HOME/.bash_history" ] && secrm "$HOME/.bash_history"
 
-	elif [ "$1" == "cache" ]; then
-		sudo /usr/sbin/purge
+		elif [ "$item" == "cache" ]; then
+			echo "Purging the cache ..."
+			sudo /usr/sbin/purge
 
-	elif [ "$1" == "clipboard" ]; then
-		pbcopy < /dev/null
+		elif [ "$item" == "clipboard" ]; then
+			echo "Purging the clipboard ..."
+			pbcopy < /dev/null
 
-	elif [ "$1" == "nvim" ]; then
-		for file in "$XDG_DATA_HOME"/nvim/shada/*.shada; do
-			rm -f "$file"
-		done
-		for file in "$XDG_STATE_HOME"/nvim/shada/*.shada; do
-			rm -f "$file"
-		done
-
-		[ -d "$XDG_STATE_HOME/nvim/undo" ] &&
-		[ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
-			rm -rf "$XDG_STATE_HOME"/nvim/undo/*
-
-	else echo "Usage purge bash|cache|clipboard|nvim."
-	fi
+		elif [ "$item" == "nvim" ]; then
+			echo "Purging the nvim ..."
+			for file in "$XDG_DATA_HOME"/nvim/shada/*.shada; do
+				rm -f "$file"
+			done
+			for file in "$XDG_STATE_HOME"/nvim/shada/*.shada; do
+				rm -f "$file"
+			done
+			[ -d "$XDG_STATE_HOME/nvim/undo" ] &&
+			[ -n "$(lsa "$XDG_STATE_HOME"/nvim/undo/)" ] &&
+				rm -rf "$XDG_STATE_HOME"/nvim/undo/*
+		fi
+	done
 }
 
 test_underline_styles () {
