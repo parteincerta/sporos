@@ -309,6 +309,7 @@ pager () {
 }
 
 # Purge temporary data from some programs.
+complete -W "bash cache clipboard nvim" purge
 purge () {
 	if [ "$1" == "bash" ]; then
 		history -c
