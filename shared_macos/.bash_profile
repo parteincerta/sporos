@@ -326,7 +326,7 @@ purge () {
 			pbcopy < /dev/null
 
 		elif [ "$item" == "nvim" ]; then
-			echo "Purging the nvim ..."
+			echo "Purging nvim ..."
 			for file in "$XDG_DATA_HOME"/nvim/shada/*.shada; do
 				rm -f "$file"
 			done

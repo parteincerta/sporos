@@ -271,11 +271,11 @@ function purge --description "Purge temporary data from some programs."
 			pbcopy < /dev/null
 
 		else if [ "$item" = "fish" ]
-			echo "Purging the fish ..."
+			echo "Purging fish ..."
 			echo 'yes' | history clear &>/dev/null
 
 		else if [ "$item" = "nvim" ]
-			echo "Purging the nvim ..."
+			echo "Purging nvim ..."
 			for file in "$XDG_DATA_HOME"/nvim/shada/*.shada
 				rm -f "$file"
 			end
