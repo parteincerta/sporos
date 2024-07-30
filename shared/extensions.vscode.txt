@@ -30,6 +30,7 @@ ms-vscode.remote-explorer
 ms-vsliveshare.vsliveshare
 oven.bun-vscode
 PKief.material-icon-theme
+redhat.fabric8-analytics
 redhat.vscode-xml
 redhat.vscode-yaml
 rebornix.toggle
